@@ -1,0 +1,31 @@
+db_path: gulaistore.db
+
+engine:
+  # Main response model
+  llm_model: gpt-4o
+
+  # Fast model for lead/toxicity classification (cheaper)
+  classifier_model: gpt-4o-mini
+
+  # How many recent messages to include in LLM context
+  history_limit: 20
+
+  # When total messages exceed this, compress older part
+  history_compress_threshold: 30
+
+  # Per-dialog daily token cap (alerts owner at 80%)
+  # ~1700 tokens/message → 100k ≈ 60 exchanges/day per dialog
+  max_tokens_per_dialog_day: 100000
+
+  # Global daily token cap
+  max_tokens_global_day: 500000
+
+  # Cooldown between lead notifications for the same dialog (minutes)
+  lead_notification_cooldown_minutes: 30
+
+  # After owner takeover, bot stays silent for this many hours
+  # (0 = stay silent until manual /start)
+  owner_takeover_timeout_hours: 24
+
+  # Feature flag: set to true when promo campaigns are ready
+  discounts_enabled: false

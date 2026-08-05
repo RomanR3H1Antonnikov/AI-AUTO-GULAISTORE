@@ -1,0 +1,32 @@
+# Category-level notes shown in LLM context
+category_notes:
+  MacBook Neo: '13", чип A18 Pro (НЕ M-серия! не путать с MacBook Air/Pro), 8 ГБ RAM фиксировано, цвета Silver/Blush/Citrus/Indigo'
+
+categories:
+  iMac:
+    - { name: "iMac 24", config: "M4 16/512", color: "серебристый", price: 192900 }
+    - { name: "iMac 24", config: "M4 16/256", color: "серебристый", price: 158900 }
+
+  MacBook Air:
+    - { name: "MacBook Air 15", config: "M5 32/1TB",  color: "серебристый", price: 219900 }
+    - { name: "MacBook Air 13", config: "M5 24/1TB",  color: "серебристый", price: 136900 }
+    - { name: "MacBook Air 15", config: "M5 16/1TB",  color: "серебристый", price: 142900 }
+    - { name: "MacBook Air 15", config: "M5 16/512",  color: "серебристый", price: 119900 }
+    - { name: "MacBook Air 13", config: "M5 16/1TB",  color: "серебристый", price: 114900 }
+    - { name: "MacBook Air 13", config: "M5 16/512",  color: "серебристый", price: 97900  }
+
+  MacBook Pro:
+    - { name: "MacBook Pro 14", config: "M5 16/512",       color: "серебристый", price: 141900 }
+    - { name: "MacBook Pro 14", config: "M5 16/1TB",       color: "серебристый", price: 152900 }
+    - { name: "MacBook Pro 16", config: "M5 Pro 64/2TB",   color: "серебристый", price: 419900 }
+    - { name: "MacBook Pro 16", config: "M5 Pro 64/1TB",   color: "серебристый", price: 386900 }
+
+  MacBook Neo:
+    - { name: "MacBook Neo", config: "256GB", color: "Silver", price: 57490 }
+    - { name: "MacBook Neo", config: "256GB", color: "Blush",  price: 57900 }
+    - { name: "MacBook Neo", config: "256GB", color: "Citrus", price: 57900 }
+    - { name: "MacBook Neo", config: "256GB", color: "Indigo", price: 56490 }
+    - { name: "MacBook Neo", config: "512GB", color: "Silver", price: 65900 }
+    - { name: "MacBook Neo", config: "512GB", color: "Blush",  price: 65900 }
+    - { name: "MacBook Neo", config: "512GB", color: "Citrus", price: 64990 }
+    - { name: "MacBook Neo", config: "512GB", color: "Indigo", price: 64490 }
