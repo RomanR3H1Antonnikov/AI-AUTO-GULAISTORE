@@ -90,6 +90,13 @@ _SYSTEM_PROMPT = """\
   → Говори прямо: техника ввезена по параллельному импорту, новая, с гарантией магазина 12 мес. и кассовым чеком.
   Не юли, не уходи от вопроса — честность продаёт лучше.
 
+═══ РАСХОЖДЕНИЕ ЦЕН ═══
+Иногда цена в объявлении расходится с актуальной ценой в каталоге (устаревшее объявление, технический сбой).
+Если покупатель указывает на расхождение или говорит «у вас в объявлении написано дешевле/дороже»:
+→ «Да, в объявлении вышла ошибка с ценой — актуальная цена [цена из каталога] ₽, уже поправляем.
+   Если не подходит — всё понимаю 🙏»
+Не спорь, не оправдывайся долго, не ссылайся на «технические причины».
+
 ═══ ЗАПРЕЩЕНО ═══
 • Давать скидки или торговаться.
   На любой торг → «По цене лучше обсудить напрямую с менеджером — передам ваш вопрос 😊»
@@ -333,8 +340,9 @@ class DialogEngine:
             return None
 
         # 3. Respect current dialog status
-        if dialog["status"] != "bot_active":
-            logger.debug("dialog %d is %s — silent", dialog_id, dialog["status"])
+        status = dialog["status"]
+        if status not in ("bot_active", "silenced"):
+            logger.debug("dialog %d is %s — silent", dialog_id, status)
             return None
 
         # 4. Persist incoming message
@@ -343,17 +351,25 @@ class DialogEngine:
         # 5. Toxicity gate
         is_toxic, toxic_reason = await self.toxicity_detector.classify(message.text)
         if is_toxic:
-            logger.info("toxic message in dialog %d: %s", dialog_id, toxic_reason)
-            await self.db.update_dialog_status(dialog_id, "silenced")
-            await transport.send_owner_notification(
-                f"⚠️ Токсичное сообщение — бот замолчал\n\n"
-                f"Диалог #{dialog_id} | {dialog['external_id']}\n"
-                f"Ссылка: {transport.get_dialog_link(dialog['external_id'])}\n"
-                f"Причина: {toxic_reason}\n"
-                f"Сообщение: «{message.text[:300]}»\n\n"
-                f"При необходимости подключитесь вручную."
-            )
+            if status == "bot_active":
+                logger.info("toxic message in dialog %d: %s", dialog_id, toxic_reason)
+                await self.db.update_dialog_status(dialog_id, "silenced")
+                await transport.send_owner_notification(
+                    f"⚠️ Токсичное сообщение — бот замолчал\n\n"
+                    f"Диалог #{dialog_id} | {dialog['external_id']}\n"
+                    f"Ссылка: {transport.get_dialog_link(dialog['external_id'])}\n"
+                    f"Причина: {toxic_reason}\n"
+                    f"Сообщение: «{message.text[:300]}»\n\n"
+                    f"Бот автоматически возобновит ответы, как только клиент напишет адекватно."
+                )
+            else:
+                logger.debug("dialog %d still silenced (another toxic message)", dialog_id)
             return None
+
+        # If silenced but this message is clean → auto-restore
+        if status == "silenced":
+            logger.info("dialog %d: auto-restored after non-toxic follow-up", dialog_id)
+            await self.db.update_dialog_status(dialog_id, "bot_active", None)
 
         # 6. Token limit gate
         if not await self._within_token_limits(dialog_id):

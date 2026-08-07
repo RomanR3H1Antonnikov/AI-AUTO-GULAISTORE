@@ -81,19 +81,42 @@ async def test_toxicity_silences_dialog(engine, transport, db):
 
 
 @pytest.mark.asyncio
-async def test_silenced_dialog_stays_silent(engine, transport, db):
+async def test_silenced_dialog_restored_on_non_toxic(engine, transport, db):
+    """First clean message after toxicity silencing auto-restores the dialog."""
     _patch_all(engine, is_toxic=True)
-
     await engine.process_message(transport, make_msg("*мат*", dialog_id="chat_lp4"))
 
-    # Now make LLM behave normally — but dialog is silenced, should still be silent
-    _patch_all(engine, is_toxic=False)
+    dialog = await db.get_dialog("test", "chat_lp4")
+    assert dialog["status"] == "silenced"
 
-    for _ in range(3):
+    # Switch to non-toxic — first clean follow-up should restore and reply
+    _patch_all(engine, bot_text="Добрый день!", is_toxic=False)
+
+    result = await engine.process_message(
+        transport, make_msg("Прости, хочу купить", dialog_id="chat_lp4")
+    )
+    assert result is not None, "Non-toxic follow-up should restore dialog and get a reply"
+
+    dialog = await db.get_dialog("test", "chat_lp4")
+    assert dialog["status"] == "bot_active"
+
+
+@pytest.mark.asyncio
+async def test_silenced_dialog_stays_silent_on_repeat_toxic(engine, transport, db):
+    """Repeated toxic messages while silenced receive no reply and no extra notification."""
+    _patch_all(engine, is_toxic=True)
+    await engine.process_message(transport, make_msg("*мат1*", dialog_id="chat_lp4b"))
+
+    notif_count = len(transport.owner_notifications)
+
+    for _ in range(2):
         result = await engine.process_message(
-            transport, make_msg("Прости, хочу купить", dialog_id="chat_lp4")
+            transport, make_msg("*мат2*", dialog_id="chat_lp4b")
         )
-        assert result is None, "Silenced dialog must stay silent regardless of message content"
+        assert result is None, "Repeated toxic message while silenced must stay silent"
+
+    assert len(transport.owner_notifications) == notif_count, \
+        "No extra notifications for repeat toxic while silenced"
 
 
 @pytest.mark.asyncio

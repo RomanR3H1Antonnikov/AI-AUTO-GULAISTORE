@@ -295,10 +295,10 @@ async def test_admin_dialog_listing(engine, transport, db):
 # ── 7. Silenced dialog — multiple follow-ups ─────────────────────────────────
 
 @pytest.mark.asyncio
-async def test_silenced_dialog_multi_followup(engine, transport, db):
+async def test_silenced_dialog_auto_restores_on_clean_followup(engine, transport, db):
     """
-    After toxicity silencing, ANY subsequent message (even polite) gets no reply.
-    Owner notification fires exactly once, not on every follow-up.
+    After toxicity silencing, the first non-toxic message auto-restores the dialog.
+    Owner notification fires exactly once — no re-notifications for the clean follow-ups.
     """
     _patch(engine, is_toxic=True)
 
@@ -308,21 +308,25 @@ async def test_silenced_dialog_multi_followup(engine, transport, db):
     assert dialog["status"] == "silenced"
     notif_count_after_toxic = len(transport.owner_notifications)
 
-    # Switch to polite mode — bot should still be silent
+    # Switch to polite mode — first message restores; further ones are normal
     _patch(engine, "Добрый день!", is_toxic=False)
 
-    for text in [
+    followup_texts = [
         "Извините, я погорячился",
         "Хочу купить MacBook, у вас есть?",
         "Здравствуйте, подскажите цену",
-    ]:
+    ]
+    for text in followup_texts:
         result = await engine.process_message(transport, make_msg(text, dialog_id="tl7"))
-        assert result is None, f"Silenced dialog must stay silent for: '{text}'"
+        assert result is not None, f"Restored dialog should reply to: '{text}'"
 
-    # No new notifications for polite follow-ups (owner already knows)
+    # Exactly one notification (from the toxic message), none for clean follow-ups
     assert len(transport.owner_notifications) == notif_count_after_toxic, \
-        "No new owner notifications after silencing is already set"
+        "No extra owner notifications for clean follow-ups"
 
-    print(f"\n[Замолчал] Статус: {dialog['status']}")
-    print(f"[Замолчал] Уведомлений: {notif_count_after_toxic} (только одно при первом токсичном)")
-    print(f"[Замолчал] Последующих ответов: 0 из 3")
+    dialog = await db.get_dialog("test", "tl7")
+    assert dialog["status"] == "bot_active"
+
+    print(f"\n[Авторестор] Статус: {dialog['status']}")
+    print(f"[Авторестор] Уведомлений: {notif_count_after_toxic} (только при первом токсичном)")
+    print(f"[Авторестор] Ответов после восстановления: {len(followup_texts)} из {len(followup_texts)}")
