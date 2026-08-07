@@ -23,6 +23,7 @@ Direction detection (no 'direction' field in webhook):
 
 import asyncio
 import logging
+from dataclasses import replace
 from typing import Optional
 
 from fastapi import FastAPI, Request
@@ -93,6 +94,9 @@ class AvitoWebhookServer:
                 logger.debug("Suppressed bot-echo webhook for chat %s", incoming.dialog_id)
                 return
 
+        if not incoming.is_owner_message:
+            incoming = await self._maybe_inject_item_context(incoming, body)
+
         try:
             reply = await self.engine.process_message(self.transport, incoming)
             if reply:
@@ -101,6 +105,55 @@ class AvitoWebhookServer:
             logger.exception(
                 "Unhandled error processing Avito chat %s", incoming.dialog_id
             )
+
+    async def _maybe_inject_item_context(
+        self, incoming: IncomingMessage, body: dict
+    ) -> IncomingMessage:
+        """
+        On the first buyer message about a specific listing, prepend item title
+        and price so the LLM can immediately answer about the correct product.
+        If item_id is absent/zero (general chat) or the dialog already has
+        history, returns incoming unchanged.
+        """
+        if not (hasattr(self.transport, "_api") and hasattr(self.transport, "_user_id")):
+            return incoming
+
+        item_id = (body.get("payload", {}).get("value") or {}).get("item_id", 0)
+        if not item_id:
+            return incoming
+
+        # Skip if the dialog already has message history (context already injected)
+        dialog = await self.engine.db.get_dialog("avito", incoming.dialog_id)
+        if dialog is not None:
+            count = await self.engine.db.get_message_count(dialog["id"])
+            if count > 0:
+                return incoming
+
+        try:
+            response = await self.transport._api.get_chat(  # type: ignore[union-attr]
+                self.transport._user_id, incoming.dialog_id  # type: ignore[union-attr]
+            )
+        except Exception:
+            logger.warning("Could not fetch item context for chat %s", incoming.dialog_id)
+            return incoming
+
+        # Avito wraps the chat under a top-level "chat" key
+        chat_root = response.get("chat", response)
+        context_val = (chat_root.get("context") or {}).get("value") or {}
+        title: str = context_val.get("title", "")
+        price: int = (context_val.get("price") or {}).get("value", 0)
+
+        if not title:
+            return incoming
+
+        if price:
+            price_str = f"{price:,}".replace(",", " ")
+            prefix = f"[Покупатель пишет по объявлению: «{title}», цена {price_str} ₽]"
+        else:
+            prefix = f"[Покупатель пишет по объявлению: «{title}»]"
+
+        logger.info("Item context injected for chat %s: %s", incoming.dialog_id, prefix)
+        return replace(incoming, text=f"{prefix}\n{incoming.text}")
 
     def _parse(self, body: dict) -> Optional[IncomingMessage]:
         """

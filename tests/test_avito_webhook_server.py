@@ -21,9 +21,16 @@ from src.core.transport import IncomingMessage
 def _make_server(reply: str | None = "Ответ бота") -> tuple[AvitoWebhookServer, MagicMock, MagicMock]:
     engine = MagicMock()
     engine.process_message = AsyncMock(return_value=reply)
+    # db helpers used by _maybe_inject_item_context
+    engine.db.get_dialog = AsyncMock(return_value=None)
+    engine.db.get_message_count = AsyncMock(return_value=0)
 
     transport = MagicMock()
     transport.send_message = AsyncMock()
+    # is_bot_echo must return False so owner messages reach the engine in tests
+    transport.is_bot_echo = MagicMock(return_value=False)
+    # get_chat returns empty dict → no item context injected (title is empty)
+    transport._api.get_chat = AsyncMock(return_value={})
 
     server = AvitoWebhookServer(engine=engine, transport=transport)
     return server, engine, transport
@@ -234,6 +241,59 @@ async def test_process_engine_exception_does_not_crash():
 
     # Should not raise
     await server._process(_webhook_body())
+
+
+# ── Item context injection ────────────────────────────────────────────────────
+
+@pytest.mark.asyncio
+async def test_item_context_injected_for_first_message():
+    """First buyer message about a listing → title+price prepended to text."""
+    server, engine, transport = _make_server()
+    transport._api.get_chat = AsyncMock(return_value={
+        "chat": {
+            "context": {
+                "value": {
+                    "title": "MacBook Pro 14 M3",
+                    "price": {"value": 150000},
+                }
+            }
+        }
+    })
+
+    await server._process(_webhook_body(text="Актуально?"))
+
+    incoming: IncomingMessage = engine.process_message.call_args[0][1]
+    assert "[Покупатель пишет по объявлению: «MacBook Pro 14 M3»" in incoming.text
+    assert "150" in incoming.text
+    assert "Актуально?" in incoming.text
+
+
+@pytest.mark.asyncio
+async def test_item_context_not_injected_when_no_item_id():
+    """Buyer messages from general chat (item_id=0) → text unchanged."""
+    server, engine, transport = _make_server()
+    body = _webhook_body(text="Привет")
+    body["payload"]["value"]["item_id"] = 0
+
+    await server._process(body)
+
+    incoming: IncomingMessage = engine.process_message.call_args[0][1]
+    assert incoming.text == "Привет"
+    transport._api.get_chat.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_item_context_not_injected_for_existing_dialog():
+    """Second+ message in an existing dialog → no context injection."""
+    server, engine, transport = _make_server()
+    engine.db.get_dialog = AsyncMock(return_value={"id": 7})
+    engine.db.get_message_count = AsyncMock(return_value=3)
+
+    await server._process(_webhook_body(text="А доставка?"))
+
+    incoming: IncomingMessage = engine.process_message.call_args[0][1]
+    assert incoming.text == "А доставка?"
+    transport._api.get_chat.assert_not_called()
 
 
 # ── End-to-end: HTTP → background task → send ─────────────────────────────────
