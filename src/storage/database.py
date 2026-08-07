@@ -188,6 +188,35 @@ class Database:
         )
         await self._db.commit()
 
+    async def get_dialogs_for_retention(self, silence_minutes: int = 5) -> list[dict]:
+        """
+        Return bot_active dialogs where:
+        - The last message is from the assistant (bot replied, buyer silent)
+        - That message is older than silence_minutes
+        - No 'retention' notification was sent since that last message
+        """
+        query = """
+        SELECT d.id, d.external_id, d.transport
+        FROM dialogs d
+        WHERE d.status = 'bot_active'
+          AND EXISTS (
+              SELECT 1 FROM messages m
+              WHERE m.dialog_id = d.id
+                AND m.role = 'assistant'
+                AND m.ts <= datetime('now', ?)
+                AND m.ts = (SELECT MAX(ts) FROM messages WHERE dialog_id = d.id)
+                AND NOT EXISTS (
+                    SELECT 1 FROM notifications n
+                    WHERE n.dialog_id = d.id
+                      AND n.type = 'retention'
+                      AND n.sent_at >= m.ts
+                )
+          )
+        """
+        interval = f"-{silence_minutes} minutes"
+        async with self._db.execute(query, (interval,)) as cur:
+            return [dict(r) for r in await cur.fetchall()]
+
     async def get_daily_tokens(self, dialog_id: Optional[int] = None) -> int:
         """Total tokens consumed today, optionally filtered to one dialog."""
         if dialog_id is not None:

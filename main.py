@@ -66,6 +66,28 @@ async def _run_telegram(dp: Dispatcher, bot: Bot) -> None:
         logger.info("Telegram polling stopped.")
 
 
+async def _run_retention(db, transports: dict, silence_minutes: int = 5, interval: int = 60) -> None:
+    """Periodically send a retention message to dialogs silent for silence_minutes."""
+    RETENTION_MSG = "Ещё актуально? 😊"
+    while True:
+        await asyncio.sleep(interval)
+        try:
+            dialogs = await db.get_dialogs_for_retention(silence_minutes)
+            for dialog in dialogs:
+                transport = transports.get(dialog["transport"])
+                if transport is None:
+                    continue
+                await transport.send_message(dialog["external_id"], RETENTION_MSG)
+                await db.add_message(dialog["id"], "assistant", RETENTION_MSG)
+                await db.record_notification(dialog["id"], "retention", {})
+                logger.info(
+                    "Retention sent → dialog %d (%s/%s)",
+                    dialog["id"], dialog["transport"], dialog["external_id"],
+                )
+        except Exception:
+            logger.exception("Retention task error")
+
+
 async def _run_uvicorn(app, port: int) -> None:
     config = uvicorn.Config(
         app=app,
@@ -152,6 +174,11 @@ async def main() -> None:
         tasks.append(
             asyncio.create_task(
                 _run_uvicorn(webhook_server.app, avito_port), name="avito_webhook"
+            )
+        )
+        tasks.append(
+            asyncio.create_task(
+                _run_retention(db, {"avito": avito_transport}), name="retention"
             )
         )
         logger.info(

@@ -330,3 +330,72 @@ async def test_silenced_dialog_auto_restores_on_clean_followup(engine, transport
     print(f"\n[Авторестор] Статус: {dialog['status']}")
     print(f"[Авторестор] Уведомлений: {notif_count_after_toxic} (только при первом токсичном)")
     print(f"[Авторестор] Ответов после восстановления: {len(followup_texts)} из {len(followup_texts)}")
+
+
+# ── 8. Retention query ────────────────────────────────────────────────────────
+
+@pytest.mark.asyncio
+async def test_retention_returns_dialog_after_silence(db):
+    """Dialog with old bot reply and no user follow-up appears in retention list."""
+    dlg = await db.get_or_create_dialog("avito", "ret_test_1")
+    # Insert a bot reply timestamped 10 minutes ago
+    await db._db.execute(
+        "INSERT INTO messages (dialog_id, role, text, ts) VALUES (?, 'assistant', 'Ок!', datetime('now', '-10 minutes'))",
+        (dlg["id"],),
+    )
+    await db._db.commit()
+
+    results = await db.get_dialogs_for_retention(silence_minutes=5)
+    ids = [r["id"] for r in results]
+    assert dlg["id"] in ids
+
+
+@pytest.mark.asyncio
+async def test_retention_not_returned_when_user_replied(db):
+    """If buyer replied after the bot, dialog must NOT appear in retention list."""
+    dlg = await db.get_or_create_dialog("avito", "ret_test_2")
+    await db._db.execute(
+        "INSERT INTO messages (dialog_id, role, text, ts) VALUES (?, 'assistant', 'Ок!', datetime('now', '-10 minutes'))",
+        (dlg["id"],),
+    )
+    await db._db.execute(
+        "INSERT INTO messages (dialog_id, role, text, ts) VALUES (?, 'user', 'Ладно', datetime('now', '-2 minutes'))",
+        (dlg["id"],),
+    )
+    await db._db.commit()
+
+    results = await db.get_dialogs_for_retention(silence_minutes=5)
+    ids = [r["id"] for r in results]
+    assert dlg["id"] not in ids
+
+
+@pytest.mark.asyncio
+async def test_retention_not_returned_after_notification_sent(db):
+    """After retention notification is recorded, dialog must NOT appear again."""
+    dlg = await db.get_or_create_dialog("avito", "ret_test_3")
+    await db._db.execute(
+        "INSERT INTO messages (dialog_id, role, text, ts) VALUES (?, 'assistant', 'Ок!', datetime('now', '-10 minutes'))",
+        (dlg["id"],),
+    )
+    await db._db.commit()
+    # Record the retention notification (sent after the bot message)
+    await db.record_notification(dlg["id"], "retention", {})
+
+    results = await db.get_dialogs_for_retention(silence_minutes=5)
+    ids = [r["id"] for r in results]
+    assert dlg["id"] not in ids
+
+
+@pytest.mark.asyncio
+async def test_retention_not_returned_when_recent_bot_reply(db):
+    """Dialog where bot replied just 1 minute ago must NOT appear (too soon)."""
+    dlg = await db.get_or_create_dialog("avito", "ret_test_4")
+    await db._db.execute(
+        "INSERT INTO messages (dialog_id, role, text, ts) VALUES (?, 'assistant', 'Ок!', datetime('now', '-1 minutes'))",
+        (dlg["id"],),
+    )
+    await db._db.commit()
+
+    results = await db.get_dialogs_for_retention(silence_minutes=5)
+    ids = [r["id"] for r in results]
+    assert dlg["id"] not in ids

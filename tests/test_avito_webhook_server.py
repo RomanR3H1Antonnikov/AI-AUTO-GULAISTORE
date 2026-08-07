@@ -243,6 +243,60 @@ async def test_process_engine_exception_does_not_crash():
     await server._process(_webhook_body())
 
 
+# ── System event greeting ────────────────────────────────────────────────────
+
+def _system_body(chat_id: str = "chat_sys", text: str = "Абонент просмотрел телефон") -> dict:
+    return {
+        "id": "evt_sys",
+        "timestamp": 1700000000,
+        "version": "v1.1",
+        "payload": {
+            "type": "message",
+            "value": {
+                "author_id": 99,
+                "user_id": 99,
+                "chat_id": chat_id,
+                "type": "system",
+                "content": {"text": text},
+            },
+        },
+    }
+
+
+@pytest.mark.asyncio
+async def test_system_event_sends_greeting_for_new_dialog():
+    server, engine, transport = _make_server()
+
+    await server._process(_system_body())
+
+    transport.send_message.assert_called_once()
+    greeting: str = transport.send_message.call_args[0][1]
+    assert "Добрый день" in greeting
+    engine.process_message.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_system_event_skips_greeting_in_existing_dialog():
+    server, engine, transport = _make_server()
+    engine.db.get_dialog = AsyncMock(return_value={"id": 5})
+    engine.db.get_message_count = AsyncMock(return_value=2)
+
+    await server._process(_system_body())
+
+    transport.send_message.assert_not_called()
+    engine.process_message.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_non_system_message_not_intercepted():
+    """Regular text message must NOT be intercepted by the system-event handler."""
+    server, engine, transport = _make_server()
+
+    await server._process(_webhook_body(text="Привет"))
+
+    engine.process_message.assert_called_once()
+
+
 # ── Item context injection ────────────────────────────────────────────────────
 
 @pytest.mark.asyncio

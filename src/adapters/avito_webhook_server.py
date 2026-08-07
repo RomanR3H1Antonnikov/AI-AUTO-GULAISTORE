@@ -77,6 +77,10 @@ class AvitoWebhookServer:
 
     async def _process(self, body: dict) -> None:
         """Parse webhook body, run engine, send reply — all in background."""
+        # System events (e.g. buyer viewed phone number) → proactive greeting
+        if await self._maybe_greet_on_system_event(body):
+            return
+
         try:
             incoming = self._parse(body)
         except ValueError as exc:
@@ -105,6 +109,35 @@ class AvitoWebhookServer:
             logger.exception(
                 "Unhandled error processing Avito chat %s", incoming.dialog_id
             )
+
+    async def _maybe_greet_on_system_event(self, body: dict) -> bool:
+        """
+        Handle Avito system messages (buyer viewed phone number, contact request, etc.).
+        If the dialog has no prior messages, send a proactive greeting.
+        Returns True if the body was a system event (so _process skips normal parsing).
+        """
+        msg = (body.get("payload", {}).get("value") or {})
+        if msg.get("type") != "system":
+            return False
+
+        chat_id: str = msg.get("chat_id", "")
+        if not chat_id:
+            return False
+
+        dialog = await self.engine.db.get_dialog("avito", chat_id)
+        if dialog and await self.engine.db.get_message_count(dialog["id"]) > 0:
+            logger.debug("System event in existing dialog %s — skipping greeting", chat_id)
+            return True
+
+        greeting = "Добрый день! Чем могу помочь? 😊"
+        try:
+            await self.transport.send_message(chat_id, greeting)
+            dlg = dialog or await self.engine.db.get_or_create_dialog("avito", chat_id)
+            await self.engine.db.add_message(dlg["id"], "assistant", greeting)
+            logger.info("Proactive greeting sent for system event in chat %s", chat_id)
+        except Exception:
+            logger.warning("Failed to send greeting for system event in chat %s", chat_id, exc_info=True)
+        return True
 
     async def _maybe_inject_item_context(
         self, incoming: IncomingMessage, body: dict
