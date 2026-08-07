@@ -85,6 +85,14 @@ class AvitoWebhookServer:
         if incoming is None:
             return
 
+        # When the bot sends via API, Avito echoes it back as a webhook with
+        # author_id == user_id — identical to the seller typing manually.
+        # Suppress these echoes using the timestamp recorded in send_message().
+        if incoming.is_owner_message and hasattr(self.transport, "is_bot_echo"):
+            if self.transport.is_bot_echo(incoming.dialog_id):  # type: ignore[union-attr]
+                logger.debug("Suppressed bot-echo webhook for chat %s", incoming.dialog_id)
+                return
+
         try:
             reply = await self.engine.process_message(self.transport, incoming)
             if reply:
