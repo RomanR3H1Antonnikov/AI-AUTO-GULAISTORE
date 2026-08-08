@@ -20,7 +20,7 @@ APP_USER="gulaistore"
 
 echo "=== [1/7] Installing system packages ==="
 apt-get update -q
-apt-get install -y -q python3.11 python3.11-venv python3-pip nginx certbot python3-certbot-nginx git
+apt-get install -y -q python3 python3-venv python3-pip nginx certbot python3-certbot-nginx git
 
 echo "=== [2/7] Creating system user '$APP_USER' ==="
 id "$APP_USER" &>/dev/null || useradd --system --home "$APP_DIR" --shell /usr/sbin/nologin "$APP_USER"
@@ -48,14 +48,18 @@ chown -R "$APP_USER:$APP_USER" "$APP_DIR"
 chmod 750 "$APP_DIR"
 
 echo "=== [4/7] Creating virtualenv and installing dependencies ==="
-sudo -u "$APP_USER" python3.11 -m venv "$APP_DIR/.venv"
+sudo -u "$APP_USER" python3 -m venv "$APP_DIR/.venv"
 sudo -u "$APP_USER" "$APP_DIR/.venv/bin/pip" install --quiet --upgrade pip
 sudo -u "$APP_USER" "$APP_DIR/.venv/bin/pip" install --quiet -r "$APP_DIR/requirements.txt"
 
-echo "=== [5/7] Installing systemd service ==="
+echo "=== [5/7] Installing systemd services ==="
 cp "$APP_DIR/deploy/gulaistore.service" /etc/systemd/system/gulaistore.service
+cp "$APP_DIR/deploy/price_monitor.service" /etc/systemd/system/price_monitor.service
 systemctl daemon-reload
 systemctl enable gulaistore
+# price_monitor requires interactive --auth before first run — enable but don't start here
+systemctl enable price_monitor || true
+echo "NOTE: run 'python -m price_monitor.main --auth' as $APP_USER before starting price_monitor"
 
 echo "=== [6/7] Configuring nginx ==="
 # Replace placeholder domain in nginx config
@@ -78,7 +82,13 @@ systemctl status gulaistore --no-pager
 echo ""
 echo "=== Done! ==="
 echo "Useful commands:"
-echo "  journalctl -u gulaistore -f          # live logs"
-echo "  systemctl restart gulaistore          # restart bot"
-echo "  systemctl status gulaistore           # service status"
-echo "  curl https://$DOMAIN/health           # health check"
+echo "  journalctl -u gulaistore -f           # live bot logs"
+echo "  systemctl restart gulaistore           # restart bot"
+echo "  systemctl status gulaistore            # bot status"
+echo "  curl https://$DOMAIN/health            # health check"
+echo "  journalctl -u price_monitor -f        # price monitor logs"
+echo "  systemctl restart price_monitor        # restart price monitor"
+echo ""
+echo "Price monitor first-run auth (once per VPS):"
+echo "  sudo -u $APP_USER $APP_DIR/.venv/bin/python -m price_monitor.main --auth"
+echo "  systemctl start price_monitor"

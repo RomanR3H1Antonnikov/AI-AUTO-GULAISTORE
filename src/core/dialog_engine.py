@@ -191,6 +191,8 @@ class DialogEngine:
 
     @staticmethod
     def _make_sku(item: dict) -> str:
+        if "db_sku" in item:
+            return item["db_sku"]
         import re as _re
         parts = [item.get("name", ""), item.get("config", ""), item.get("color", "")]
         raw = " ".join(p for p in parts if p).lower().strip()

@@ -36,3 +36,10 @@ htmlcov/
 
 # Avito API rules (may contain proprietary schema)
 apirules/
+
+# Telethon session files (credentials)
+*.session
+*.session-journal
+
+# Local diagnostic dumps
+scripts/channel_dump.txt

@@ -4,28 +4,28 @@ category_notes:
 
 categories:
   iMac:
-    - { name: "iMac 24", config: "M4 16/512", color: "серебристый", price: 192900 }
-    - { name: "iMac 24", config: "M4 16/256", color: "серебристый", price: 158900 }
+    - { name: "iMac 24", config: "M4 16/512", color: "серебристый", price: 192900, db_sku: "imac_m4_8_8_16_512_silver" }
+    - { name: "iMac 24", config: "M4 16/256", color: "серебристый", price: 158900, db_sku: "imac_m4_8_8_16_256_silver" }
 
   MacBook Air:
-    - { name: "MacBook Air 15", config: "M5 32/1TB",  color: "серебристый", price: 219900 }
+    - { name: "MacBook Air 15", config: "M5 32/1TB",  color: "серебристый", price: 219900, db_sku: "air_15_m5_32_1tb_starlight" }
     - { name: "MacBook Air 13", config: "M5 24/1TB",  color: "серебристый", price: 136900 }
-    - { name: "MacBook Air 15", config: "M5 16/1TB",  color: "серебристый", price: 142900 }
-    - { name: "MacBook Air 15", config: "M5 16/512",  color: "серебристый", price: 119900 }
-    - { name: "MacBook Air 13", config: "M5 16/1TB",  color: "серебристый", price: 114900 }
-    - { name: "MacBook Air 13", config: "M5 16/512",  color: "серебристый", price: 97900  }
+    - { name: "MacBook Air 15", config: "M5 16/1TB",  color: "серебристый", price: 142900, db_sku: "air_15_m5_16_1tb_sky_blue" }
+    - { name: "MacBook Air 15", config: "M5 16/512",  color: "серебристый", price: 119900, db_sku: "air_15_m5_16_512_starlight" }
+    - { name: "MacBook Air 13", config: "M5 16/1TB",  color: "серебристый", price: 114900, db_sku: "air_13_m5_16_1tb_starlight" }
+    - { name: "MacBook Air 13", config: "M5 16/512",  color: "серебристый", price: 97900,  db_sku: "air_13_m5_16_512_starlight" }
 
   MacBook Pro:
     - { name: "MacBook Pro 14", config: "M5 16/512",       color: "серебристый", price: 141900 }
     - { name: "MacBook Pro 14", config: "M5 16/1TB",       color: "серебристый", price: 152900 }
-    - { name: "MacBook Pro 16", config: "M5 Pro 64/2TB",   color: "серебристый", price: 419900 }
-    - { name: "MacBook Pro 16", config: "M5 Pro 64/1TB",   color: "серебристый", price: 386900 }
+    - { name: "MacBook Pro 16", config: "M5 Pro 64/2TB",   color: "серебристый", price: 419900, db_sku: "pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_silver" }
+    - { name: "MacBook Pro 16", config: "M5 Pro 64/1TB",   color: "серебристый", price: 386900, db_sku: "pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_silver" }
 
   MacBook Neo:
     - { name: "MacBook Neo", config: "256GB", color: "Silver", price: 57490 }
-    - { name: "MacBook Neo", config: "256GB", color: "Blush",  price: 57900 }
-    - { name: "MacBook Neo", config: "256GB", color: "Citrus", price: 57900 }
-    - { name: "MacBook Neo", config: "256GB", color: "Indigo", price: 56490 }
+    - { name: "MacBook Neo", config: "256GB", color: "Blush",  price: 57900, db_sku: "neo_8_256_blush" }
+    - { name: "MacBook Neo", config: "256GB", color: "Citrus", price: 57900, db_sku: "neo_8_256_citrus" }
+    - { name: "MacBook Neo", config: "256GB", color: "Indigo", price: 56490, db_sku: "neo_8_256_indigo" }
     - { name: "MacBook Neo", config: "512GB", color: "Silver", price: 65900 }
     - { name: "MacBook Neo", config: "512GB", color: "Blush",  price: 65900 }
     - { name: "MacBook Neo", config: "512GB", color: "Citrus", price: 64990 }
