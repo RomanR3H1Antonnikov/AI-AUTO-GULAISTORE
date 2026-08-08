@@ -206,22 +206,39 @@ class DialogEngine:
             header = f"\n{category}" + (f" [{note}]" if note else "") + ":"
             lines.append(header)
             for item in items:
-                parts = [f"  • {item['name']}"]
+                name = item["name"]
                 if item.get("config"):
-                    parts.append(item["config"])
+                    name = f"{name} {item['config']}"
                 if item.get("color"):
-                    parts.append(f"({item['color']})")
-                yaml_price: int = item["price"]
-                live_price: Optional[int] = None
-                if self.price_db:
-                    try:
-                        live_price = await self.price_db.get_price(self._make_sku(item))
-                    except Exception:
-                        logger.warning("price_db lookup failed for %s", item.get("name"))
-                final_price = live_price if live_price is not None else yaml_price
-                price_str = f"{final_price:,}".replace(",", " ")
-                parts.append(f"— {price_str} ₽")
-                lines.append(" ".join(parts))
+                    name = f"{name} ({item['color']})"
+
+                if "markup" in item:
+                    # New-style: final price = db_price + fixed markup
+                    markup: int = item["markup"]
+                    db_price: Optional[int] = None
+                    sku = item.get("db_sku")
+                    if self.price_db and sku:
+                        try:
+                            db_price = await self.price_db.get_price(sku)
+                        except Exception:
+                            logger.warning("price_db lookup failed for sku=%s", sku)
+                    if db_price is not None:
+                        price_str = f"{db_price + markup:,}".replace(",", " ")
+                        lines.append(f"  • {name} — {price_str} ₽")
+                    else:
+                        lines.append(f"  • {name} — цена уточняется")
+                else:
+                    # Legacy-style: yaml price, optionally overridden by live price
+                    yaml_price: int = item.get("price", 0)
+                    live_price: Optional[int] = None
+                    if self.price_db:
+                        try:
+                            live_price = await self.price_db.get_price(self._make_sku(item))
+                        except Exception:
+                            logger.warning("price_db lookup failed for %s", name)
+                    final_price = live_price if live_price is not None else yaml_price
+                    price_str = f"{final_price:,}".replace(",", " ")
+                    lines.append(f"  • {name} — {price_str} ₽")
         return "\n".join(lines)
 
     async def _build_system_prompt(self) -> str:

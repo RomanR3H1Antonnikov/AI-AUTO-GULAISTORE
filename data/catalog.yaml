@@ -1,32 +1,138 @@
-# Category-level notes shown in LLM context
+# Catalog: каждая позиция содержит display-имя, фиксированную наценку (markup, руб.)
+# и db_sku — ключ в prices.db (из Telegram-канала/бота).
+# Итоговая цена для покупателя: db_price + markup.
+# Если db_sku не указан или цена в БД отсутствует — бот сообщает «цена уточняется».
+
 category_notes:
-  MacBook Neo: '13", чип A18 Pro (НЕ M-серия! не путать с MacBook Air/Pro), 8 ГБ RAM фиксировано, цвета Silver/Blush/Citrus/Indigo'
+  MacBook Neo: '13", чип A18 Pro (НЕ M-серия!), 8 ГБ RAM, цвета Silver/Blush/Citrus/Indigo'
+  iPhone 17 Pro Max: 'Доступны eSIM+eSIM и nanoSIM+eSIM'
+  iPhone 17 Pro: 'Доступны eSIM+eSIM и nanoSIM+eSIM'
+  iPhone 17: 'Доступны eSIM+eSIM и nanoSIM+eSIM'
+  iPad Pro (Wi-Fi): 'Wi-Fi версии: GPS может не работать в РФ (нет LTE-модуля)'
+  iPad Air (Wi-Fi): 'Wi-Fi версии: GPS может не работать в РФ (нет LTE-модуля)'
 
 categories:
-  iMac:
-    - { name: "iMac 24", config: "M4 16/512", color: "серебристый", price: 192900, db_sku: "imac_m4_8_8_16_512_silver" }
-    - { name: "iMac 24", config: "M4 16/256", color: "серебристый", price: 158900, db_sku: "imac_m4_8_8_16_256_silver" }
-
-  MacBook Air:
-    - { name: "MacBook Air 15", config: "M5 32/1TB",  color: "серебристый", price: 219900, db_sku: "air_15_m5_32_1tb_starlight" }
-    - { name: "MacBook Air 13", config: "M5 24/1TB",  color: "серебристый", price: 136900 }
-    - { name: "MacBook Air 15", config: "M5 16/1TB",  color: "серебристый", price: 142900, db_sku: "air_15_m5_16_1tb_sky_blue" }
-    - { name: "MacBook Air 15", config: "M5 16/512",  color: "серебристый", price: 119900, db_sku: "air_15_m5_16_512_starlight" }
-    - { name: "MacBook Air 13", config: "M5 16/1TB",  color: "серебристый", price: 114900, db_sku: "air_13_m5_16_1tb_starlight" }
-    - { name: "MacBook Air 13", config: "M5 16/512",  color: "серебристый", price: 97900,  db_sku: "air_13_m5_16_512_starlight" }
-
-  MacBook Pro:
-    - { name: "MacBook Pro 14", config: "M5 16/512",       color: "серебристый", price: 141900 }
-    - { name: "MacBook Pro 14", config: "M5 16/1TB",       color: "серебристый", price: 152900 }
-    - { name: "MacBook Pro 16", config: "M5 Pro 64/2TB",   color: "серебристый", price: 419900, db_sku: "pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_silver" }
-    - { name: "MacBook Pro 16", config: "M5 Pro 64/1TB",   color: "серебристый", price: 386900, db_sku: "pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_silver" }
-
   MacBook Neo:
-    - { name: "MacBook Neo", config: "256GB", color: "Silver", price: 57490 }
-    - { name: "MacBook Neo", config: "256GB", color: "Blush",  price: 57900, db_sku: "neo_8_256_blush" }
-    - { name: "MacBook Neo", config: "256GB", color: "Citrus", price: 57900, db_sku: "neo_8_256_citrus" }
-    - { name: "MacBook Neo", config: "256GB", color: "Indigo", price: 56490, db_sku: "neo_8_256_indigo" }
-    - { name: "MacBook Neo", config: "512GB", color: "Silver", price: 65900 }
-    - { name: "MacBook Neo", config: "512GB", color: "Blush",  price: 65900 }
-    - { name: "MacBook Neo", config: "512GB", color: "Citrus", price: 64990 }
-    - { name: "MacBook Neo", config: "512GB", color: "Indigo", price: 64490 }
+    - { name: "MacBook NEO (8/256) Indigo",  markup: 2000, db_sku: "neo_8_256_indigo" }
+    - { name: "MacBook NEO (8/256) Citrus",  markup: 2000, db_sku: "neo_8_256_citrus" }
+    - { name: "MacBook NEO (8/256) Silver",  markup: 2000 }
+    - { name: "MacBook NEO (8/256) Blush",   markup: 2000, db_sku: "neo_8_256_blush" }
+    - { name: "MacBook NEO (8/512) Indigo",  markup: 2000 }
+    - { name: "MacBook NEO (8/512) Citrus",  markup: 2000 }
+    - { name: "MacBook NEO (8/512) Silver",  markup: 2000 }
+    - { name: "MacBook NEO (8/512) Blush",   markup: 2000 }
+
+  iPhone 17 Pro Max:
+    - { name: "iPhone 17 Pro Max 256 Гб Deep Blue",    markup: 2000, db_sku: "17_pro_max_256_blue" }
+    - { name: "iPhone 17 Pro Max 512 Гб Deep Blue",    markup: 2500, db_sku: "17_pro_max_512_blue" }
+    - { name: "iPhone 17 Pro Max 1 ТБ Deep Blue",      markup: 3000, db_sku: "17_pro_max_1tb_blue" }
+    - { name: "iPhone 17 Pro Max 2 ТБ Deep Blue",      markup: 3000 }
+    - { name: "iPhone 17 Pro Max 256 Гб Cosmic Orange", markup: 2000, db_sku: "17_pro_max_256_orange" }
+    - { name: "iPhone 17 Pro Max 512 Гб Cosmic Orange", markup: 2500, db_sku: "17_pro_max_512_orange" }
+    - { name: "iPhone 17 Pro Max 1 ТБ Cosmic Orange",  markup: 3000 }
+    - { name: "iPhone 17 Pro Max 2 ТБ Cosmic Orange",  markup: 3000, db_sku: "17_pro_max_2tb_orange" }
+    - { name: "iPhone 17 Pro Max 256 Гб Silver",       markup: 2000 }
+    - { name: "iPhone 17 Pro Max 512 Гб Silver",       markup: 2500 }
+    - { name: "iPhone 17 Pro Max 1 ТБ Silver",         markup: 3000, db_sku: "17_pro_max_1tb_silver" }
+    - { name: "iPhone 17 Pro Max 2 ТБ Silver",         markup: 3000, db_sku: "17_pro_max_2tb_silver" }
+
+  iPhone 17 Pro:
+    - { name: "iPhone 17 Pro 256 Гб Deep Blue",    markup: 2000, db_sku: "17_pro_256_blue" }
+    - { name: "iPhone 17 Pro 512 Гб Deep Blue",    markup: 2500, db_sku: "17_pro_512_blue" }
+    - { name: "iPhone 17 Pro 1 ТБ Deep Blue",      markup: 3000, db_sku: "17_pro_1tb_blue" }
+    - { name: "iPhone 17 Pro 256 Гб Cosmic Orange", markup: 2000, db_sku: "17_pro_256_orange" }
+    - { name: "iPhone 17 Pro 512 Гб Cosmic Orange", markup: 2500, db_sku: "17_pro_512_orange" }
+    - { name: "iPhone 17 Pro 1 ТБ Cosmic Orange",  markup: 3000, db_sku: "17_pro_1tb_orange" }
+    - { name: "iPhone 17 Pro 256 Гб Silver",       markup: 2000, db_sku: "17_pro_256_silver" }
+    - { name: "iPhone 17 Pro 512 Гб Silver",       markup: 2500, db_sku: "17_pro_512_silver" }
+    - { name: "iPhone 17 Pro 1 ТБ Silver",         markup: 3000, db_sku: "17_pro_1tb_silver" }
+
+  iPhone 17:
+    - { name: "iPhone 17 256 Гб Black",    markup: 2000, db_sku: "17_256_black" }
+    - { name: "iPhone 17 512 Гб Black",    markup: 2500 }
+    - { name: "iPhone 17 256 Гб Mist Blue", markup: 2000 }
+    - { name: "iPhone 17 512 Гб Mist Blue", markup: 2500 }
+    - { name: "iPhone 17 256 Гб Sage",     markup: 2000 }
+    - { name: "iPhone 17 512 Гб Sage",     markup: 2500 }
+    - { name: "iPhone 17 256 Гб Lavender", markup: 2000, db_sku: "17_256_lavender" }
+    - { name: "iPhone 17 512 Гб Lavender", markup: 2500 }
+    - { name: "iPhone 17 256 Гб White",    markup: 2000 }
+    - { name: "iPhone 17 512 Гб White",    markup: 2500 }
+
+  iMac M4:
+    - { name: "iMac M4 10/10/24/1 ТБ (все цвета)",   markup: 6000, db_sku: "imac_m4_10_10_24_1tb_silver" }
+    - { name: "iMac M4 10/10/32/512 ГБ (все цвета)",  markup: 6000, db_sku: "imac_m4_10_10_32_512_silver" }
+    - { name: "iMac M4 10/10/32/1 ТБ (все цвета)",   markup: 6000, db_sku: "imac_m4_10_10_32_1tb_silver" }
+    - { name: "iMac M4 10/10/32/2 ТБ (все цвета)",   markup: 6000, db_sku: "imac_m4_10_10_32_2tb_silver" }
+    - { name: "iMac M4 8/8/16/256 ГБ (все цвета)",   markup: 4000, db_sku: "imac_m4_8_8_16_256_silver" }
+    - { name: "iMac M4 10/10/16/256 ГБ (все цвета)", markup: 4000, db_sku: "imac_m4_10_10_16_256_silver" }
+    - { name: "iMac M4 10/10/24/256 ГБ (все цвета)", markup: 4000, db_sku: "imac_m4_10_10_24_256_green" }
+    - { name: "iMac M4 8/8/16/512 ГБ (все цвета)",   markup: 4000, db_sku: "imac_m4_8_8_16_512_silver" }
+    - { name: "iMac M4 10/10/16/512 ГБ (все цвета)", markup: 4000, db_sku: "imac_m4_10_10_16_512_silver" }
+    - { name: "iMac M4 10/10/16/1 ТБ (все цвета)",   markup: 4000, db_sku: "imac_m4_10_10_16_1tb_silver" }
+    - { name: "iMac M4 10/10/24/512 ГБ (все цвета)", markup: 4000, db_sku: "imac_m4_10_10_24_512_silver" }
+
+  MacBook Pro 16:
+    - { name: "MacBook Pro 16 M5 Max 18c/32c GPU 36 ГБ/2 ТБ",  markup: 5000, db_sku: "pro_16_m5_max_18c_cpu_32c_gpu_36_2tb_black" }
+    - { name: "MacBook Pro 16 M5 Pro 18c/20c GPU 64 ГБ/1 ТБ",  markup: 5000, db_sku: "pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_silver" }
+    - { name: "MacBook Pro 16 M5 Pro 18c/20c GPU 64 ГБ/2 ТБ",  markup: 5000, db_sku: "pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_silver" }
+    - { name: "MacBook Pro 16 M5 Max 18c/40c GPU 64 ГБ/2 ТБ",  markup: 5000, db_sku: "pro_16_m5_max_18c_cpu_40c_gpu_64_2tb_black" }
+    - { name: "MacBook Pro 16 M5 Max 18c/40c GPU 64 ГБ/4 ТБ",  markup: 5000, db_sku: "pro_16_m5_max_18c_cpu_40c_gpu_64_4tb_silver" }
+    - { name: "MacBook Pro 16 M5 Max 18c/40c GPU 128 ГБ/8 ТБ", markup: 5000, db_sku: "pro_16_m5_max_18c_cpu_40c_gpu_128_8tb_black" }
+
+  MacBook Pro 14:
+    - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 48 ГБ/1 ТБ",  markup: 5000, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_48_1tb_black" }
+    - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 48 ГБ/2 ТБ",  markup: 5000, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_48_2tb_black" }
+    - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 64 ГБ/1 ТБ",  markup: 5000, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_64_1tb_black" }
+    - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 64 ГБ/2 ТБ",  markup: 5000, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_64_2tb_black" }
+    - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 64 ГБ/2 ТБ",  markup: 5000, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_64_2tb_black" }
+    - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 64 ГБ/4 ТБ",  markup: 5000, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_64_4tb_black" }
+    - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 128 ГБ/2 ТБ", markup: 5000, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_128_2tb_black" }
+    - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 128 ГБ/4 ТБ", markup: 5000, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_128_4tb_black" }
+    - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 128 ГБ/8 ТБ", markup: 5000, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_128_8tb_black" }
+
+  MacBook Air 15:
+    - { name: "MacBook Air 15 M5 16 ГБ/512 ГБ", markup: 3000, db_sku: "air_15_m5_16_512_starlight" }
+    - { name: "MacBook Air 15 M5 16 ГБ/1 ТБ",   markup: 3000, db_sku: "air_15_m5_16_1tb_sky_blue" }
+    - { name: "MacBook Air 15 M5 32 ГБ/512 ГБ", markup: 3000, db_sku: "air_15_m5_32_512_silver" }
+    - { name: "MacBook Air 15 M5 32 ГБ/1 ТБ",   markup: 3000, db_sku: "air_15_m5_32_1tb_starlight" }
+    - { name: "MacBook Air 15 M5 32 ГБ/2 ТБ",   markup: 3000, db_sku: "air_15_m5_32_2tb_silver" }
+    - { name: "MacBook Air 15 M5 32 ГБ/4 ТБ",   markup: 3000, db_sku: "air_15_m5_32_4tb_silver" }
+
+  MacBook Air 13:
+    - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", markup: 2500, db_sku: "air_13_m5_16_512_starlight" }
+    - { name: "MacBook Air 13 M5 16 ГБ/1 ТБ",   markup: 2500, db_sku: "air_13_m5_16_1tb_starlight" }
+    - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   markup: 2500 }
+    - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   markup: 2500, db_sku: "air_13_m5_32_2tb_70w_sky_blue" }
+    - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   markup: 2500, db_sku: "air_13_m5_32_4tb_70w_silver" }
+
+  iPad Pro (LTE):
+    - { name: "iPad Pro 11 M5 256 ГБ LTE", markup: 3000, db_sku: "ipad_pro_11_m5_256_lte_silver" }
+    - { name: "iPad Pro 11 M5 512 ГБ LTE", markup: 3000, db_sku: "ipad_pro_11_m5_512_lte_black" }
+    - { name: "iPad Pro 13 M5 256 ГБ LTE", markup: 3000, db_sku: "ipad_pro_13_m5_256_lte_black" }
+    - { name: "iPad Pro 13 M5 512 ГБ LTE", markup: 3000, db_sku: "ipad_pro_13_m5_512_lte_black" }
+    - { name: "iPad Pro 13 M5 1 ТБ LTE",   markup: 3000, db_sku: "ipad_pro_13_m5_1tb_lte_black" }
+    - { name: "iPad Pro 13 M5 2 ТБ LTE",   markup: 3000, db_sku: "ipad_pro_13_m5_2tb_lte_black" }
+
+  iPad Pro (Wi-Fi):
+    - { name: "iPad Pro 11 M5 256 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_pro_11_m5_256_wi_fi_black" }
+    - { name: "iPad Pro 11 M5 512 ГБ Wi-Fi", markup: 2000 }
+    - { name: "iPad Pro 11 M5 2 ТБ Wi-Fi",   markup: 2000 }
+    - { name: "iPad Pro 13 M5 256 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_pro_13_m5_256_wi_fi_black" }
+    - { name: "iPad Pro 13 M5 512 ГБ Wi-Fi", markup: 2000 }
+    - { name: "iPad Pro 13 M5 1 ТБ Wi-Fi",   markup: 2000 }
+    - { name: "iPad Pro 13 M5 2 ТБ Wi-Fi",   markup: 2000 }
+
+  iPad Air (Wi-Fi):
+    - { name: "iPad Air 11 M4 (2026) 128 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_air_11_m4_2026_128_wi_fi_grey" }
+    - { name: "iPad Air 11 M4 (2026) 256 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_air_11_m4_2026_256_wi_fi_grey" }
+    - { name: "iPad Air 13 M4 (2026) 128 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_air_13_m4_2026_128_wi_fi_grey" }
+    - { name: "iPad Air 13 M4 (2026) 256 ГБ Wi-Fi", markup: 2000 }
+    - { name: "iPad Air 13 M4 (2026) 512 ГБ Wi-Fi", markup: 2000 }
+
+  iPad Air (LTE):
+    - { name: "iPad Air 11 M4 (2026) 128 ГБ LTE", markup: 3000, db_sku: "ipad_air_11_m4_2026_128_lte_grey" }
+    - { name: "iPad Air 11 M4 (2026) 256 ГБ LTE", markup: 3000 }
+    - { name: "iPad Air 13 M4 (2026) 128 ГБ LTE", markup: 3000, db_sku: "ipad_air_13_m4_2026_128_lte_grey" }
+    - { name: "iPad Air 13 M4 (2026) 256 ГБ LTE", markup: 3000, db_sku: "ipad_air_13_m4_2026_256_lte_grey" }
+    - { name: "iPad Air 13 M4 (2026) 512 ГБ LTE", markup: 3000, db_sku: "ipad_air_13_m4_2026_512_lte_grey" }

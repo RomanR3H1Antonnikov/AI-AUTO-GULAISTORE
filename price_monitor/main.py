@@ -1,4 +1,4 @@
-"""
+﻿"""
 Gulai Store — Price Monitor service.
 
 Runs on VPS alongside the main autoresponder.
@@ -42,17 +42,19 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
     """One price-check cycle: fetch all sources, deduplicate, persist changes."""
     logger.info("=== Price check at %s ===", datetime.now().strftime("%H:%M:%S"))
 
-    # SKU → (name, price, source); bot source wins over group if both have an entry
-    seen: dict[str, tuple[str, int, str, str]] = {}  # sku → (name, price, source, raw)
+
+    # SKU -> (name, price, source, raw); always keep the CHEAPER price across sources
+    seen: dict[str, tuple[str, int, str, str]] = {}  # sku -> (name, price, source, raw)
 
     group_prices = await fetch_group_prices(client, cfg.group_chat_id, cfg.group_msg_limit)
     for p in group_prices:
-        seen[p.sku] = (p.name, p.price, "group", p.raw_line)
+        if p.sku not in seen or p.price < seen[p.sku][1]:
+            seen[p.sku] = (p.name, p.price, "group", p.raw_line)
 
     bot_prices = await fetch_bot_prices(client, cfg.price_bot_username, cfg.bot_collect_timeout)
     for p in bot_prices:
-        seen[p.sku] = (p.name, p.price, "bot", p.raw_line)  # bot overrides group
-
+        if p.sku not in seen or p.price < seen[p.sku][1]:
+            seen[p.sku] = (p.name, p.price, "bot", p.raw_line)
     changed = 0
     for sku, (name, price, source, raw) in seen.items():
         if await db.upsert(sku, name, price, source, raw):
