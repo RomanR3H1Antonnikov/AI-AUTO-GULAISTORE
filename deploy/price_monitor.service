@@ -1,0 +1,16 @@
+[Unit]
+Description=Gulai Store — Price Monitor (Telegram userbot)
+After=network-online.target
+
+[Service]
+Type=simple
+User=gulaistore
+Group=gulaistore
+WorkingDirectory=/opt/gulaistore
+ExecStart=/opt/gulaistore/.venv/bin/python -m price_monitor.main
+EnvironmentFile=/opt/gulaistore/.env
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

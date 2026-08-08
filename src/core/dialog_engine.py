@@ -1,4 +1,4 @@
-"""
+﻿"""
 Transport-agnostic dialog engine.
 This module knows nothing about Telegram or Avito — it works via the Transport interface.
 """
@@ -17,6 +17,7 @@ from .stock_source import StockSource
 from .toxicity_detector import ToxicityDetector
 from .transport import IncomingMessage, Transport
 from ..storage.database import Database
+from ..storage.price_database import PriceDatabase
 
 logger = logging.getLogger(__name__)
 
@@ -151,11 +152,13 @@ class DialogEngine:
         catalog_path: str,
         config: dict,
         stock_source: StockSource,
+        price_db: Optional[PriceDatabase] = None,
     ) -> None:
         self.db = db
         self.client = openai_client
         self.config = config
         self.stock_source = stock_source
+        self.price_db = price_db  # optional live price override
 
         clf_model = config.get("classifier_model", "gpt-4o-mini")
         self.lead_detector = LeadDetector(openai_client, clf_model)
@@ -186,7 +189,14 @@ class DialogEngine:
             lines.append(f"• {fact}")
         return "\n".join(lines)
 
-    def _format_catalog(self) -> str:
+    @staticmethod
+    def _make_sku(item: dict) -> str:
+        import re as _re
+        parts = [item.get("name", ""), item.get("config", ""), item.get("color", "")]
+        raw = " ".join(p for p in parts if p).lower().strip()
+        return _re.sub(r"[^a-zа-яёё0-9]+", "_", raw).strip("_")
+
+    async def _format_catalog(self) -> str:
         cat_notes = self._cat.get("category_notes", {})
         lines: list[str] = []
         for category, items in self._cat.get("categories", {}).items():
@@ -199,15 +209,23 @@ class DialogEngine:
                     parts.append(item["config"])
                 if item.get("color"):
                     parts.append(f"({item['color']})")
-                price = f"{item['price']:,}".replace(",", " ")
-                parts.append(f"— {price} ₽")
+                yaml_price: int = item["price"]
+                live_price: Optional[int] = None
+                if self.price_db:
+                    try:
+                        live_price = await self.price_db.get_price(self._make_sku(item))
+                    except Exception:
+                        logger.warning("price_db lookup failed for %s", item.get("name"))
+                final_price = live_price if live_price is not None else yaml_price
+                price_str = f"{final_price:,}".replace(",", " ")
+                parts.append(f"— {price_str} ₽")
                 lines.append(" ".join(parts))
         return "\n".join(lines)
 
-    def _build_system_prompt(self) -> str:
+    async def _build_system_prompt(self) -> str:
         return _SYSTEM_PROMPT.format(
             knowledge_base=self._format_kb(),
-            catalog=self._format_catalog(),
+            catalog=await self._format_catalog(),
             current_dt=datetime.now(timezone.utc).astimezone().strftime("%d.%m.%Y %H:%M"),
         )
 
@@ -393,7 +411,7 @@ class DialogEngine:
             return None
 
         # 7. Build context and call LLM
-        system_prompt = self._build_system_prompt()
+        system_prompt = await self._build_system_prompt()
         history = await self._build_llm_messages(dialog_id)
         llm_msgs = [{"role": "system", "content": system_prompt}] + history
 

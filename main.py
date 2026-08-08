@@ -38,6 +38,7 @@ from src.adapters.telegram_adapter import TelegramAdapter
 from src.core.dialog_engine import DialogEngine
 from src.core.stock_source import StubStockSource
 from src.storage.database import Database
+from src.storage.price_database import PriceDatabase
 
 load_dotenv()
 
@@ -113,6 +114,17 @@ async def main() -> None:
     # ── LLM client ────────────────────────────────────────────────────────────
     openai_client = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
+    # ── Live price database (optional — activated when prices.db exists) ─────
+    price_db_path = config.get("price_db_path", "prices.db")
+    price_db: PriceDatabase | None = None
+    import os as _os
+    if _os.path.exists(price_db_path):
+        price_db = PriceDatabase(price_db_path)
+        await price_db.init()
+        logger.info("Live price database loaded from %s", price_db_path)
+    else:
+        logger.info("prices.db not found — using YAML catalog prices (run price_monitor to enable live prices)")
+
     # ── Dialog engine (shared between all transports) ─────────────────────────
     engine = DialogEngine(
         db=db,
@@ -121,6 +133,7 @@ async def main() -> None:
         catalog_path="data/catalog.yaml",
         config=config.get("engine", {}),
         stock_source=StubStockSource(),
+        price_db=price_db,
     )
 
     # ── Telegram ──────────────────────────────────────────────────────────────
@@ -197,6 +210,8 @@ async def main() -> None:
         await asyncio.gather(*tasks)
     finally:
         await db.close()
+        if price_db:
+            await price_db.close()
         if avito_api_client:
             await avito_api_client.close()
         logger.info("Shutdown complete.")
