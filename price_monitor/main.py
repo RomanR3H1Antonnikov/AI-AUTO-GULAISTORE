@@ -15,7 +15,7 @@ Normal operation (managed by systemd):
 import asyncio
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 from dotenv import load_dotenv
 from telethon import TelegramClient
@@ -36,6 +36,23 @@ logging.basicConfig(
     ],
 )
 logger = logging.getLogger(__name__)
+
+_MSK = timezone(timedelta(hours=3))
+_WINDOW_START = (10, 30)   # 10:30 MSK
+_WINDOW_END   = (18, 30)   # 18:30 MSK
+
+
+def _in_window(now: datetime) -> bool:
+    t = (now.hour, now.minute)
+    return _WINDOW_START <= t < _WINDOW_END
+
+
+def _secs_until_window(now: datetime) -> float:
+    """Seconds until 10:30 MSK (next occurrence)."""
+    target = now.replace(hour=_WINDOW_START[0], minute=_WINDOW_START[1], second=0, microsecond=0)
+    if now >= target:
+        target += timedelta(days=1)
+    return (target - now).total_seconds()
 
 
 async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> None:
@@ -72,6 +89,16 @@ async def main_loop(cfg: Config) -> None:
         logger.info("Connected as %s (@%s)", me.first_name, me.username)
 
         while True:
+            now = datetime.now(_MSK)
+            if not _in_window(now):
+                wait = _secs_until_window(now)
+                logger.info(
+                    "Outside 10:30–18:30 MSK (now %s MSK). Sleeping %.1fh until window opens.",
+                    now.strftime("%H:%M"), wait / 3600,
+                )
+                await asyncio.sleep(wait)
+                continue
+
             try:
                 await run_check(client, db, cfg)
             except Exception:
