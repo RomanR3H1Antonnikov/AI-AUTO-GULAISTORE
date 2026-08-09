@@ -32,8 +32,8 @@ class Transport(ABC):
         ...
 
     @abstractmethod
-    async def send_owner_notification(self, text: str) -> None:
-        """Send an alert to the store owner (lead, escalation, toxicity, etc.)."""
+    async def send_owner_notification(self, text: str) -> Optional[int]:
+        """Send an alert to the store owner. Returns platform message ID if available."""
         ...
 
     @abstractmethod

@@ -387,6 +387,10 @@ class DialogEngine:
             if datetime.now(timezone.utc) - sent < timedelta(minutes=10):
                 return
 
+        context = (
+            f"Вопрос клиента: «{user_message[:300]}»\n"
+            f"Ответ бота: «{bot_reply[:200]}»"
+        )
         text = (
             f"📌 Эскалация в диалоге #{dialog_id}\n\n"
             f"Клиент: {dialog['external_id']}\n"
@@ -394,9 +398,17 @@ class DialogEngine:
             f"Вопрос клиента: «{user_message[:200]}»\n"
             f"Ответ бота: «{bot_reply[:200]}»"
         )
-        await transport.send_owner_notification(text)
+        tg_msg_id = await transport.send_owner_notification(text)
         await self.db.record_notification(dialog_id, "escalation",
                                           {"user_msg": user_message[:200]})
+        if tg_msg_id is not None:
+            await self.db.store_escalation_relay(
+                tg_msg_id=tg_msg_id,
+                dialog_id=dialog_id,
+                transport=dialog["transport"],
+                external_id=dialog["external_id"],
+                context=context,
+            )
 
     # ── Main entry point ──────────────────────────────────────────────────────
 
@@ -491,6 +503,26 @@ class DialogEngine:
             dialog_id, usage.total_tokens, reply[:80],
         )
         return reply
+
+    async def reformulate_owner_reply(self, owner_text: str, context: str) -> str:
+        """Переформулирует сырой ответ владельца в сообщение для покупателя."""
+        prompt = (
+            "Ты — помощница магазина Gulai Store. "
+            "Владелец дал ответ на вопрос покупателя. "
+            "Переформулируй его ответ в дружелюбное сообщение покупателю. "
+            "Без вводных фраз, без Markdown, 1–3 предложения максимум. "
+            "Обращайся на «вы».\n\n"
+            f"Контекст:\n{context}\n\n"
+            f"Ответ владельца: «{owner_text}»\n\n"
+            "Сформулируй ответ покупателю:"
+        )
+        response = await self.client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.5,
+            max_tokens=200,
+        )
+        return response.choices[0].message.content.strip()
 
     # ── Admin commands ────────────────────────────────────────────────────────
 

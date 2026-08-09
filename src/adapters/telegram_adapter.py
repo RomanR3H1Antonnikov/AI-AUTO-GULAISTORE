@@ -44,8 +44,9 @@ class TelegramTransport(Transport):
     async def send_message(self, dialog_id: str, text: str) -> None:
         await self._bot.send_message(chat_id=int(dialog_id), text=text)
 
-    async def send_owner_notification(self, text: str) -> None:
-        await self._bot.send_message(chat_id=self._owner_id, text=text)
+    async def send_owner_notification(self, text: str) -> Optional[int]:
+        msg = await self._bot.send_message(chat_id=self._owner_id, text=text)
+        return msg.message_id
 
     def get_dialog_link(self, dialog_id: str) -> str:
         return f"tg://user?id={dialog_id}"
@@ -76,6 +77,8 @@ class TelegramAdapter:
         self.owner_id = owner_telegram_id
         self.transport = TelegramTransport(bot, owner_telegram_id)
         self.router = Router(name="gulaistore")
+        # Injected by main.py after Avito transport is created
+        self.avito_reply_sender: Optional[callable] = None
         self._register_handlers()
 
     def _is_owner(self, user_id: int) -> bool:
@@ -91,6 +94,9 @@ class TelegramAdapter:
 
         # /start with args = resume a dialog; without args = owner opens the bot
         r.message(Command("start"),   F.from_user.id == self.owner_id)(self._cmd_start_owner)
+
+        # Owner non-command messages (handles escalation relay; ignores everything else)
+        r.message(F.from_user.id == self.owner_id)(self._handle_owner_message)
 
         # ── Buyer /start ──────────────────────────────────────────────────────
         r.message(Command("start"))(self._cmd_start_buyer)
@@ -189,6 +195,56 @@ class TelegramAdapter:
         if reply:
             await message.answer(reply)
 
+    # ── Owner non-command messages ────────────────────────────────────────────
+
+    async def _handle_owner_message(self, message: Message) -> None:
+        """
+        Owner replied to an escalation notification → relay their answer to Avito.
+        Plain (non-reply) messages from owner are silently ignored.
+        """
+        if message.reply_to_message is None:
+            logger.debug("ignoring non-reply message from owner")
+            return
+
+        replied_msg_id = message.reply_to_message.message_id
+        relay = await self.engine.db.get_escalation_relay(replied_msg_id)
+        if relay is None:
+            # Owner replied to a lead/toxicity notification, not an escalation
+            logger.debug("owner replied to non-escalation tg_msg_id=%d — ignored", replied_msg_id)
+            return
+
+        if not message.text:
+            await message.answer("Пришли текстом — перешлю клиенту.")
+            return
+
+        try:
+            reformulated = await self.engine.reformulate_owner_reply(
+                owner_text=message.text,
+                context=relay["context"],
+            )
+        except Exception as exc:
+            logger.error("reformulate_owner_reply failed: %s", exc)
+            await message.answer(f"Ошибка при обработке ответа: {exc}")
+            return
+
+        if self.avito_reply_sender is not None:
+            try:
+                await self.avito_reply_sender(relay["external_id"], reformulated)
+                await self.engine.db.add_message(relay["dialog_id"], "assistant", reformulated)
+                await self.engine.db.delete_escalation_relay(replied_msg_id)
+                await message.answer(f"Отправлено клиенту:\n\n{reformulated}")
+                logger.info(
+                    "owner reply relayed to Avito chat %s: %r",
+                    relay["external_id"], reformulated[:80],
+                )
+            except Exception as exc:
+                logger.error("Failed to relay to Avito chat %s: %s", relay["external_id"], exc)
+                await message.answer(f"Ошибка отправки в Авито: {exc}\n\nГотовый ответ:\n{reformulated}")
+        else:
+            await message.answer(
+                f"Avito не подключён — не могу переслать.\n\nГотовый ответ:\n{reformulated}"
+            )
+
     # ── Generic message handler ───────────────────────────────────────────────
 
     async def _handle_message(self, message: Message) -> None:
@@ -200,11 +256,6 @@ class TelegramAdapter:
         bot_id = await self.transport.get_bot_id()
         if sender_id == bot_id:
             logger.debug("ignoring own message (loop protection)")
-            return
-
-        # Owner messages are for the admin panel only — never feed to dialog engine
-        if self._is_owner(sender_id):
-            logger.debug("ignoring non-command message from owner")
             return
 
         text = message.text or message.caption or ""

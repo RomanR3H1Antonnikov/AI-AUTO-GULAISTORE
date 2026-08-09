@@ -48,6 +48,15 @@ CREATE TABLE IF NOT EXISTS token_usage (
     date                DATE    DEFAULT (date('now')),
     created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS escalation_relay (
+    tg_msg_id   INTEGER PRIMARY KEY,
+    dialog_id   INTEGER NOT NULL REFERENCES dialogs(id),
+    transport   TEXT    NOT NULL,
+    external_id TEXT    NOT NULL,
+    context     TEXT,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 
@@ -216,6 +225,39 @@ class Database:
         interval = f"-{silence_minutes} minutes"
         async with self._db.execute(query, (interval,)) as cur:
             return [dict(r) for r in await cur.fetchall()]
+
+    # ── Escalation relay ─────────────────────────────────────────────────────
+
+    async def store_escalation_relay(
+        self,
+        tg_msg_id: int,
+        dialog_id: int,
+        transport: str,
+        external_id: str,
+        context: str,
+    ) -> None:
+        await self._db.execute(
+            """INSERT OR REPLACE INTO escalation_relay
+               (tg_msg_id, dialog_id, transport, external_id, context)
+               VALUES (?,?,?,?,?)""",
+            (tg_msg_id, dialog_id, transport, external_id, context),
+        )
+        await self._db.commit()
+
+    async def get_escalation_relay(self, tg_msg_id: int) -> Optional[dict]:
+        async with self._db.execute(
+            "SELECT * FROM escalation_relay WHERE tg_msg_id=?", (tg_msg_id,)
+        ) as cur:
+            row = await cur.fetchone()
+        return dict(row) if row else None
+
+    async def delete_escalation_relay(self, tg_msg_id: int) -> None:
+        await self._db.execute(
+            "DELETE FROM escalation_relay WHERE tg_msg_id=?", (tg_msg_id,)
+        )
+        await self._db.commit()
+
+    # ── Token usage ──────────────────────────────────────────────────────────
 
     async def get_daily_tokens(self, dialog_id: Optional[int] = None) -> int:
         """Total tokens consumed today, optionally filtered to one dialog."""

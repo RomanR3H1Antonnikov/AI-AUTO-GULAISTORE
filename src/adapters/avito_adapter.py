@@ -25,14 +25,14 @@ get_sender_name:
 
 import logging
 import time
-from typing import Awaitable, Callable
+from typing import Awaitable, Callable, Optional
 
 from ..core.transport import Transport
 from .avito_api_client import AvitoApiClient
 
 logger = logging.getLogger(__name__)
 
-OwnerNotifier = Callable[[str], Awaitable[None]]
+OwnerNotifier = Callable[[str], Awaitable[Optional[int]]]
 
 # After the bot sends a message, Avito fires a webhook with author_id == user_id,
 # indistinguishable from the seller typing manually. We track the send timestamp
@@ -81,9 +81,9 @@ class AvitoTransport(Transport):
         sent_at = self._last_sent.get(chat_id)
         return sent_at is not None and (time.monotonic() - sent_at) < _BOT_ECHO_WINDOW
 
-    async def send_owner_notification(self, text: str) -> None:
-        """Forward alert to store owner via the injected notifier."""
-        await self._owner_notifier(text)
+    async def send_owner_notification(self, text: str) -> Optional[int]:
+        """Forward alert to store owner via the injected notifier. Returns TG message_id."""
+        return await self._owner_notifier(text)
 
     def get_dialog_link(self, dialog_id: str) -> str:
         return f"https://www.avito.ru/profile/messenger/{dialog_id}"

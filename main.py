@@ -180,6 +180,9 @@ async def main() -> None:
             owner_notifier=tg_adapter.transport.send_owner_notification,
         )
 
+        # Wire owner-reply relay: TelegramAdapter → AvitoTransport
+        tg_adapter.avito_reply_sender = avito_transport.send_message
+
         # Register webhook — idempotent, non-fatal on failure.
         await setup_avito_webhook(avito_api_client, avito_webhook_url)
 
