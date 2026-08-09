@@ -61,7 +61,7 @@ def _load_config() -> dict:
 async def _run_telegram(dp: Dispatcher, bot: Bot) -> None:
     logger.info("Telegram polling started.")
     try:
-        await dp.start_polling(bot, skip_updates=True)
+        await dp.start_polling(bot, skip_updates=True, polling_timeout=3)
     finally:
         await bot.session.close()
         logger.info("Telegram polling stopped.")
