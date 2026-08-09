@@ -11,8 +11,10 @@ Channel (em-dash separator, bare integer price):
 
 Bot (hyphen separator, dotted price with ₽):
   Product Name Color 🇺🇸 eSim - 99.200₽
-  Product Name (condition note) - 13.100₽🏎️
+  MHFF4 MacBook Neo 13 2026 A18 Pro 8 256 Indigo - 56.800₽
+  iPhone 17 Pro Max 256 Blue 1 Sim + eSim - 106.500₽🏎️
 
+Both formats produce identical SKUs for the same product via _normalize_for_sku().
 Lines not matching either pattern are silently skipped.
 """
 
@@ -50,7 +52,7 @@ _CONDITION_RE = re.compile(
 # "(только Wi-Fi)" note — strip it, doesn't affect price identity
 _WIFI_NOTE_RE = re.compile(r"\s*\(только[^)]*\)", re.UNICODE)
 
-# "[MODEL_CODE]" at start of cleaned string
+# "[MODEL_CODE]" at start of cleaned string (channel format: [MHFF4])
 _MODEL_CODE_RE = re.compile(r"^\[[^\]]+\]\s*")
 
 # Leading junk: backtick, dot, space — before the emoji/letter start
@@ -62,6 +64,37 @@ _TAIL_JUNK_RE = re.compile(r'[\s,;.!?🔌]+$', re.UNICODE)
 # Bot format: "Name - 99.200₽" — price with dots as thousands separators + ₽ sign
 # Greedy (.+) so we split at the LAST " - " before the price
 _BOT_LINE_RE = re.compile(r"^(.+)\s+-\s+(\d[\d.]*)\s*₽", re.UNICODE)
+
+# ── SKU normalisation (strips bot-specific noise so channel and bot match) ──
+
+# Leading unbracketed model code: MHFF4, MDHA4, MVV83, MH304, etc.
+# Pattern: 1-3 uppercase letters + 1-4 uppercase/digits + trailing digit
+_LEAD_CODE_RE = re.compile(r"^[A-Z]{1,3}[A-Z0-9]{1,4}\d\s+", re.UNICODE)
+
+# "MacBook " prefix (bot writes full name; channel writes "Neo ...", "Air ...")
+_MACBOOK_PREFIX_RE = re.compile(r"^MacBook\s+", re.UNICODE)
+
+# "iPhone " prefix (bot writes "iPhone 17 Pro Max"; channel writes "17 Pro Max")
+_IPHONE_PREFIX_RE = re.compile(r"^iPhone\s+", re.UNICODE)
+
+# "A18 Pro" / "A16" chip designation inside Neo names
+_NEO_CHIP_RE = re.compile(r"\s+A\d+(?:\s+Pro)?\b", re.UNICODE)
+
+# Screen-size digit right after "Neo" ("Neo 13 ...") — not part of the spec
+_NEO_SCREEN_RE = re.compile(r"(?<=Neo)\s+1[35]\b", re.UNICODE)
+
+# Year: 2024/2025/2026/2027
+_YEAR_RE = re.compile(r"\s+\b20[2-3]\d\b", re.UNICODE)
+
+# Trailing unbracketed model code at end of string: " MDWK4", " MH304"
+_TRAIL_CODE_RE = re.compile(r"\s+[A-Z]{1,3}[A-Z0-9]{1,4}\d$", re.UNICODE)
+
+# SIM-type suffixes — different variants sold at different prices; we keep
+# only the base (cheapest = eSim) in the canonical SKU
+_SIM_RE = re.compile(
+    r"\s+(?:eSim|[12]\s*Sim(?:\s*\+\s*eSim)?|nanoSIM(?:\s*\+\s*eSIM)?).*$",
+    re.IGNORECASE | re.UNICODE,
+)
 
 
 def _strip_leading_nonword(s: str) -> str:
@@ -80,7 +113,7 @@ def _clean_name(raw: str) -> str:
     """Strip emoji prefix, model code, flags, and locale notes from a raw name string."""
     s = _LEAD_JUNK_RE.sub("", raw)
     s = _strip_leading_nonword(s)
-    s = _MODEL_CODE_RE.sub("", s)
+    s = _MODEL_CODE_RE.sub("", s)      # remove [MHFF4] (channel bracketed codes)
     s = _FLAG_RE.sub("", s)
     s = _RUS_PLUG_RE.sub("", s)
     s = _WIFI_NOTE_RE.sub("", s)
@@ -88,14 +121,36 @@ def _clean_name(raw: str) -> str:
     return s.strip()
 
 
+def _normalize_for_sku(name: str) -> str:
+    """Convert a cleaned product name to canonical form before SKU generation.
+
+    Both channel and bot produce the same SKU for the same product:
+      channel "NEO (8/256) Indigo"                       → neo_8_256_indigo
+      bot     "MHFF4 MacBook Neo 13 2026 A18 Pro 8 256 Indigo" → neo_8_256_indigo
+
+      channel "17 Pro Max (256) Blue"                    → 17_pro_max_256_blue
+      bot     "iPhone 17 Pro Max 256 Blue eSim"          → 17_pro_max_256_blue
+    """
+    s = _LEAD_CODE_RE.sub("", name)      # MHFF4, MDHA4, etc.
+    s = _MACBOOK_PREFIX_RE.sub("", s)    # "MacBook "
+    s = _IPHONE_PREFIX_RE.sub("", s)    # "iPhone "
+    s = _NEO_CHIP_RE.sub("", s)         # "A18 Pro"
+    s = _NEO_SCREEN_RE.sub("", s)       # "Neo 13" → "Neo"
+    s = _YEAR_RE.sub("", s)             # 2026, 2025, …
+    s = _TRAIL_CODE_RE.sub("", s)       # trailing "MDWK4"
+    s = _SIM_RE.sub("", s)              # "eSim", "1 Sim + eSim", "2 Sim"
+    return s.strip()
+
+
 def make_sku(text: str) -> str:
     """Derive a stable lowercase SKU from a product name string."""
+    text = _normalize_for_sku(text)
     text = text.lower().strip()
     text = re.sub(r"[^a-zа-яёё0-9]+", "_", text)
     return text.strip("_")
 
 
-def _parse_channel_line(line: str) -> ParsedPrice | None:
+def _parse_channel_line(line: str) -> "ParsedPrice | None":
     """Parse channel-format line: 'Name — 58000'."""
     if _EM_DASH not in line:
         return None
@@ -129,7 +184,7 @@ def _parse_channel_line(line: str) -> ParsedPrice | None:
     return ParsedPrice(sku=make_sku(name), name=name, price=price, raw_line=line.strip("`"))
 
 
-def _parse_bot_line(line: str) -> ParsedPrice | None:
+def _parse_bot_line(line: str) -> "ParsedPrice | None":
     """Parse bot-format line: 'Name - 99.200₽'."""
     m = _BOT_LINE_RE.match(line)
     if not m:
@@ -141,7 +196,6 @@ def _parse_bot_line(line: str) -> ParsedPrice | None:
         logger.debug("Skipping condition-note line: %r", line)
         return None
 
-    # Remove dots (thousands separators) → integer
     try:
         price = int(price_dotted.replace(".", ""))
     except ValueError:
