@@ -69,7 +69,7 @@ async def _run_telegram(dp: Dispatcher, bot: Bot) -> None:
 
 async def _run_retention(db, transports: dict, silence_minutes: int = 5, interval: int = 60) -> None:
     """Periodically send a retention message to dialogs silent for silence_minutes."""
-    RETENTION_MSG = "Ещё актуально? 😊"
+    RETENTION_MSG = "Подскажите, пожалуйста, вопрос ещё актуален?"
     while True:
         await asyncio.sleep(interval)
         try:
