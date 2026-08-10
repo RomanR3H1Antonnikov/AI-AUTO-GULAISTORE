@@ -23,41 +23,41 @@ categories:
     - { name: "MacBook NEO (8/512) Blush",   markup: 2000, db_sku: "neo_8_512_blush" }
 
   iPhone 17 Pro Max:
-    - { name: "iPhone 17 Pro Max 256 Гб Deep Blue",    markup: 2000, db_sku: "17_pro_max_256_blue" }
-    - { name: "iPhone 17 Pro Max 512 Гб Deep Blue",    markup: 2500, db_sku: "17_pro_max_512_blue" }
-    - { name: "iPhone 17 Pro Max 1 ТБ Deep Blue",      markup: 3000, db_sku: "17_pro_max_1tb_blue" }
-    - { name: "iPhone 17 Pro Max 2 ТБ Deep Blue",      markup: 3000, db_sku: "17_pro_max_2tb_blue" }
-    - { name: "iPhone 17 Pro Max 256 Гб Cosmic Orange", markup: 2000, db_sku: "17_pro_max_256_orange" }
-    - { name: "iPhone 17 Pro Max 512 Гб Cosmic Orange", markup: 2500, db_sku: "17_pro_max_512_orange" }
-    - { name: "iPhone 17 Pro Max 1 ТБ Cosmic Orange",  markup: 3000, db_sku: "17_pro_max_1tb_orange" }
-    - { name: "iPhone 17 Pro Max 2 ТБ Cosmic Orange",  markup: 3000, db_sku: "17_pro_max_2tb_orange" }
-    - { name: "iPhone 17 Pro Max 256 Гб Silver",       markup: 2000, db_sku: "17_pro_max_256_silver" }
-    - { name: "iPhone 17 Pro Max 512 Гб Silver",       markup: 2500, db_sku: "17_pro_max_512_silver" }
-    - { name: "iPhone 17 Pro Max 1 ТБ Silver",         markup: 3000, db_sku: "17_pro_max_1tb_silver" }
-    - { name: "iPhone 17 Pro Max 2 ТБ Silver",         markup: 3000, db_sku: "17_pro_max_2tb_silver" }
+    - { name: "iPhone 17 Pro Max 256 Гб Deep Blue",    markup: 1500, db_sku: "17_pro_max_256_blue" }
+    - { name: "iPhone 17 Pro Max 512 Гб Deep Blue",    markup: 1500, db_sku: "17_pro_max_512_blue" }
+    - { name: "iPhone 17 Pro Max 1 ТБ Deep Blue",      markup: 1500, db_sku: "17_pro_max_1tb_blue" }
+    - { name: "iPhone 17 Pro Max 2 ТБ Deep Blue",      markup: 1500, db_sku: "17_pro_max_2tb_blue" }
+    - { name: "iPhone 17 Pro Max 256 Гб Cosmic Orange", markup: 1500, db_sku: "17_pro_max_256_orange" }
+    - { name: "iPhone 17 Pro Max 512 Гб Cosmic Orange", markup: 1500, db_sku: "17_pro_max_512_orange" }
+    - { name: "iPhone 17 Pro Max 1 ТБ Cosmic Orange",  markup: 1500, db_sku: "17_pro_max_1tb_orange" }
+    - { name: "iPhone 17 Pro Max 2 ТБ Cosmic Orange",  markup: 1500, db_sku: "17_pro_max_2tb_orange" }
+    - { name: "iPhone 17 Pro Max 256 Гб Silver",       markup: 1500, db_sku: "17_pro_max_256_silver" }
+    - { name: "iPhone 17 Pro Max 512 Гб Silver",       markup: 1500, db_sku: "17_pro_max_512_silver" }
+    - { name: "iPhone 17 Pro Max 1 ТБ Silver",         markup: 1500, db_sku: "17_pro_max_1tb_silver" }
+    - { name: "iPhone 17 Pro Max 2 ТБ Silver",         markup: 1500, db_sku: "17_pro_max_2tb_silver" }
 
   iPhone 17 Pro:
-    - { name: "iPhone 17 Pro 256 Гб Deep Blue",    markup: 2000, db_sku: "17_pro_256_blue" }
-    - { name: "iPhone 17 Pro 512 Гб Deep Blue",    markup: 2500, db_sku: "17_pro_512_blue" }
-    - { name: "iPhone 17 Pro 1 ТБ Deep Blue",      markup: 3000, db_sku: "17_pro_1tb_blue" }
-    - { name: "iPhone 17 Pro 256 Гб Cosmic Orange", markup: 2000, db_sku: "17_pro_256_orange" }
-    - { name: "iPhone 17 Pro 512 Гб Cosmic Orange", markup: 2500, db_sku: "17_pro_512_orange" }
-    - { name: "iPhone 17 Pro 1 ТБ Cosmic Orange",  markup: 3000, db_sku: "17_pro_1tb_orange" }
-    - { name: "iPhone 17 Pro 256 Гб Silver",       markup: 2000, db_sku: "17_pro_256_silver" }
-    - { name: "iPhone 17 Pro 512 Гб Silver",       markup: 2500, db_sku: "17_pro_512_silver" }
-    - { name: "iPhone 17 Pro 1 ТБ Silver",         markup: 3000, db_sku: "17_pro_1tb_silver" }
+    - { name: "iPhone 17 Pro 256 Гб Deep Blue",    markup: 1500, db_sku: "17_pro_256_blue" }
+    - { name: "iPhone 17 Pro 512 Гб Deep Blue",    markup: 1500, db_sku: "17_pro_512_blue" }
+    - { name: "iPhone 17 Pro 1 ТБ Deep Blue",      markup: 1500, db_sku: "17_pro_1tb_blue" }
+    - { name: "iPhone 17 Pro 256 Гб Cosmic Orange", markup: 1500, db_sku: "17_pro_256_orange" }
+    - { name: "iPhone 17 Pro 512 Гб Cosmic Orange", markup: 1500, db_sku: "17_pro_512_orange" }
+    - { name: "iPhone 17 Pro 1 ТБ Cosmic Orange",  markup: 1500, db_sku: "17_pro_1tb_orange" }
+    - { name: "iPhone 17 Pro 256 Гб Silver",       markup: 1500, db_sku: "17_pro_256_silver" }
+    - { name: "iPhone 17 Pro 512 Гб Silver",       markup: 1500, db_sku: "17_pro_512_silver" }
+    - { name: "iPhone 17 Pro 1 ТБ Silver",         markup: 1500, db_sku: "17_pro_1tb_silver" }
 
   iPhone 17:
-    - { name: "iPhone 17 256 Гб Black",     markup: 2000, db_sku: "17_256_black" }
-    - { name: "iPhone 17 512 Гб Black",     markup: 2500, db_sku: "17_512_black" }
-    - { name: "iPhone 17 256 Гб Mist Blue", markup: 2000, db_sku: "17_256_blue" }
-    - { name: "iPhone 17 512 Гб Mist Blue", markup: 2500, db_sku: "17_512_blue" }
-    - { name: "iPhone 17 256 Гб Sage",      markup: 2000, db_sku: "17_256_sage" }
-    - { name: "iPhone 17 512 Гб Sage",      markup: 2500, db_sku: "17_512_sage" }
-    - { name: "iPhone 17 256 Гб Lavender",  markup: 2000, db_sku: "17_256_lavender" }
-    - { name: "iPhone 17 512 Гб Lavender",  markup: 2500, db_sku: "17_512_lavender" }
-    - { name: "iPhone 17 256 Гб White",     markup: 2000, db_sku: "17_256_white" }
-    - { name: "iPhone 17 512 Гб White",     markup: 2500, db_sku: "17_512_white" }
+    - { name: "iPhone 17 256 Гб Black",     markup: 1500, db_sku: "17_256_black" }
+    - { name: "iPhone 17 512 Гб Black",     markup: 1500, db_sku: "17_512_black" }
+    - { name: "iPhone 17 256 Гб Mist Blue", markup: 1500, db_sku: "17_256_blue" }
+    - { name: "iPhone 17 512 Гб Mist Blue", markup: 1500, db_sku: "17_512_blue" }
+    - { name: "iPhone 17 256 Гб Sage",      markup: 1500, db_sku: "17_256_sage" }
+    - { name: "iPhone 17 512 Гб Sage",      markup: 1500, db_sku: "17_512_sage" }
+    - { name: "iPhone 17 256 Гб Lavender",  markup: 1500, db_sku: "17_256_lavender" }
+    - { name: "iPhone 17 512 Гб Lavender",  markup: 1500, db_sku: "17_512_lavender" }
+    - { name: "iPhone 17 256 Гб White",     markup: 1500, db_sku: "17_256_white" }
+    - { name: "iPhone 17 512 Гб White",     markup: 1500, db_sku: "17_512_white" }
 
   iMac M4:
     - { name: "iMac M4 10/10/24/1 ТБ (все цвета)",   markup: 6000, db_sku: "imac_m4_10_10_24_1tb_silver" }
@@ -107,32 +107,32 @@ categories:
     - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   markup: 2500, db_sku: "air_13_m5_32_4tb_70w_silver" }
 
   iPad Pro (LTE):
-    - { name: "iPad Pro 11 M5 256 ГБ LTE", markup: 3000, db_sku: "ipad_pro_11_m5_256_lte_silver" }
-    - { name: "iPad Pro 11 M5 512 ГБ LTE", markup: 3000, db_sku: "ipad_pro_11_m5_512_lte_black" }
-    - { name: "iPad Pro 13 M5 256 ГБ LTE", markup: 3000, db_sku: "ipad_pro_13_m5_256_lte_black" }
-    - { name: "iPad Pro 13 M5 512 ГБ LTE", markup: 3000, db_sku: "ipad_pro_13_m5_512_lte_black" }
-    - { name: "iPad Pro 13 M5 1 ТБ LTE",   markup: 3000, db_sku: "ipad_pro_13_m5_1tb_lte_black" }
-    - { name: "iPad Pro 13 M5 2 ТБ LTE",   markup: 3000, db_sku: "ipad_pro_13_m5_2tb_lte_black" }
+    - { name: "iPad Pro 11 M5 256 ГБ LTE", markup: 1500, db_sku: "ipad_pro_11_m5_256_lte_silver" }
+    - { name: "iPad Pro 11 M5 512 ГБ LTE", markup: 1500, db_sku: "ipad_pro_11_m5_512_lte_black" }
+    - { name: "iPad Pro 13 M5 256 ГБ LTE", markup: 1500, db_sku: "ipad_pro_13_m5_256_lte_black" }
+    - { name: "iPad Pro 13 M5 512 ГБ LTE", markup: 1500, db_sku: "ipad_pro_13_m5_512_lte_black" }
+    - { name: "iPad Pro 13 M5 1 ТБ LTE",   markup: 1500, db_sku: "ipad_pro_13_m5_1tb_lte_black" }
+    - { name: "iPad Pro 13 M5 2 ТБ LTE",   markup: 1500, db_sku: "ipad_pro_13_m5_2tb_lte_black" }
 
   iPad Pro (Wi-Fi):
-    - { name: "iPad Pro 11 M5 256 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_pro_11_m5_256_wi_fi_black" }
-    - { name: "iPad Pro 11 M5 512 ГБ Wi-Fi", markup: 2000 }
-    - { name: "iPad Pro 11 M5 2 ТБ Wi-Fi",   markup: 2000 }
-    - { name: "iPad Pro 13 M5 256 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_pro_13_m5_256_wi_fi_black" }
-    - { name: "iPad Pro 13 M5 512 ГБ Wi-Fi", markup: 2000 }
-    - { name: "iPad Pro 13 M5 1 ТБ Wi-Fi",   markup: 2000 }
-    - { name: "iPad Pro 13 M5 2 ТБ Wi-Fi",   markup: 2000 }
+    - { name: "iPad Pro 11 M5 256 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_pro_11_m5_256_wi_fi_black" }
+    - { name: "iPad Pro 11 M5 512 ГБ Wi-Fi", markup: 1500 }
+    - { name: "iPad Pro 11 M5 2 ТБ Wi-Fi",   markup: 1500 }
+    - { name: "iPad Pro 13 M5 256 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_pro_13_m5_256_wi_fi_black" }
+    - { name: "iPad Pro 13 M5 512 ГБ Wi-Fi", markup: 1500 }
+    - { name: "iPad Pro 13 M5 1 ТБ Wi-Fi",   markup: 1500 }
+    - { name: "iPad Pro 13 M5 2 ТБ Wi-Fi",   markup: 1500 }
 
   iPad Air (Wi-Fi):
-    - { name: "iPad Air 11 M4 (2026) 128 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_air_11_m4_2026_128_wi_fi_grey" }
-    - { name: "iPad Air 11 M4 (2026) 256 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_air_11_m4_2026_256_wi_fi_grey" }
-    - { name: "iPad Air 13 M4 (2026) 128 ГБ Wi-Fi", markup: 2000, db_sku: "ipad_air_13_m4_2026_128_wi_fi_grey" }
-    - { name: "iPad Air 13 M4 (2026) 256 ГБ Wi-Fi", markup: 2000 }
-    - { name: "iPad Air 13 M4 (2026) 512 ГБ Wi-Fi", markup: 2000 }
+    - { name: "iPad Air 11 M4 (2026) 128 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_air_11_m4_2026_128_wi_fi_grey" }
+    - { name: "iPad Air 11 M4 (2026) 256 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_air_11_m4_2026_256_wi_fi_grey" }
+    - { name: "iPad Air 13 M4 (2026) 128 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_air_13_m4_2026_128_wi_fi_grey" }
+    - { name: "iPad Air 13 M4 (2026) 256 ГБ Wi-Fi", markup: 1500 }
+    - { name: "iPad Air 13 M4 (2026) 512 ГБ Wi-Fi", markup: 1500 }
 
   iPad Air (LTE):
-    - { name: "iPad Air 11 M4 (2026) 128 ГБ LTE", markup: 3000, db_sku: "ipad_air_11_m4_2026_128_lte_grey" }
-    - { name: "iPad Air 11 M4 (2026) 256 ГБ LTE", markup: 3000 }
-    - { name: "iPad Air 13 M4 (2026) 128 ГБ LTE", markup: 3000, db_sku: "ipad_air_13_m4_2026_128_lte_grey" }
-    - { name: "iPad Air 13 M4 (2026) 256 ГБ LTE", markup: 3000, db_sku: "ipad_air_13_m4_2026_256_lte_grey" }
-    - { name: "iPad Air 13 M4 (2026) 512 ГБ LTE", markup: 3000, db_sku: "ipad_air_13_m4_2026_512_lte_grey" }
+    - { name: "iPad Air 11 M4 (2026) 128 ГБ LTE", markup: 1500, db_sku: "ipad_air_11_m4_2026_128_lte_grey" }
+    - { name: "iPad Air 11 M4 (2026) 256 ГБ LTE", markup: 1500 }
+    - { name: "iPad Air 13 M4 (2026) 128 ГБ LTE", markup: 1500, db_sku: "ipad_air_13_m4_2026_128_lte_grey" }
+    - { name: "iPad Air 13 M4 (2026) 256 ГБ LTE", markup: 1500, db_sku: "ipad_air_13_m4_2026_256_lte_grey" }
+    - { name: "iPad Air 13 M4 (2026) 512 ГБ LTE", markup: 1500, db_sku: "ipad_air_13_m4_2026_512_lte_grey" }
