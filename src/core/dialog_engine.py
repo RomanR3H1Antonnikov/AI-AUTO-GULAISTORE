@@ -487,16 +487,37 @@ class DialogEngine:
             if datetime.now(timezone.utc) - sent < timedelta(minutes=10):
                 return
 
+        # Detect if bot is asking to clarify price/availability (not in DB)
+        price_unknown = bool(re.search(
+            r"уточн[а-я]+\s+наличие|одну\s+минуту|секунду,?\s+уточн[а-я]+",
+            bot_reply, re.IGNORECASE
+        ))
+
         context = (
             f"Вопрос клиента: «{user_message[:300]}»\n"
             f"Ответ бота: «{bot_reply[:200]}»"
         )
+
+        if price_unknown:
+            header = f"❓ Цена/наличие не найдены — диалог #{dialog_id}\n"
+            footer = (
+                f"\n\nЦены нет в базе. Ответьте на это сообщение с ценой и наличием — "
+                f"бот сразу передаст ваш ответ клиенту в чат Авито."
+            )
+        else:
+            header = f"📌 Эскалация в диалоге #{dialog_id}\n"
+            footer = (
+                f"\n\nОтветьте на это сообщение — "
+                f"бот передаст ваш ответ клиенту в чат Авито."
+            )
+
         text = (
-            f"📌 Эскалация в диалоге #{dialog_id}\n\n"
+            f"{header}\n"
             f"Клиент: {dialog['external_id']}\n"
             f"Ссылка: {transport.get_dialog_link(dialog['external_id'])}\n\n"
             f"Вопрос клиента: «{user_message[:200]}»\n"
             f"Ответ бота: «{bot_reply[:200]}»"
+            f"{footer}"
         )
         tg_msg_id = await transport.send_owner_notification(text)
         await self.db.record_notification(dialog_id, "escalation",
