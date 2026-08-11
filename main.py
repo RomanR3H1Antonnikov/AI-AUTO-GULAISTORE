@@ -74,19 +74,30 @@ async def _run_retention(db, transports: dict, silence_minutes: int = 5, interva
         await asyncio.sleep(interval)
         try:
             dialogs = await db.get_dialogs_for_retention(silence_minutes)
-            for dialog in dialogs:
-                transport = transports.get(dialog["transport"])
-                if transport is None:
-                    continue
+        except Exception:
+            logger.exception("Retention: failed to query dialogs")
+            continue
+        for dialog in dialogs:
+            transport = transports.get(dialog["transport"])
+            if transport is None:
+                continue
+            try:
                 await transport.send_message(dialog["external_id"], RETENTION_MSG)
                 await db.add_message(dialog["id"], "assistant", RETENTION_MSG)
-                await db.record_notification(dialog["id"], "retention", {})
                 logger.info(
                     "Retention sent → dialog %d (%s/%s)",
                     dialog["id"], dialog["transport"], dialog["external_id"],
                 )
-        except Exception:
-            logger.exception("Retention task error")
+            except Exception:
+                logger.exception(
+                    "Retention: failed to send to dialog %d (%s/%s) — marking notified to skip",
+                    dialog["id"], dialog["transport"], dialog["external_id"],
+                )
+            # Always mark notified — prevents infinite retry on dead/invalid chats
+            try:
+                await db.record_notification(dialog["id"], "retention", {})
+            except Exception:
+                logger.exception("Retention: failed to record notification for dialog %d", dialog["id"])
 
 
 async def _run_uvicorn(app, port: int) -> None:
