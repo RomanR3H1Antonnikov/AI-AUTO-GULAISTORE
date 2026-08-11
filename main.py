@@ -90,18 +90,23 @@ async def _run_retention(db, transports: dict, silence_minutes: int = 5, interva
             if transport is None:
                 continue
 
-            # Skip retention if the last bot message was a goodbye or channel invite.
+            # Skip retention if the last meaningful bot message was a goodbye or channel invite.
+            # Walk backwards through recent messages to skip deleted/empty ones.
             try:
-                last_msgs = await db.get_messages(dialog["id"], limit=1)
-                if last_msgs:
-                    last_text = last_msgs[0]["text"].lower()
-                    if any(p in last_text for p in _RETENTION_SKIP_PHRASES):
-                        logger.info(
-                            "Retention skipped → dialog %d (last msg is closing/channel invite)",
-                            dialog["id"],
-                        )
-                        await db.record_notification(dialog["id"], "retention", {})
-                        continue
+                recent = await db.get_messages(dialog["id"], limit=5)
+                last_text = None
+                for msg in reversed(recent):
+                    text = (msg.get("text") or "").strip()
+                    if msg["role"] == "assistant" and len(text) >= 3:
+                        last_text = text.lower()
+                        break
+                if last_text and any(p in last_text for p in _RETENTION_SKIP_PHRASES):
+                    logger.info(
+                        "Retention skipped → dialog %d (last meaningful msg is closing/channel invite)",
+                        dialog["id"],
+                    )
+                    await db.record_notification(dialog["id"], "retention", {})
+                    continue
             except Exception:
                 logger.exception("Retention: failed to check last message for dialog %d", dialog["id"])
 

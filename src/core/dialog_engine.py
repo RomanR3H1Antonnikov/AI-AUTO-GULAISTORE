@@ -615,13 +615,18 @@ class DialogEngine:
 
         # 4.5 Reciprocal-closing gate: after bot says goodbye, don't respond to
         # short "спасибо вам тоже" type messages — avoids awkward double-goodbye.
+        # Walk backwards skipping deleted/empty messages to find last meaningful bot message.
         if len(message.text) <= 60 and _CLIENT_RECIPROCAL_RE.search(message.text):
-            recent_msgs = await self.db.get_messages(dialog_id, limit=3)
-            # recent_msgs[-1] is the just-saved user msg; [-2] is the last assistant msg
-            if len(recent_msgs) >= 2 and recent_msgs[-2]["role"] == "assistant":
-                if _BOT_CLOSING_RE.search(recent_msgs[-2]["text"]):
-                    logger.info("dialog %d: reciprocal closing after goodbye — staying silent", dialog_id)
-                    return None
+            recent_msgs = await self.db.get_messages(dialog_id, limit=6)
+            # Find last meaningful assistant message (skip empty/deleted, skip the just-saved user msg)
+            last_bot_text: Optional[str] = None
+            for m in reversed(recent_msgs):
+                if m["role"] == "assistant" and len((m["text"] or "").strip()) >= 3:
+                    last_bot_text = m["text"]
+                    break
+            if last_bot_text and _BOT_CLOSING_RE.search(last_bot_text):
+                logger.info("dialog %d: reciprocal closing after goodbye — staying silent", dialog_id)
+                return None
 
         # 5. Toxicity gate
         is_toxic, toxic_reason = await self.toxicity_detector.classify(message.text)
