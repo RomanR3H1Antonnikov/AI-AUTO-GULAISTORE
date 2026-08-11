@@ -519,7 +519,13 @@ class DialogEngine:
 
         # 3. Respect current dialog status
         status = dialog["status"]
-        if status not in ("bot_active", "silenced"):
+        if status == "owner_takeover":
+            # Client re-engaged → auto-resume regardless of why takeover was set.
+            # Bot only stays permanently silent for toxic content (handled in step 5).
+            logger.info("dialog %d: client re-engaged after owner_takeover → auto-resuming", dialog_id)
+            await self.db.update_dialog_status(dialog_id, "bot_active", None)
+            status = "bot_active"
+        elif status not in ("bot_active", "silenced"):
             logger.debug("dialog %d is %s — silent", dialog_id, status)
             return None
 
