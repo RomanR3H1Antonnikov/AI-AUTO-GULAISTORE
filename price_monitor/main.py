@@ -105,8 +105,31 @@ async def main_loop(cfg: Config) -> None:
                 logger.exception("Unhandled error in price check")
 
             interval = cfg.check_interval_hours * 3600
-            logger.info("Sleeping %.1fh until next check", cfg.check_interval_hours)
-            await asyncio.sleep(interval)
+            now = datetime.now(_MSK)
+            next_check = now + timedelta(seconds=interval)
+            window_close = now.replace(
+                hour=_WINDOW_END[0], minute=_WINDOW_END[1], second=0, microsecond=0
+            )
+            secs_to_close = (window_close - now).total_seconds()
+
+            if next_check >= window_close and secs_to_close > 1.5 * 3600:
+                # Next regular check would miss/skip the window end;
+                # schedule one fixed run at 18:29 MSK (1 min before window closes).
+                sleep_secs = max(0.0, secs_to_close - 60)
+                logger.info(
+                    "Fixed 18:30 check scheduled in %.1fh (next regular would be %s MSK, outside window).",
+                    sleep_secs / 3600,
+                    next_check.strftime("%H:%M"),
+                )
+                await asyncio.sleep(sleep_secs)
+                try:
+                    await run_check(client, db, cfg)
+                except Exception:
+                    logger.exception("Unhandled error in fixed 18:30 check")
+                await asyncio.sleep(interval)  # sleep past window; loop restarts tomorrow
+            else:
+                logger.info("Sleeping %.1fh until next check", cfg.check_interval_hours)
+                await asyncio.sleep(interval)
 
     await db.close()
 
