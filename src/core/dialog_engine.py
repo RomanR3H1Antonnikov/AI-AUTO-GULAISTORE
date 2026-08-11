@@ -124,10 +124,12 @@ _SYSTEM_PROMPT = """\
   — «Какой тип SIM нужен — nanoSIM+eSIM или eSIM+eSIM?»
   — «Принципиален ли неактивированный вариант или активированный тоже подойдёт?»
   Не задавай эти вопросы по одному — только вместе.
-• Когда клиент назвал цвет — называй конкретную цену из каталога.
+• Когда клиент назвал цвет, SIM-тип и тип активации — бери цену из соответствующей колонки каталога:
+  eSIM → колонка «eSIM» | nanoSIM+eSIM → колонка «нано+eSIM» | активированный → колонка «актив»
+  Никогда не путай колонки и не показывай цену eSIM как цену nanoSIM+eSIM.
 • ПЛОХОЙ ответ: «Deep Blue — 97 700 ₽, Cosmic Orange — 94 400 ₽, Silver — 98 000 ₽» — так нельзя.
-• ХОРОШИЙ ответ: «iPhone 17 Pro 256 ГБ — от 94 400 ₽. Цвета: Deep Blue, Cosmic Orange, Silver.
-  Уточните: nanoSIM+eSIM или eSIM+eSIM, и принципиален ли неактив?»
+• ХОРОШИЙ ответ: «iPhone 17 Pro 256 ГБ — от 93 200 ₽. Цвета: Deep Blue, Cosmic Orange, Silver.
+  Уточните: nanoSIM+eSIM или eSIM+eSIM, и принципиален ли неактивированный?»
 • Если клиент УЖЕ указал цвет или конфигурацию — называй только соответствующий вариант и цену.
 • ЦЕНУ НЕ НАЗЫВАЙ только если позиция отсутствует в каталоге (цена уточняется).
 • Все цвета и конфигурации доступны — не ограничивайся только каталогом.
@@ -380,23 +382,46 @@ class DialogEngine:
                     name = f"{name} ({item['color']})"
 
                 if "markup" in item:
-                    # New-style: final price = db_price + fixed markup
                     markup: int = item["markup"]
-                    db_price: Optional[int] = None
-                    sku = item.get("db_sku")
-                    if self.price_db and sku:
-                        try:
-                            db_price = await self.price_db.get_price(sku)
-                        except Exception:
-                            logger.warning("price_db lookup failed for sku=%s", sku)
-                    if db_price is not None:
-                        price_str = f"{db_price + markup:,}".replace(",", " ")
-                        lines.append(f"  • {name} — {price_str} ₽")
-                    elif item.get("price"):
-                        price_str = f"{item['price']:,}".replace(",", " ")
-                        lines.append(f"  • {name} — {price_str} ₽")
+                    sku_esim  = item.get("db_sku_esim")
+                    sku_nano  = item.get("db_sku_nano")
+                    sku_activ = item.get("db_sku_activ")
+
+                    if sku_esim or sku_nano or sku_activ:
+                        # Multi-variant iPhone: eSIM | нано+eSIM | актив
+                        parts: list[str] = []
+                        for label, sku in [("eSIM", sku_esim), ("нано+eSIM", sku_nano), ("актив", sku_activ)]:
+                            if not sku:
+                                continue
+                            v_price: Optional[int] = None
+                            if self.price_db:
+                                try:
+                                    v_price = await self.price_db.get_price(sku)
+                                except Exception:
+                                    logger.warning("price_db lookup failed for sku=%s", sku)
+                            if v_price is not None:
+                                parts.append(f"{label}: {v_price + markup:,}".replace(",", " ") + " ₽")
+                        if parts:
+                            lines.append(f"  • {name} — {' | '.join(parts)}")
+                        else:
+                            lines.append(f"  • {name} — цена уточняется")
                     else:
-                        lines.append(f"  • {name} — цена уточняется")
+                        # Single-SKU path (MacBook, iPad, iMac)
+                        db_price: Optional[int] = None
+                        sku = item.get("db_sku")
+                        if self.price_db and sku:
+                            try:
+                                db_price = await self.price_db.get_price(sku)
+                            except Exception:
+                                logger.warning("price_db lookup failed for sku=%s", sku)
+                        if db_price is not None:
+                            price_str = f"{db_price + markup:,}".replace(",", " ")
+                            lines.append(f"  • {name} — {price_str} ₽")
+                        elif item.get("price"):
+                            price_str = f"{item['price']:,}".replace(",", " ")
+                            lines.append(f"  • {name} — {price_str} ₽")
+                        else:
+                            lines.append(f"  • {name} — цена уточняется")
                 else:
                     # Legacy-style: yaml price, optionally overridden by live price
                     yaml_price: int = item.get("price", 0)
