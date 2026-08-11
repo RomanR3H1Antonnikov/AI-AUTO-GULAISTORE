@@ -30,6 +30,18 @@ _ESCALATION_RE = re.compile(
     r"(передам\s+ваш\s+вопрос|уточн[а-я]+\s+у\s+коллег|минуту,?\s+уточн[а-я]+)", re.IGNORECASE
 )
 
+# Detect bot goodbye in the last assistant message.
+_BOT_CLOSING_RE = re.compile(
+    r"хорошего\s+дня|всего\s+доброго|на\s+связи|до\s+свидания|удачи",
+    re.IGNORECASE,
+)
+
+# Detect client's reciprocal closing (only if message is short).
+_CLIENT_RECIPROCAL_RE = re.compile(
+    r"спасибо|вам\s+тоже|и\s+вам|взаимно|благодарю|спс|и\s+вам|👍|🙏",
+    re.IGNORECASE,
+)
+
 _SYSTEM_PROMPT = """\
 Ты — помощница магазина Gulai Store. Отвечаешь покупателям в чате Авито.
 
@@ -600,6 +612,16 @@ class DialogEngine:
 
         # 4. Persist incoming message
         await self.db.add_message(dialog_id, "user", message.text)
+
+        # 4.5 Reciprocal-closing gate: after bot says goodbye, don't respond to
+        # short "спасибо вам тоже" type messages — avoids awkward double-goodbye.
+        if len(message.text) <= 60 and _CLIENT_RECIPROCAL_RE.search(message.text):
+            recent_msgs = await self.db.get_messages(dialog_id, limit=3)
+            # recent_msgs[-1] is the just-saved user msg; [-2] is the last assistant msg
+            if len(recent_msgs) >= 2 and recent_msgs[-2]["role"] == "assistant":
+                if _BOT_CLOSING_RE.search(recent_msgs[-2]["text"]):
+                    logger.info("dialog %d: reciprocal closing after goodbye — staying silent", dialog_id)
+                    return None
 
         # 5. Toxicity gate
         is_toxic, toxic_reason = await self.toxicity_detector.classify(message.text)
