@@ -67,6 +67,14 @@ async def _run_telegram(dp: Dispatcher, bot: Bot) -> None:
         logger.info("Telegram polling stopped.")
 
 
+_RETENTION_SKIP_PHRASES = (
+    "хорошего дня",
+    "всего доброго",
+    "до свидания",
+    "gulai_store",   # канал Gulai_store — конец диалога с приглашением в канал
+)
+
+
 async def _run_retention(db, transports: dict, silence_minutes: int = 5, interval: int = 60) -> None:
     """Periodically send a retention message to dialogs silent for silence_minutes."""
     RETENTION_MSG = "Подскажите, пожалуйста, вопрос ещё актуален?"
@@ -81,6 +89,22 @@ async def _run_retention(db, transports: dict, silence_minutes: int = 5, interva
             transport = transports.get(dialog["transport"])
             if transport is None:
                 continue
+
+            # Skip retention if the last bot message was a goodbye or channel invite.
+            try:
+                last_msgs = await db.get_messages(dialog["id"], limit=1)
+                if last_msgs:
+                    last_text = last_msgs[0]["text"].lower()
+                    if any(p in last_text for p in _RETENTION_SKIP_PHRASES):
+                        logger.info(
+                            "Retention skipped → dialog %d (last msg is closing/channel invite)",
+                            dialog["id"],
+                        )
+                        await db.record_notification(dialog["id"], "retention", {})
+                        continue
+            except Exception:
+                logger.exception("Retention: failed to check last message for dialog %d", dialog["id"])
+
             try:
                 await transport.send_message(dialog["external_id"], RETENTION_MSG)
                 await db.add_message(dialog["id"], "assistant", RETENTION_MSG)
