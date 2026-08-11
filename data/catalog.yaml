@@ -13,14 +13,14 @@ category_notes:
 
 categories:
   MacBook Neo:
-    - { name: "MacBook NEO (8/256) Indigo",  markup: 2000, db_sku: "neo_8_256_indigo" }
-    - { name: "MacBook NEO (8/256) Citrus",  markup: 2000, db_sku: "neo_8_256_citrus" }
-    - { name: "MacBook NEO (8/256) Silver",  markup: 2000, db_sku: "neo_8_256_silver" }
-    - { name: "MacBook NEO (8/256) Blush",   markup: 2000, db_sku: "neo_8_256_blush" }
-    - { name: "MacBook NEO (8/512) Indigo",  markup: 2000, db_sku: "neo_8_512_indigo" }
-    - { name: "MacBook NEO (8/512) Citrus",  markup: 2000, db_sku: "neo_8_512_citrus" }
-    - { name: "MacBook NEO (8/512) Silver",  markup: 2000, db_sku: "neo_8_512_silver" }
-    - { name: "MacBook NEO (8/512) Blush",   markup: 2000, db_sku: "neo_8_512_blush" }
+    - { name: "MacBook NEO (8/256) Indigo",  markup: 1500, db_sku: "neo_8_256_indigo" }
+    - { name: "MacBook NEO (8/256) Citrus",  markup: 1500, db_sku: "neo_8_256_citrus" }
+    - { name: "MacBook NEO (8/256) Silver",  markup: 1500, db_sku: "neo_8_256_silver" }
+    - { name: "MacBook NEO (8/256) Blush",   markup: 1500, db_sku: "neo_8_256_blush" }
+    - { name: "MacBook NEO (8/512) Indigo",  markup: 1500, db_sku: "neo_8_512_indigo" }
+    - { name: "MacBook NEO (8/512) Citrus",  markup: 1500, db_sku: "neo_8_512_citrus" }
+    - { name: "MacBook NEO (8/512) Silver",  markup: 1500, db_sku: "neo_8_512_silver" }
+    - { name: "MacBook NEO (8/512) Blush",   markup: 1500, db_sku: "neo_8_512_blush" }
 
   iPhone 17 Pro Max:
     - { name: "iPhone 17 Pro Max 256 Гб Deep Blue",    markup: 1500, db_sku: "17_pro_max_256_blue" }
