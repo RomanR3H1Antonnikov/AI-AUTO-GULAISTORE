@@ -18,7 +18,7 @@ engine:
   max_tokens_per_dialog_day: 100000
 
   # Global daily token cap
-  max_tokens_global_day: 2000000
+  max_tokens_global_day: 1000000
 
   # Cooldown between lead notifications for the same dialog (minutes)
   lead_notification_cooldown_minutes: 30
