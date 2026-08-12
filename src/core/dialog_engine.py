@@ -32,7 +32,8 @@ _ESCALATION_RE = re.compile(
 
 # Detect bot goodbye in the last assistant message.
 _BOT_CLOSING_RE = re.compile(
-    r"хорошего\s+дня|всего\s+доброго|на\s+связи|до\s+свидания|удачи",
+    r"хорошего\s+дня|хорошего\s+вечера|хорошего\s+утра|хорошей\s+ночи"
+    r"|всего\s+доброго|на\s+связи|до\s+свидания|удачи",
     re.IGNORECASE,
 )
 
