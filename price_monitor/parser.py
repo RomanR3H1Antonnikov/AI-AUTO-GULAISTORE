@@ -49,7 +49,11 @@ _CONDITION_RE = re.compile(
     re.IGNORECASE | re.UNICODE,
 )
 
-# "(только Wi-Fi)" note — strip it, doesn't affect price identity
+# "(только Wi-Fi)" — пропускаем строку целиком: такой айпад не продаём,
+# а его цена может случайно попасть в LTE-SKU если LTE есть в имени модели.
+_WIFI_ONLY_RE = re.compile(r"\(только\s+wi[-\s]?fi\)", re.IGNORECASE | re.UNICODE)
+
+# "(только ...)" прочие заметки — стрипаем (оставляем на случай других вариантов)
 _WIFI_NOTE_RE = re.compile(r"\s*\(только[^)]*\)", re.UNICODE)
 
 # "[MODEL_CODE]" at start of cleaned string (channel format: [MHFF4])
@@ -164,6 +168,10 @@ def _parse_channel_line(line: str) -> "ParsedPrice | None":
         logger.debug("Skipping condition-note line: %r", line)
         return None
 
+    if _WIFI_ONLY_RE.search(name_raw):
+        logger.debug("Skipping Wi-Fi-only line: %r", line)
+        return None
+
     price_clean = price_raw.strip().lstrip("`")
     price_match = re.match(r"\d[\d\s\xa0]*", price_clean)
     if not price_match:
@@ -194,6 +202,10 @@ def _parse_bot_line(line: str) -> "ParsedPrice | None":
 
     if SKIP_CONDITION_NOTES and _CONDITION_RE.search(name_raw):
         logger.debug("Skipping condition-note line: %r", line)
+        return None
+
+    if _WIFI_ONLY_RE.search(name_raw):
+        logger.debug("Skipping Wi-Fi-only line: %r", line)
         return None
 
     try:
