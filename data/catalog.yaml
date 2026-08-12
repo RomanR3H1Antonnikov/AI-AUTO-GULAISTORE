@@ -209,7 +209,7 @@ categories:
   MacBook Air 13:
     - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ (Starlight · Silver · Midnight · Sky Blue)", markup: 2500, db_sku: "air_13_m5_16_512_starlight" }
     - { name: "MacBook Air 13 M5 16 ГБ/1 ТБ (Starlight · Silver · Midnight · Sky Blue)",   markup: 2500, db_sku: "air_13_m5_16_1tb_starlight" }
-    - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ (Starlight · Silver · Midnight · Sky Blue)",   markup: 2500, db_sku: "air_13_m5_24_1tb_starlight" }
+    - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ (Starlight · Silver · Midnight · Sky Blue)",   markup: 2500 }
     - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ (Starlight · Silver · Midnight · Sky Blue)",   markup: 2500, db_sku: "air_13_m5_32_2tb_70w_sky_blue" }
     - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ (Starlight · Silver · Midnight · Sky Blue)",   markup: 2500, db_sku: "air_13_m5_32_4tb_70w_silver" }
 
