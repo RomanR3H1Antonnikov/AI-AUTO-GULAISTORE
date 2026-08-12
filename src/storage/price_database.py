@@ -88,6 +88,40 @@ class PriceDatabase:
             logger.info("Price updated: %s %s → %d ₽", sku, name, price)
         return changed
 
+    async def prune_stale(self, run_started_at: str, min_seen: int = 50) -> int:
+        """Delete SKUs not updated in the current run (disappeared from all sources).
+
+        Safety guard: skips deletion if fewer than min_seen rows were updated this run,
+        which indicates a failed/partial fetch rather than genuine disappearance.
+        Returns number of deleted rows.
+        """
+        async with self._db.execute(
+            "SELECT COUNT(*) FROM prices WHERE updated_at >= ?", (run_started_at,)
+        ) as cur:
+            (updated_count,) = await cur.fetchone()
+
+        if updated_count < min_seen:
+            logger.warning(
+                "prune_stale skipped: only %d rows updated this run (min_seen=%d) — "
+                "looks like a partial fetch, not deleting stale entries",
+                updated_count, min_seen,
+            )
+            return 0
+
+        async with self._db.execute(
+            "SELECT COUNT(*) FROM prices WHERE updated_at < ?", (run_started_at,)
+        ) as cur:
+            (stale_count,) = await cur.fetchone()
+
+        if stale_count:
+            await self._db.execute(
+                "DELETE FROM prices WHERE updated_at < ?", (run_started_at,)
+            )
+            await self._db.commit()
+            logger.info("prune_stale: removed %d stale SKU(s) not seen in this run", stale_count)
+
+        return stale_count
+
     async def set_markup(self, sku: str, markup_pct: float) -> None:
         """Set per-SKU markup percentage (applied on top of raw supplier price)."""
         await self._db.execute(

@@ -57,11 +57,11 @@ def _secs_until_window(now: datetime) -> float:
 
 async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> None:
     """One price-check cycle: fetch all sources, deduplicate, persist changes."""
+    run_started_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     logger.info("=== Price check at %s ===", datetime.now().strftime("%H:%M:%S"))
 
-
     # SKU -> (name, price, source, raw); always keep the CHEAPER price across sources
-    seen: dict[str, tuple[str, int, str, str]] = {}  # sku -> (name, price, source, raw)
+    seen: dict[str, tuple[str, int, str, str]] = {}
 
     group_prices = await fetch_group_prices(client, cfg.group_chat_id, cfg.group_msg_limit)
     for p in group_prices:
@@ -72,12 +72,14 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
     for p in bot_prices:
         if p.sku not in seen or p.price < seen[p.sku][1]:
             seen[p.sku] = (p.name, p.price, "bot", p.raw_line)
+
     changed = 0
     for sku, (name, price, source, raw) in seen.items():
         if await db.upsert(sku, name, price, source, raw):
             changed += 1
 
-    logger.info("=== Done: %d/%d prices changed ===", changed, len(seen))
+    pruned = await db.prune_stale(run_started_at)
+    logger.info("=== Done: %d/%d prices changed, %d stale removed ===", changed, len(seen), pruned)
 
 
 async def main_loop(cfg: Config) -> None:
