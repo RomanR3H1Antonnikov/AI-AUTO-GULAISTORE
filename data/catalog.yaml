@@ -222,10 +222,10 @@ categories:
 
   iPad Pro (Wi-Fi):
     - { name: "iPad Pro 11 M5 256 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_pro_11_m5_256_wi_fi_black" }
-    - { name: "iPad Pro 11 M5 512 ГБ Wi-Fi", markup: 1500 }
-    - { name: "iPad Pro 11 M5 2 ТБ Wi-Fi",   markup: 1500 }
+    - { name: "iPad Pro 11 M5 512 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_pro_11_m5_512_space_black_wi_fi" }
+    - { name: "iPad Pro 11 M5 2 ТБ Wi-Fi",   markup: 1500, db_sku: "ipad_pro_11_m5_2tb_wi_fi_black_nano" }
     - { name: "iPad Pro 13 M5 256 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_pro_13_m5_256_wi_fi_black" }
-    - { name: "iPad Pro 13 M5 512 ГБ Wi-Fi", markup: 1500 }
+    - { name: "iPad Pro 13 M5 512 ГБ Wi-Fi", markup: 1500, db_sku: "ipad_pro_13_m5_512_space_black_wi_fi" }
     - { name: "iPad Pro 13 M5 1 ТБ Wi-Fi",   markup: 1500 }
     - { name: "iPad Pro 13 M5 2 ТБ Wi-Fi",   markup: 1500 }
 
