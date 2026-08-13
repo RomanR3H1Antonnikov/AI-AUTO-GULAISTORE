@@ -2,16 +2,16 @@ db_path: gulaistore.db
 
 engine:
   # Main response model
-  llm_model: gpt-4o
+  llm_model: gpt-4o-mini
 
   # Fast model for lead/toxicity classification (cheaper)
   classifier_model: gpt-4o-mini
 
   # How many recent messages to include in LLM context
-  history_limit: 20
+  history_limit: 10
 
   # When total messages exceed this, compress older part
-  history_compress_threshold: 30
+  history_compress_threshold: 20
 
   # Per-dialog daily token cap (alerts owner at 80%)
   # ~1700 tokens/message → 100k ≈ 60 exchanges/day per dialog

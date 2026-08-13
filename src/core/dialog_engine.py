@@ -21,8 +21,8 @@ from ..storage.price_database import PriceDatabase
 
 logger = logging.getLogger(__name__)
 
-_HISTORY_LIMIT = 20
-_COMPRESS_THRESHOLD = 30
+_HISTORY_LIMIT_DEFAULT = 10
+_COMPRESS_THRESHOLD_DEFAULT = 20
 _LEAD_COOLDOWN_MINUTES = 30
 
 # If the bot's own reply contains these patterns it means an escalation happened.
@@ -344,7 +344,9 @@ class DialogEngine:
         self.lead_detector = LeadDetector(openai_client, clf_model)
         self.toxicity_detector = ToxicityDetector(openai_client, clf_model)
 
-        self.llm_model: str = config.get("llm_model", "gpt-4o")
+        self.llm_model: str = config.get("llm_model", "gpt-4o-mini")
+        self.history_limit: int = config.get("history_limit", _HISTORY_LIMIT_DEFAULT)
+        self.compress_threshold: int = config.get("history_compress_threshold", _COMPRESS_THRESHOLD_DEFAULT)
         self.max_dialog_tokens: int = config.get("max_tokens_per_dialog_day", 10_000)
         self.max_global_tokens: int = config.get("max_tokens_global_day", 500_000)
 
@@ -472,13 +474,13 @@ class DialogEngine:
 
     async def _build_llm_messages(self, dialog_id: int) -> list[dict]:
         total = await self.db.get_message_count(dialog_id)
-        recent = await self.db.get_messages(dialog_id, limit=_HISTORY_LIMIT)
+        recent = await self.db.get_messages(dialog_id, limit=self.history_limit)
 
         result: list[dict] = []
 
-        if total > _HISTORY_LIMIT and len(recent) == _HISTORY_LIMIT:
+        if total > self.compress_threshold and len(recent) == self.history_limit:
             all_msgs = await self.db.get_messages(dialog_id, limit=total)
-            older = all_msgs[:-_HISTORY_LIMIT]
+            older = all_msgs[:-self.history_limit]
             if older:
                 summary = await self._compress_history(older)
                 result.append({"role": "system", "content": f"[Резюме предыдущей части диалога]: {summary}"})
