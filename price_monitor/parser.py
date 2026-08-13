@@ -15,6 +15,7 @@ Bot (hyphen separator, dotted price with ₽):
   iPhone 17 Pro Max 256 Blue 1 Sim + eSim - 106.500₽🏎️
 
 Both formats produce identical SKUs for the same product via _normalize_for_sku().
+eSIM-only variants produce the base SKU; nano/physical-SIM variants get a _nano suffix.
 Lines not matching either pattern are silently skipped.
 """
 
@@ -93,10 +94,12 @@ _YEAR_RE = re.compile(r"\s+\b20[2-3]\d\b", re.UNICODE)
 # Trailing unbracketed model code at end of string: " MDWK4", " MH304"
 _TRAIL_CODE_RE = re.compile(r"\s+[A-Z]{1,3}[A-Z0-9]{1,4}\d$", re.UNICODE)
 
-# SIM-type suffixes — different variants sold at different prices; we keep
-# only the base (cheapest = eSim) in the canonical SKU
-_SIM_RE = re.compile(
-    r"\s+(?:eSim|[12]\s*Sim(?:\s*\+\s*eSim)?|nanoSIM(?:\s*\+\s*eSIM)?).*$",
+# eSIM-only suffix → strip (eSIM is the base/default SKU)
+_SIM_ESIM_RE = re.compile(r"\s+eSim\b.*$", re.IGNORECASE | re.UNICODE)
+
+# Nano/physical SIM variants → replace suffix with " nano" to produce _nano SKU
+_SIM_NANO_RE = re.compile(
+    r"\s+(?:[12]\s*Sim(?:\s*\+\s*eSim)?|nanoSIM(?:\s*\+\s*eSIM)?).*$",
     re.IGNORECASE | re.UNICODE,
 )
 
@@ -134,6 +137,7 @@ def _normalize_for_sku(name: str) -> str:
 
       channel "17 Pro Max (256) Blue"                    → 17_pro_max_256_blue
       bot     "iPhone 17 Pro Max 256 Blue eSim"          → 17_pro_max_256_blue
+      bot     "iPhone 17 Pro Max 256 Blue 1 Sim + eSim"  → 17_pro_max_256_blue_nano
     """
     s = _LEAD_CODE_RE.sub("", name)      # MHFF4, MDHA4, etc.
     s = _MACBOOK_PREFIX_RE.sub("", s)    # "MacBook "
@@ -142,7 +146,11 @@ def _normalize_for_sku(name: str) -> str:
     s = _NEO_SCREEN_RE.sub("", s)       # "Neo 13" → "Neo"
     s = _YEAR_RE.sub("", s)             # 2026, 2025, …
     s = _TRAIL_CODE_RE.sub("", s)       # trailing "MDWK4"
-    s = _SIM_RE.sub("", s)              # "eSim", "1 Sim + eSim", "2 Sim"
+    # SIM-type suffixes: nano variants become _nano SKU; eSIM-only strips cleanly
+    if _SIM_NANO_RE.search(s):
+        s = _SIM_NANO_RE.sub(" nano", s)
+    else:
+        s = _SIM_ESIM_RE.sub("", s)
     return s.strip()
 
 
