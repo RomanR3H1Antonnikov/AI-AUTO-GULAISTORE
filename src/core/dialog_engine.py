@@ -623,6 +623,9 @@ class DialogEngine:
             if "✅✅✅" in message.text:
                 await self.db.update_dialog_status(dialog_id, "owner_takeover", "checkmark_silence")
                 logger.info("dialog %d: ✅✅✅ — manager takes over, bot permanently silenced", dialog_id)
+            elif "❌❌❌" in message.text:
+                await self.db.update_dialog_status(dialog_id, "bot_active", None)
+                logger.info("dialog %d: ❌❌❌ — bot re-activated by manager", dialog_id)
             else:
                 logger.info("owner message saved to dialog %d context (no auto-takeover)", dialog_id)
             return None
