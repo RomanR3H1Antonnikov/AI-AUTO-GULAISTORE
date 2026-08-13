@@ -617,16 +617,23 @@ class DialogEngine:
         dialog_id: int = dialog["id"]
 
         # 2. Owner message → save to dialog context so LLM sees it, but never respond.
-        # Auto-takeover is intentionally removed: owner just drops info (price list, etc.)
-        # without taking over the dialog. Explicit takeover is /take command only.
+        # If the message contains ✅✅✅ — permanently silence the bot; manager takes over.
         if message.is_owner_message:
             await self.db.add_message(dialog_id, "assistant", message.text)
-            logger.info("owner message saved to dialog %d context (no auto-takeover)", dialog_id)
+            if "✅✅✅" in message.text:
+                await self.db.update_dialog_status(dialog_id, "owner_takeover", "checkmark_silence")
+                logger.info("dialog %d: ✅✅✅ — manager takes over, bot permanently silenced", dialog_id)
+            else:
+                logger.info("owner message saved to dialog %d context (no auto-takeover)", dialog_id)
             return None
 
         # 3. Respect current dialog status
         status = dialog["status"]
         if status == "owner_takeover":
+            if dialog.get("takeover_type") == "checkmark_silence":
+                # Permanent manager takeover (✅✅✅) — stay silent; only /start <id> can undo.
+                logger.info("dialog %d: permanent silence (manager ✅✅✅ takeover)", dialog_id)
+                return None
             # Client re-engaged → auto-resume regardless of why takeover was set.
             # Bot only stays permanently silent for toxic content (handled in step 5).
             logger.info("dialog %d: client re-engaged after owner_takeover → auto-resuming", dialog_id)
