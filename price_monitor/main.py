@@ -73,12 +73,22 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
         if p.sku not in seen or p.price < seen[p.sku][1]:
             seen[p.sku] = (p.name, p.price, "bot", p.raw_line)
 
+    # Track which sources returned data — prune_stale only removes entries from
+    # active sources, preserving entries from offline/empty sources (e.g. bot after 19:00).
+    sources_seen: set[str] = set()
+    if group_prices:
+        sources_seen.add("group")
+    if bot_prices:
+        sources_seen.add("bot")
+    if not sources_seen:
+        logger.warning("All sources returned 0 entries — skipping prune entirely")
+
     changed = 0
     for sku, (name, price, source, raw) in seen.items():
         if await db.upsert(sku, name, price, source, raw):
             changed += 1
 
-    pruned = await db.prune_stale(run_started_at)
+    pruned = await db.prune_stale(run_started_at, sources_seen=sources_seen or None)
     logger.info("=== Done: %d/%d prices changed, %d stale removed ===", changed, len(seen), pruned)
 
 

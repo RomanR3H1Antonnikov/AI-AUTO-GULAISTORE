@@ -88,11 +88,18 @@ class PriceDatabase:
             logger.info("Price updated: %s %s → %d ₽", sku, name, price)
         return changed
 
-    async def prune_stale(self, run_started_at: str, min_seen: int = 50) -> int:
+    async def prune_stale(
+        self,
+        run_started_at: str,
+        min_seen: int = 50,
+        sources_seen: set[str] | None = None,
+    ) -> int:
         """Delete SKUs not updated in the current run (disappeared from all sources).
 
-        Safety guard: skips deletion if fewer than min_seen rows were updated this run,
-        which indicates a failed/partial fetch rather than genuine disappearance.
+        Safety guards:
+        - Skips deletion if fewer than min_seen rows were updated this run.
+        - If sources_seen is provided, only prunes entries from those sources,
+          preserving entries from sources that returned 0 results (e.g. bot offline).
         Returns number of deleted rows.
         """
         async with self._db.execute(
@@ -103,22 +110,41 @@ class PriceDatabase:
         if updated_count < min_seen:
             logger.warning(
                 "prune_stale skipped: only %d rows updated this run (min_seen=%d) — "
-                "looks like a partial fetch, not deleting stale entries",
+                "partial fetch, not deleting stale entries",
                 updated_count, min_seen,
             )
             return 0
 
-        async with self._db.execute(
-            "SELECT COUNT(*) FROM prices WHERE updated_at < ?", (run_started_at,)
-        ) as cur:
+        if sources_seen is not None:
+            # Only prune stale entries from sources that actually returned data.
+            # Entries from sources with 0 results (e.g. bot offline) are preserved.
+            placeholders = ",".join("?" * len(sources_seen))
+            stale_sql = (
+                f"SELECT COUNT(*) FROM prices "
+                f"WHERE updated_at < ? AND source IN ({placeholders})"
+            )
+            delete_sql = (
+                f"DELETE FROM prices "
+                f"WHERE updated_at < ? AND source IN ({placeholders})"
+            )
+            params = (run_started_at, *sources_seen)
+        else:
+            stale_sql = "SELECT COUNT(*) FROM prices WHERE updated_at < ?"
+            delete_sql = "DELETE FROM prices WHERE updated_at < ?"
+            params = (run_started_at,)
+
+        async with self._db.execute(stale_sql, params) as cur:
             (stale_count,) = await cur.fetchone()
 
         if stale_count:
-            await self._db.execute(
-                "DELETE FROM prices WHERE updated_at < ?", (run_started_at,)
-            )
+            await self._db.execute(delete_sql, params)
             await self._db.commit()
-            logger.info("prune_stale: removed %d stale SKU(s) not seen in this run", stale_count)
+            skipped_note = (
+                f" (only from sources: {sorted(sources_seen)})" if sources_seen else ""
+            )
+            logger.info(
+                "prune_stale: removed %d stale SKU(s)%s", stale_count, skipped_note
+            )
 
         return stale_count
 
