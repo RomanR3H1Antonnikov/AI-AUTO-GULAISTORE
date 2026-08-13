@@ -27,7 +27,13 @@ _LEAD_COOLDOWN_MINUTES = 30
 
 # If the bot's own reply contains these patterns it means an escalation happened.
 _ESCALATION_RE = re.compile(
-    r"(передам\s+ваш\s+вопрос|уточн[а-я]+\s+у\s+коллег|минуту,?\s+уточн[а-я]+)", re.IGNORECASE
+    r"(передам\s+ваш\s+вопрос"
+    r"|уточн[а-я]+\s+у\s+коллег"
+    r"|минуту,?\s+уточн[а-я]+"
+    r"|передал[аи]?\s+ваш"        # «передала ваш номер/запрос» — доставка, бронь
+    r"|менеджер\s+свяжется"        # «менеджер свяжется с вами» — доставка, заказ
+    r")",
+    re.IGNORECASE,
 )
 
 # Detect bot goodbye in the last assistant message.
