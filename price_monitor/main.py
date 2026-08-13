@@ -1,8 +1,8 @@
-﻿"""
+"""
 Gulai Store — Price Monitor service.
 
 Runs on VPS alongside the main autoresponder.
-Every N hours fetches prices from two Telegram sources, detects changes,
+Fetches prices from two Telegram sources twice a day (10:30 and 18:00 MSK),
 and updates prices.db which the autoresponder reads for live prices.
 
 First-time setup (interactive, run locally or via SSH):
@@ -38,27 +38,27 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 _MSK = timezone(timedelta(hours=3))
-_WINDOW_START = (10, 30)   # 10:30 MSK
-_WINDOW_END   = (18, 30)   # 18:30 MSK
+
+# Two fixed runs per day (MSK): morning and evening.
+_RUN_TIMES: list[tuple[int, int]] = [(10, 30), (18, 0)]
 
 
-def _in_window(now: datetime) -> bool:
-    t = (now.hour, now.minute)
-    return _WINDOW_START <= t < _WINDOW_END
-
-
-def _secs_until_window(now: datetime) -> float:
-    """Seconds until 10:30 MSK (next occurrence)."""
-    target = now.replace(hour=_WINDOW_START[0], minute=_WINDOW_START[1], second=0, microsecond=0)
-    if now >= target:
-        target += timedelta(days=1)
-    return (target - now).total_seconds()
+def _next_run(now: datetime) -> datetime:
+    """Return the next scheduled run datetime in MSK."""
+    base = now.replace(second=0, microsecond=0)
+    for h, m in _RUN_TIMES:
+        candidate = base.replace(hour=h, minute=m)
+        if candidate > now:
+            return candidate
+    # All today's slots passed — first slot tomorrow.
+    h, m = _RUN_TIMES[0]
+    return (base + timedelta(days=1)).replace(hour=h, minute=m)
 
 
 async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> None:
     """One price-check cycle: fetch all sources, deduplicate, persist changes."""
     run_started_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-    logger.info("=== Price check at %s ===", datetime.now().strftime("%H:%M:%S"))
+    logger.info("=== Price check at %s MSK ===", datetime.now(_MSK).strftime("%H:%M:%S"))
 
     # SKU -> (name, price, source, raw); always keep the CHEAPER price across sources
     seen: dict[str, tuple[str, int, str, str]] = {}
@@ -92,46 +92,18 @@ async def main_loop(cfg: Config) -> None:
 
         while True:
             now = datetime.now(_MSK)
-            if not _in_window(now):
-                wait = _secs_until_window(now)
-                logger.info(
-                    "Outside 10:30–18:30 MSK (now %s MSK). Sleeping %.1fh until window opens.",
-                    now.strftime("%H:%M"), wait / 3600,
-                )
-                await asyncio.sleep(wait)
-                continue
+            next_run = _next_run(now)
+            wait = (next_run - now).total_seconds()
+            logger.info(
+                "Next price check at %s MSK (in %.1fh).",
+                next_run.strftime("%H:%M"), wait / 3600,
+            )
+            await asyncio.sleep(wait)
 
             try:
                 await run_check(client, db, cfg)
             except Exception:
                 logger.exception("Unhandled error in price check")
-
-            interval = cfg.check_interval_hours * 3600
-            now = datetime.now(_MSK)
-            next_check = now + timedelta(seconds=interval)
-            window_close = now.replace(
-                hour=_WINDOW_END[0], minute=_WINDOW_END[1], second=0, microsecond=0
-            )
-            secs_to_close = (window_close - now).total_seconds()
-
-            if next_check >= window_close and secs_to_close > 1.5 * 3600:
-                # Next regular check would miss/skip the window end;
-                # schedule one fixed run at 18:29 MSK (1 min before window closes).
-                sleep_secs = max(0.0, secs_to_close - 60)
-                logger.info(
-                    "Fixed 18:30 check scheduled in %.1fh (next regular would be %s MSK, outside window).",
-                    sleep_secs / 3600,
-                    next_check.strftime("%H:%M"),
-                )
-                await asyncio.sleep(sleep_secs)
-                try:
-                    await run_check(client, db, cfg)
-                except Exception:
-                    logger.exception("Unhandled error in fixed 18:30 check")
-                await asyncio.sleep(interval)  # sleep past window; loop restarts tomorrow
-            else:
-                logger.info("Sleeping %.1fh until next check", cfg.check_interval_hours)
-                await asyncio.sleep(interval)
 
     await db.close()
 
