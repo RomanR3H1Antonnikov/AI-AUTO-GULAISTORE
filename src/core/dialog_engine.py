@@ -81,6 +81,10 @@ _SYSTEM_PROMPT = """\
 ═══ КАТАЛОГ ТОВАРОВ ═══
 {catalog}
 
+⚠️ ЦЕНЫ В КАТАЛОГЕ ВЫШЕ — ЕДИНСТВЕННЫЙ ИСТОЧНИК ПРАВДЫ.
+Если в истории переписки ты называла другую цену — это устаревшие данные. Всегда используй цену
+из каталога выше. При расхождении скажи: «Уточню — актуальная цена [X] ₽.»
+
 ═══ НАЛИЧИЕ ТОВАРА — ТРИ СЛУЧАЯ ═══
 
 ⚠️ ЦЕНЫ И НАЛИЧИЕ МЕНЯЮТСЯ. Никогда не гарантируй конкретную цену или наличие надолго вперёд.
@@ -644,6 +648,8 @@ class DialogEngine:
         # If the message contains ✅✅✅ — permanently silence the bot; manager takes over.
         if message.is_owner_message:
             await self.db.add_message(dialog_id, "assistant", message.text)
+            # Reset retention timer: owner is actively managing this chat.
+            await self.db.record_notification(dialog_id, "retention", {})
             if "✅✅✅" in message.text:
                 await self.db.update_dialog_status(dialog_id, "owner_takeover", "checkmark_silence")
                 logger.info("dialog %d: ✅✅✅ — manager takes over, bot permanently silenced", dialog_id)
