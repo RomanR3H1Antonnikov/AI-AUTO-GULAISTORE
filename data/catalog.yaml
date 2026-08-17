@@ -37,7 +37,7 @@ categories:
       markup: 1500
       db_sku_esim:  "17_pro_max_1tb_blue"
       db_sku_nano:  "17_pro_max_1tb_blue_nano"
-      db_sku_activ: "iphone_17_pro_max_1tb_blue_esim_актив_новый_запакованный"
+      db_sku_activ: "17_pro_max_1tb_blue_актив"
     - name: "iPhone 17 Pro Max 2 ТБ Deep Blue"
       markup: 1500
       db_sku_esim:  "17_pro_max_2tb_blue"
@@ -56,7 +56,7 @@ categories:
       markup: 1500
       db_sku_esim:  "17_pro_max_1tb_orange"
       db_sku_nano:  "17_pro_max_1tb_orange_nano"
-      db_sku_activ: "iphone_17_pro_max_1tb_orange_esim_актив_новый_запакованный"
+      db_sku_activ: "17_pro_max_1tb_orange_актив"
     - name: "iPhone 17 Pro Max 2 ТБ Cosmic Orange"
       markup: 1500
       db_sku_esim:  "17_pro_max_2tb_orange"
@@ -91,7 +91,7 @@ categories:
       markup: 1500
       db_sku_esim:  "17_pro_1tb_blue"
       db_sku_nano:  "17_pro_1tb_blue_nano"
-      db_sku_activ: "iphone_17_pro_1tb_blue_esim_актив_новый_запакованный"
+      db_sku_activ: "17_pro_1tb_blue_актив"
     - name: "iPhone 17 Pro 256 Гб Cosmic Orange"
       markup: 1500
       db_sku_esim: "17_pro_256_orange"
@@ -105,7 +105,7 @@ categories:
       markup: 1500
       db_sku_esim:  "17_pro_1tb_orange"
       db_sku_nano:  "17_pro_1tb_orange_nano"
-      db_sku_activ: "iphone_17_pro_1tb_orange_esim_актив_новый_запакованный"
+      db_sku_activ: "17_pro_1tb_orange_актив"
     - name: "iPhone 17 Pro 256 Гб Silver"
       markup: 1500
       db_sku_esim:  "17_pro_256_silver"
@@ -120,7 +120,7 @@ categories:
       markup: 1500
       db_sku_esim:  "17_pro_1tb_silver"
       db_sku_nano:  "17_pro_1tb_silver_nano"
-      db_sku_activ: "17_pro_1tb_silver"
+      db_sku_activ: "17_pro_1tb_silver_актив"
 
   iPhone 17:
     - name: "iPhone 17 256 Гб Black"
@@ -130,16 +130,16 @@ categories:
     - name: "iPhone 17 512 Гб Black"
       markup: 1500
       db_sku_nano:  "17_512_black_nano"
-      db_sku_activ: "iphone_17_512_black_1_sim_esim_актив_новый_запечатанный"
+      db_sku_activ: "17_512_black_актив"
     - name: "iPhone 17 256 Гб Mist Blue"
       markup: 1500
       db_sku_esim:  "17_256_blue"
       db_sku_nano:  "17_256_blue_nano"
-      db_sku_activ: "17_256_blue"
+      db_sku_activ: "17_256_blue_актив"
     - name: "iPhone 17 512 Гб Mist Blue"
       markup: 1500
       db_sku_nano:  "17_512_blue_nano"
-      db_sku_activ: "iphone_17_512_blue_1_sim_esim_актив_новый_запечатанный"
+      db_sku_activ: "17_512_blue_актив"
     - name: "iPhone 17 256 Гб Sage"
       markup: 1500
       db_sku_nano:  "17_256_sage_nano"
@@ -148,7 +148,7 @@ categories:
       markup: 1500
       db_sku_esim:  "17_512_sage"
       db_sku_nano:  "17_512_sage_nano"
-      db_sku_activ: "iphone_17_512_sage_1_sim_esim_актив_новый_запечатанный"
+      db_sku_activ: "17_512_sage_актив"
     - name: "iPhone 17 256 Гб Lavender"
       markup: 1500
       db_sku_nano:  "17_256_lavender_nano"
@@ -156,7 +156,7 @@ categories:
     - name: "iPhone 17 512 Гб Lavender"
       markup: 1500
       db_sku_nano:  "17_512_lavender_nano"
-      db_sku_activ: "iphone_17_512_lavender_1_sim_esim_актив_новый_запечатанный"
+      db_sku_activ: "17_512_lavender_актив"
     - name: "iPhone 17 256 Гб White"
       markup: 1500
       db_sku_nano:  "17_256_white_nano"
@@ -164,7 +164,7 @@ categories:
     - name: "iPhone 17 512 Гб White"
       markup: 1500
       db_sku_nano:  "17_512_white_nano"
-      db_sku_activ: "iphone_17_512_white_1_sim_esim_актив_новый_запечатанный"
+      db_sku_activ: "17_512_white_актив"
 
   iMac M4:
     - { name: "iMac M4 8/8/16/256 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",   markup: 3500, db_sku: "imac_m4_8_8_16_256_silver" }
