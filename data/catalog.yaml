@@ -272,15 +272,15 @@ categories:
     - { name: "iPad Pro 13 M5 2 ТБ Wi-Fi (Black · Silver)",   markup: 2000 }
 
   iPad Air (Wi-Fi):
-    - { name: "iPad Air 11 M4 (2026) 128 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000, db_sku: "ipad_air_11_m4_2026_128_wi_fi_grey" }
-    - { name: "iPad Air 11 M4 (2026) 256 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000, db_sku: "ipad_air_11_m4_2026_256_wi_fi_grey" }
-    - { name: "iPad Air 13 M4 (2026) 128 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000, db_sku: "ipad_air_13_m4_2026_128_wi_fi_grey" }
+    - { name: "iPad Air 11 M4 (2026) 128 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000, db_sku: "ipad_air_11_m4_128_wi_fi_grey" }
+    - { name: "iPad Air 11 M4 (2026) 256 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000 }
+    - { name: "iPad Air 13 M4 (2026) 128 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000 }
     - { name: "iPad Air 13 M4 (2026) 256 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000 }
     - { name: "iPad Air 13 M4 (2026) 512 ГБ Wi-Fi (Space Gray · Starlight · Purple · Blue)", markup: 2000 }
 
   iPad Air (LTE):
     - { name: "iPad Air 11 M4 (2026) 128 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000 }
     - { name: "iPad Air 11 M4 (2026) 256 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000 }
-    - { name: "iPad Air 13 M4 (2026) 128 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000, db_sku: "ipad_air_13_m4_2026_128_lte_grey" }
-    - { name: "iPad Air 13 M4 (2026) 256 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000, db_sku: "ipad_air_13_m4_2026_256_lte_grey" }
-    - { name: "iPad Air 13 M4 (2026) 512 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000, db_sku: "ipad_air_13_m4_2026_512_lte_grey" }
+    - { name: "iPad Air 13 M4 (2026) 128 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000, db_sku: "ipad_air_13_m4_128_lte_grey" }
+    - { name: "iPad Air 13 M4 (2026) 256 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000, db_sku: "ipad_air_13_m4_256_lte_grey" }
+    - { name: "iPad Air 13 M4 (2026) 512 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 3000 }
