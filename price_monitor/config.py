@@ -29,3 +29,6 @@ class Config:
 
     # ── Shared price database ─────────────────────────────────────────────────
     db_path: str = os.environ.get("PRICE_DB_PATH", "prices.db")
+
+    # ── Notifications ─────────────────────────────────────────────────────────
+    owner_telegram_id: int = int(os.environ.get("OWNER_TELEGRAM_ID", "0"))

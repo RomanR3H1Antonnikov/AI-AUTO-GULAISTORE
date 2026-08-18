@@ -465,12 +465,15 @@ class DialogEngine:
                             if not sku:
                                 continue
                             v_price: Optional[int] = None
+                            known_unavail = False
                             if self.price_db:
                                 try:
-                                    v_price = await self.price_db.get_price(sku)
+                                    v_price, known_unavail = await self.price_db.get_price_info(sku)
                                 except Exception:
                                     logger.warning("price_db lookup failed for sku=%s", sku)
-                            if v_price is not None:
+                            if known_unavail:
+                                parts.append(f"{label}: временно нет в прайсе")
+                            elif v_price is not None:
                                 parts.append(f"{label}: {v_price + markup:,}".replace(",", " ") + " ₽")
                         if parts:
                             lines.append(f"  • {name} — {' | '.join(parts)}")
@@ -479,13 +482,16 @@ class DialogEngine:
                     else:
                         # Single-SKU path (MacBook, iPad, iMac)
                         db_price: Optional[int] = None
+                        known_unavail = False
                         sku = item.get("db_sku")
                         if self.price_db and sku:
                             try:
-                                db_price = await self.price_db.get_price(sku)
+                                db_price, known_unavail = await self.price_db.get_price_info(sku)
                             except Exception:
                                 logger.warning("price_db lookup failed for sku=%s", sku)
-                        if db_price is not None:
+                        if known_unavail:
+                            lines.append(f"  • {name} — временно снята из прайса, уточни у владельца")
+                        elif db_price is not None:
                             price_str = f"{db_price + markup:,}".replace(",", " ")
                             lines.append(f"  • {name} — {price_str} ₽")
                         elif item.get("price"):
@@ -497,14 +503,18 @@ class DialogEngine:
                     # Legacy-style: yaml price, optionally overridden by live price
                     yaml_price: int = item.get("price", 0)
                     live_price: Optional[int] = None
+                    known_unavail = False
                     if self.price_db:
                         try:
-                            live_price = await self.price_db.get_price(self._make_sku(item))
+                            live_price, known_unavail = await self.price_db.get_price_info(self._make_sku(item))
                         except Exception:
                             logger.warning("price_db lookup failed for %s", name)
-                    final_price = live_price if live_price is not None else yaml_price
-                    price_str = f"{final_price:,}".replace(",", " ")
-                    lines.append(f"  • {name} — {price_str} ₽")
+                    if known_unavail:
+                        lines.append(f"  • {name} — временно снята из прайса, уточни у владельца")
+                    else:
+                        final_price = live_price if live_price is not None else yaml_price
+                        price_str = f"{final_price:,}".replace(",", " ")
+                        lines.append(f"  • {name} — {price_str} ₽")
         return "\n".join(lines)
 
     async def _build_system_prompt(self) -> str:

@@ -29,12 +29,16 @@ logger = logging.getLogger(__name__)
 _EM_DASH = "—"  # U+2014 — channel format separator
 
 
+_NEEDS_CHECK_RE = re.compile(r"[\U0001F3CE\U0001F697]", re.UNICODE)  # 🏎️ 🚗
+
+
 @dataclass
 class ParsedPrice:
-    sku: str        # stable key derived from name, used to look up in DB
-    name: str       # human-readable name (cleaned)
-    price: int      # price in rubles
-    raw_line: str   # original text line (for debugging)
+    sku: str              # stable key derived from name, used to look up in DB
+    name: str             # human-readable name (cleaned)
+    price: int            # price in rubles
+    raw_line: str         # original text line (for debugging)
+    needs_check: bool = False  # 🏎️/🚗 in line → price needs owner confirmation
 
 
 # Regional Indicator letters (flag emoji building blocks): U+1F1E0–U+1F1FF
@@ -197,7 +201,8 @@ def _parse_channel_line(line: str) -> "ParsedPrice | None":
     if not name or len(name) < 3:
         return None
 
-    return ParsedPrice(sku=make_sku(name), name=name, price=price, raw_line=line.strip("`"))
+    needs_check = bool(_NEEDS_CHECK_RE.search(line))
+    return ParsedPrice(sku=make_sku(name), name=name, price=price, raw_line=line.strip("`"), needs_check=needs_check)
 
 
 def _parse_bot_line(line: str) -> "ParsedPrice | None":
@@ -228,7 +233,8 @@ def _parse_bot_line(line: str) -> "ParsedPrice | None":
     if not name or len(name) < 3:
         return None
 
-    return ParsedPrice(sku=make_sku(name), name=name, price=price, raw_line=line)
+    needs_check = bool(_NEEDS_CHECK_RE.search(line))
+    return ParsedPrice(sku=make_sku(name), name=name, price=price, raw_line=line, needs_check=needs_check)
 
 
 def parse_prices_from_text(text: str) -> list[ParsedPrice]:
