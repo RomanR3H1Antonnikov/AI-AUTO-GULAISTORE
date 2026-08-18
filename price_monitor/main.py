@@ -14,11 +14,13 @@ Normal operation (managed by systemd):
 
 import asyncio
 import logging
+import os
 import sys
 from datetime import datetime, timezone, timedelta
 
 from dotenv import load_dotenv
-from telethon import TelegramClient
+from openai import AsyncOpenAI
+from telethon import TelegramClient, events
 
 load_dotenv()
 
@@ -42,6 +44,9 @@ _MSK = timezone(timedelta(hours=3))
 # Two fixed runs per day (MSK): morning and evening.
 _RUN_TIMES: list[tuple[int, int]] = [(10, 30), (18, 0)]
 
+# Message IDs of price reports sent to the owner — replies to these trigger price queries.
+_report_msg_ids: set[int] = set()
+
 
 def _next_run(now: datetime) -> datetime:
     """Return the next scheduled run datetime in MSK."""
@@ -50,15 +55,75 @@ def _next_run(now: datetime) -> datetime:
         candidate = base.replace(hour=h, minute=m)
         if candidate > now:
             return candidate
-    # All today's slots passed — first slot tomorrow.
     h, m = _RUN_TIMES[0]
     return (base + timedelta(days=1)).replace(hour=h, minute=m)
 
 
 def _format_price(price: int) -> str:
-    """Format price as '107 500 ₽'."""
     return f"{price:,}".replace(",", " ") + " ₽"
 
+
+# ── Owner price query via LLM ─────────────────────────────────────────────────
+
+async def _handle_owner_price_query(event, db: PriceDatabase, openai: AsyncOpenAI) -> None:
+    """Owner replied to a price report — treat it as a DB price query."""
+    question = (event.raw_text or "").strip()
+    if not question:
+        return
+
+    logger.info("Owner price query: %r", question[:120])
+
+    results = await db.search_prices(question, limit=15)
+    if not results:
+        await event.reply("Ничего не найдено по этому запросу в базе цен.")
+        return
+
+    lines: list[str] = []
+    for r in results:
+        status = "в наличии" if r["available"] else "❌ нет в прайсе (пропало)"
+        markup = r.get("markup_pct") or 0
+        raw = r["price"]
+        final = round(raw * (1 + markup / 100))
+        changed = r.get("price_changed_at") or r.get("updated_at") or "неизвестно"
+        # Trim seconds from timestamp if present
+        if isinstance(changed, str) and len(changed) > 16:
+            changed = changed[:16]
+        lines.append(
+            f"• {r['name']}\n"
+            f"  SKU: {r['sku']}\n"
+            f"  Закупочная: {_format_price(raw)}"
+            + (f"  Наценка: {markup}% → итог: {_format_price(final)}" if markup else "") + "\n"
+            f"  Статус: {status}\n"
+            f"  Изменено/пропало: {changed}"
+        )
+
+    context = "\n\n".join(lines)
+    prompt = (
+        "Ты — аналитик магазина Gulai Store, отвечаешь владельцу на вопрос о ценах.\n"
+        "Используй ТОЛЬКО данные из базы ниже. Отвечай кратко, по-русски.\n"
+        "Если несколько подходящих позиций — перечисли все.\n"
+        "Формат: название, закупочная, наценка (если есть), итоговая, статус, дата изменения.\n\n"
+        f"Вопрос: {question}\n\n"
+        f"Данные из базы:\n{context}"
+    )
+
+    try:
+        resp = await openai.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            max_tokens=500,
+        )
+        answer = resp.choices[0].message.content.strip()
+    except Exception as exc:
+        logger.error("LLM price query failed: %s", exc)
+        answer = f"Ошибка при обращении к LLM: {exc}\n\nРезультаты поиска:\n{context}"
+
+    await event.reply(answer)
+    logger.info("Answered owner price query for %r", question[:60])
+
+
+# ── Owner report ──────────────────────────────────────────────────────────────
 
 async def _send_owner_report(
     client: TelegramClient,
@@ -68,11 +133,11 @@ async def _send_owner_report(
     changed_items: list[dict],
     disappeared_items: list[dict],
     needs_check_items: list[dict],
-) -> None:
-    """Send a Telegram message to the owner with the price update report."""
+) -> int | None:
+    """Send price update report to owner. Returns sent message ID (to track replies)."""
     if not owner_id:
         logger.warning("OWNER_TELEGRAM_ID not set — skipping owner report")
-        return
+        return None
 
     ts = run_time.strftime("%d %b, %H:%M МСК").lstrip("0")
     total = stats.get("total", 0)
@@ -89,6 +154,7 @@ async def _send_owner_report(
         lines.append(f"❌ Пропали: {stats['disappeared']}")
     if stats.get("needs_check"):
         lines.append(f"🏎 Уточнить у владельца: {stats['needs_check']}")
+    lines.append("\n💬 Ответь на это сообщение любым вопросом о ценах — я проверю базу.")
 
     if changed_items:
         lines.append("\n— Изменения цен —")
@@ -109,19 +175,22 @@ async def _send_owner_report(
 
     text = "\n".join(lines)
     try:
-        await client.send_message(owner_id, text)
-        logger.info("Owner report sent to %d", owner_id)
+        msg = await client.send_message(owner_id, text)
+        logger.info("Owner report sent to %d (msg_id=%d)", owner_id, msg.id)
+        return msg.id
     except Exception:
         logger.exception("Failed to send owner report to %d", owner_id)
+        return None
 
 
-async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> None:
+# ── Price check cycle ─────────────────────────────────────────────────────────
+
+async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config, openai_client: AsyncOpenAI) -> None:
     """One price-check cycle: fetch all sources, deduplicate, persist changes."""
     run_started_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     run_time_msk = datetime.now(_MSK)
     logger.info("=== Price check at %s MSK ===", run_time_msk.strftime("%H:%M:%S"))
 
-    # SKU -> (name, price, source, raw, needs_check); always keep the CHEAPER price across sources
     seen: dict[str, tuple[str, int, str, str, bool]] = {}
 
     group_prices = await fetch_group_prices(client, cfg.group_chat_id, cfg.group_msg_limit)
@@ -134,8 +203,6 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
         if p.sku not in seen or p.price < seen[p.sku][1]:
             seen[p.sku] = (p.name, p.price, "bot", p.raw_line, p.needs_check)
 
-    # Track which sources returned data — prune_stale only removes entries from
-    # active sources, preserving entries from offline/empty sources (e.g. bot after 19:00).
     sources_seen: set[str] = set()
     if group_prices:
         sources_seen.add("group")
@@ -144,10 +211,9 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
     if not sources_seen:
         logger.warning("All sources returned 0 entries — skipping prune entirely")
 
-    # Collect per-run stats and item lists for owner report.
     stats = {"new": 0, "restored": 0, "changed": 0, "unchanged": 0, "needs_check": 0}
-    changed_items: list[dict] = []     # new / restored / changed prices
-    needs_check_items: list[dict] = [] # 🏎️ items
+    changed_items: list[dict] = []
+    needs_check_items: list[dict] = []
 
     for sku, (name, price, source, raw, needs_check) in seen.items():
         available = 0 if needs_check else 1
@@ -157,7 +223,6 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
             stats["needs_check"] += 1
             needs_check_items.append({"sku": sku, "name": name, "price": price})
         if status in ("new", "restored", "changed"):
-            # Get final price (with markup) for the report.
             final_price, _ = await db.get_price_info(sku)
             changed_items.append({"sku": sku, "name": name, "price": price,
                                    "final_price": final_price, "status": status})
@@ -167,7 +232,6 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
     )
     stats["disappeared"] = disappeared_count
 
-    # Count total active entries for summary.
     all_entries = await db.get_all()
     stats["total"] = len(all_entries)
 
@@ -177,23 +241,40 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config) -> N
         stats.get("unchanged", 0), disappeared_count, stats.get("needs_check", 0), stats["total"],
     )
 
-    # Send report only if something actually changed.
     if any(stats.get(k) for k in ("new", "restored", "changed", "disappeared", "needs_check")):
-        await _send_owner_report(
+        msg_id = await _send_owner_report(
             client, cfg.owner_telegram_id, run_time_msk,
             stats, changed_items, disappeared_items, needs_check_items,
         )
+        if msg_id:
+            _report_msg_ids.add(msg_id)
+            logger.info("Report msg_id %d registered for price queries", msg_id)
     else:
         logger.info("No changes detected — skipping owner report")
 
+
+# ── Main loop ─────────────────────────────────────────────────────────────────
 
 async def main_loop(cfg: Config) -> None:
     db = PriceDatabase(cfg.db_path)
     await db.init()
 
+    openai_client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
     async with TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash) as client:
         me = await client.get_me()
         logger.info("Connected as %s (@%s)", me.first_name, me.username)
+
+        @client.on(events.NewMessage(from_users=cfg.owner_telegram_id))
+        async def on_owner_message(event):
+            if not event.is_reply:
+                return
+            if event.reply_to_msg_id not in _report_msg_ids:
+                return
+            try:
+                await _handle_owner_price_query(event, db, openai_client)
+            except Exception:
+                logger.exception("Error handling owner price query")
 
         while True:
             now = datetime.now(_MSK)
@@ -206,7 +287,7 @@ async def main_loop(cfg: Config) -> None:
             await asyncio.sleep(wait)
 
             try:
-                await run_check(client, db, cfg)
+                await run_check(client, db, cfg, openai_client)
             except Exception:
                 logger.exception("Unhandled error in price check")
 

@@ -17,14 +17,15 @@ _SCHEMA = """
 PRAGMA journal_mode=WAL;
 
 CREATE TABLE IF NOT EXISTS prices (
-    sku         TEXT    PRIMARY KEY,
-    name        TEXT    NOT NULL,
-    price       INTEGER NOT NULL,
-    markup_pct  REAL    NOT NULL DEFAULT 0,
-    source      TEXT,
-    raw_text    TEXT,
-    available   INTEGER NOT NULL DEFAULT 1,
-    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    sku              TEXT    PRIMARY KEY,
+    name             TEXT    NOT NULL,
+    price            INTEGER NOT NULL,
+    markup_pct       REAL    NOT NULL DEFAULT 0,
+    source           TEXT,
+    raw_text         TEXT,
+    available        INTEGER NOT NULL DEFAULT 1,
+    price_changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS price_history (
@@ -53,13 +54,23 @@ class PriceDatabase:
         await self._db.executescript(_SCHEMA)
         await self._db.commit()
 
-        # Migrate: add `available` column if missing (older DB versions).
+        # Migrations for older DBs.
         async with self._db.execute("PRAGMA table_info(prices)") as cur:
             cols = {row[1] async for row in cur}
         if "available" not in cols:
             await self._db.execute(_MIGRATION_ADD_AVAILABLE)
             await self._db.commit()
             logger.info("Migration: added `available` column to prices table")
+        if "price_changed_at" not in cols:
+            await self._db.execute(
+                "ALTER TABLE prices ADD COLUMN price_changed_at TIMESTAMP"
+            )
+            # Bootstrap: treat updated_at as initial price_changed_at
+            await self._db.execute(
+                "UPDATE prices SET price_changed_at = updated_at WHERE price_changed_at IS NULL"
+            )
+            await self._db.commit()
+            logger.info("Migration: added `price_changed_at` column to prices table")
 
         logger.info("PriceDatabase initialised at %s", self.path)
 
@@ -104,16 +115,32 @@ class PriceDatabase:
             status = "unchanged"
             old_price = row["price"]
 
-        await self._db.execute(
-            """INSERT INTO prices (sku, name, price, source, raw_text, available, updated_at)
-               VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-               ON CONFLICT(sku) DO UPDATE SET
-                 name=excluded.name, price=excluded.price,
-                 source=excluded.source, raw_text=excluded.raw_text,
-                 available=excluded.available,
-                 updated_at=CURRENT_TIMESTAMP""",
-            (sku, name, price, source, raw_text, available),
-        )
+        changed = status in ("new", "changed", "restored")
+        if changed:
+            await self._db.execute(
+                """INSERT INTO prices
+                     (sku, name, price, source, raw_text, available, price_changed_at, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                   ON CONFLICT(sku) DO UPDATE SET
+                     name=excluded.name, price=excluded.price,
+                     source=excluded.source, raw_text=excluded.raw_text,
+                     available=excluded.available,
+                     price_changed_at=CURRENT_TIMESTAMP,
+                     updated_at=CURRENT_TIMESTAMP""",
+                (sku, name, price, source, raw_text, available),
+            )
+        else:
+            # "unchanged" — only bump updated_at (heartbeat), keep price_changed_at as-is
+            await self._db.execute(
+                """INSERT INTO prices
+                     (sku, name, price, source, raw_text, available, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                   ON CONFLICT(sku) DO UPDATE SET
+                     name=excluded.name, source=excluded.source,
+                     raw_text=excluded.raw_text, available=excluded.available,
+                     updated_at=CURRENT_TIMESTAMP""",
+                (sku, name, price, source, raw_text, available),
+            )
         if status in ("new", "changed"):
             await self._db.execute(
                 "INSERT INTO price_history (sku, old_price, new_price) VALUES (?,?,?)",
@@ -164,7 +191,7 @@ class PriceDatabase:
                 f"WHERE updated_at < ? AND available=1 AND source IN ({placeholders})"
             )
             mark_sql = (
-                f"UPDATE prices SET available=0 "
+                f"UPDATE prices SET available=0, price_changed_at=CURRENT_TIMESTAMP "
                 f"WHERE updated_at < ? AND available=1 AND source IN ({placeholders})"
             )
             params = (run_started_at, *sources_seen)
@@ -174,7 +201,7 @@ class PriceDatabase:
                 "WHERE updated_at < ? AND available=1"
             )
             mark_sql = (
-                "UPDATE prices SET available=0 "
+                "UPDATE prices SET available=0, price_changed_at=CURRENT_TIMESTAMP "
                 "WHERE updated_at < ? AND available=1"
             )
             params = (run_started_at,)
@@ -242,3 +269,38 @@ class PriceDatabase:
             d["final_price"] = round(r["price"] * (1 + r["markup_pct"] / 100))
             result.append(d)
         return result
+
+    async def search_prices(self, query: str, limit: int = 12) -> list[dict]:
+        """Search prices by keywords from a natural language query.
+
+        Tries AND-match first (all words must appear), falls back to OR-match.
+        Searches both `name` and `sku` columns.  Returns all columns including
+        `price_changed_at` so the caller can show freshness info.
+        """
+        words = [w for w in query.split() if len(w) > 2]
+        if not words:
+            async with self._db.execute(
+                "SELECT * FROM prices ORDER BY available DESC, name LIMIT ?", (limit,)
+            ) as cur:
+                return [dict(r) async for r in cur]
+
+        def _build(op: str) -> tuple[str, list]:
+            conds = [f"(name LIKE ? OR sku LIKE ?)" for _ in words]
+            sql = (
+                f"SELECT * FROM prices WHERE {f' {op} '.join(conds)} "
+                f"ORDER BY available DESC, name LIMIT ?"
+            )
+            params = [v for w in words for v in (f"%{w}%", f"%{w}%")]
+            params.append(limit)
+            return sql, params
+
+        sql, params = _build("AND")
+        async with self._db.execute(sql, params) as cur:
+            rows = [dict(r) async for r in cur]
+
+        if not rows:
+            sql, params = _build("OR")
+            async with self._db.execute(sql, params) as cur:
+                rows = [dict(r) async for r in cur]
+
+        return rows
