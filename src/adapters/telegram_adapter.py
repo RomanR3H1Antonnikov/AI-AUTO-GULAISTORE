@@ -217,25 +217,28 @@ class TelegramAdapter:
             await message.answer("Пришли текстом — перешлю клиенту.")
             return
 
+        is_addendum = relay.get("reply_count", 0) > 0
         try:
             reformulated = await self.engine.reformulate_owner_reply(
                 owner_text=message.text,
                 context=relay["context"],
+                is_addendum=is_addendum,
             )
         except Exception as exc:
             logger.error("reformulate_owner_reply failed: %s", exc)
             await message.answer(f"Ошибка при обработке ответа: {exc}")
             return
 
+        label = "Дополнение отправлено клиенту" if is_addendum else "Отправлено клиенту"
         if self.avito_reply_sender is not None:
             try:
                 await self.avito_reply_sender(relay["external_id"], reformulated)
                 await self.engine.db.add_message(relay["dialog_id"], "assistant", reformulated)
-                await self.engine.db.delete_escalation_relay(replied_msg_id)
-                await message.answer(f"Отправлено клиенту:\n\n{reformulated}")
+                await self.engine.db.increment_relay_reply_count(replied_msg_id)
+                await message.answer(f"✅ {label}:\n\n{reformulated}")
                 logger.info(
-                    "owner reply relayed to Avito chat %s: %r",
-                    relay["external_id"], reformulated[:80],
+                    "owner reply #%d relayed to Avito chat %s: %r",
+                    relay.get("reply_count", 0) + 1, relay["external_id"], reformulated[:80],
                 )
             except Exception as exc:
                 logger.error("Failed to relay to Avito chat %s: %s", relay["external_id"], exc)

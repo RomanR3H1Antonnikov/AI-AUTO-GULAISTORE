@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS escalation_relay (
     transport   TEXT    NOT NULL,
     external_id TEXT    NOT NULL,
     context     TEXT,
+    reply_count INTEGER NOT NULL DEFAULT 0,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 """
@@ -70,6 +71,16 @@ class Database:
         self._db.row_factory = aiosqlite.Row
         await self._db.executescript(_SCHEMA)
         await self._db.commit()
+
+        # Migration: add reply_count if missing (older DB without it).
+        async with self._db.execute("PRAGMA table_info(escalation_relay)") as cur:
+            cols = {row[1] async for row in cur}
+        if "reply_count" not in cols:
+            await self._db.execute(
+                "ALTER TABLE escalation_relay ADD COLUMN reply_count INTEGER NOT NULL DEFAULT 0"
+            )
+            await self._db.commit()
+            logger.info("Migration: added reply_count to escalation_relay")
 
     async def close(self) -> None:
         if self._db:
@@ -250,6 +261,13 @@ class Database:
         ) as cur:
             row = await cur.fetchone()
         return dict(row) if row else None
+
+    async def increment_relay_reply_count(self, tg_msg_id: int) -> None:
+        await self._db.execute(
+            "UPDATE escalation_relay SET reply_count = reply_count + 1 WHERE tg_msg_id=?",
+            (tg_msg_id,),
+        )
+        await self._db.commit()
 
     async def delete_escalation_relay(self, tg_msg_id: int) -> None:
         await self._db.execute(

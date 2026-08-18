@@ -809,13 +809,24 @@ class DialogEngine:
         )
         return reply
 
-    async def reformulate_owner_reply(self, owner_text: str, context: str) -> str:
+    async def reformulate_owner_reply(
+        self, owner_text: str, context: str, is_addendum: bool = False
+    ) -> str:
         """Переформулирует сырой ответ владельца в сообщение для покупателя."""
+        if is_addendum:
+            addendum_note = (
+                "Это ДОПОЛНЕНИЕ к уже отправленному ответу. "
+                "Начни сообщение с одной из фраз: «Чуть не забыл —», «Кстати, », «Уточню ещё — », «Забыл добавить: » — "
+                "выбери ту, что звучит естественнее для контекста. "
+            )
+        else:
+            addendum_note = ""
         prompt = (
             "Ты — помощница магазина Gulai Store. "
             "Владелец дал ответ на вопрос покупателя. "
+            f"{addendum_note}"
             "Переформулируй его ответ в дружелюбное сообщение покупателю. "
-            "Без вводных фраз, без Markdown, 1–3 предложения максимум. "
+            "Без Markdown, 1–3 предложения максимум. "
             "Обращайся на «вы».\n\n"
             f"Контекст:\n{context}\n\n"
             f"Ответ владельца: «{owner_text}»\n\n"
