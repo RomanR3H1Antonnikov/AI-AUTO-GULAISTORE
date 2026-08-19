@@ -197,6 +197,7 @@ async def main() -> None:
         bot=bot,
         owner_telegram_id=int(os.environ["OWNER_TELEGRAM_ID"]),
         engine=engine,
+        developer_telegram_id=int(os.environ.get("DEVELOPER_TELEGRAM_ID", "0")),
     )
     dp.include_router(tg_adapter.router)
 

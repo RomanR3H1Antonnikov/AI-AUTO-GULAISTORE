@@ -128,13 +128,18 @@ async def _handle_owner_price_query(event, db: PriceDatabase, openai: AsyncOpenA
 async def _send_owner_report(
     client: TelegramClient,
     owner_id: int,
+    developer_id: int,
     run_time: datetime,
     stats: dict,
     changed_items: list[dict],
     disappeared_items: list[dict],
     needs_check_items: list[dict],
 ) -> int | None:
-    """Send price update report to owner. Returns sent message ID (to track replies)."""
+    """Send price update report to owner (and read-only copy to developer).
+
+    Returns the owner's message ID so replies can be tracked for price queries.
+    Developer gets a copy but their replies are intentionally ignored.
+    """
     if not owner_id:
         logger.warning("OWNER_TELEGRAM_ID not set — skipping owner report")
         return None
@@ -177,10 +182,22 @@ async def _send_owner_report(
     try:
         msg = await client.send_message(owner_id, text)
         logger.info("Owner report sent to %d (msg_id=%d)", owner_id, msg.id)
-        return msg.id
     except Exception:
         logger.exception("Failed to send owner report to %d", owner_id)
         return None
+
+    if developer_id:
+        try:
+            dev_text = text.replace(
+                "💬 Ответь на это сообщение любым вопросом о ценах — я проверю базу.",
+                "ℹ️ Только для чтения — вопросы о ценах задаёт владелец.",
+            )
+            await client.send_message(developer_id, dev_text)
+            logger.info("Developer report copy sent to %d", developer_id)
+        except Exception:
+            logger.warning("Failed to send report copy to developer %d", developer_id)
+
+    return msg.id
 
 
 # ── Price check cycle ─────────────────────────────────────────────────────────
@@ -243,7 +260,7 @@ async def run_check(client: TelegramClient, db: PriceDatabase, cfg: Config, open
 
     if any(stats.get(k) for k in ("new", "restored", "changed", "disappeared", "needs_check")):
         msg_id = await _send_owner_report(
-            client, cfg.owner_telegram_id, run_time_msk,
+            client, cfg.owner_telegram_id, cfg.developer_telegram_id, run_time_msk,
             stats, changed_items, disappeared_items, needs_check_items,
         )
         if msg_id:

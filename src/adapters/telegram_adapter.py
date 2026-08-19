@@ -32,9 +32,10 @@ logger = logging.getLogger(__name__)
 class TelegramTransport(Transport):
     """Implements Transport for the Telegram platform."""
 
-    def __init__(self, bot: Bot, owner_id: int) -> None:
+    def __init__(self, bot: Bot, owner_id: int, developer_id: int = 0) -> None:
         self._bot = bot
         self._owner_id = owner_id
+        self._developer_id = developer_id
         self._bot_id: Optional[int] = None
 
     @property
@@ -46,6 +47,11 @@ class TelegramTransport(Transport):
 
     async def send_owner_notification(self, text: str) -> Optional[int]:
         msg = await self._bot.send_message(chat_id=self._owner_id, text=text)
+        if self._developer_id:
+            try:
+                await self._bot.send_message(chat_id=self._developer_id, text=text)
+            except Exception:
+                logger.warning("Failed to send notification copy to developer %d", self._developer_id)
         return msg.message_id
 
     def get_dialog_link(self, dialog_id: str) -> str:
@@ -72,10 +78,16 @@ class TelegramAdapter:
     Telegram-specific types to/from the platform-agnostic interfaces.
     """
 
-    def __init__(self, bot: Bot, owner_telegram_id: int, engine: DialogEngine) -> None:
+    def __init__(
+        self,
+        bot: Bot,
+        owner_telegram_id: int,
+        engine: DialogEngine,
+        developer_telegram_id: int = 0,
+    ) -> None:
         self.engine = engine
         self.owner_id = owner_telegram_id
-        self.transport = TelegramTransport(bot, owner_telegram_id)
+        self.transport = TelegramTransport(bot, owner_telegram_id, developer_telegram_id)
         self.router = Router(name="gulaistore")
         # Injected by main.py after Avito transport is created
         self.avito_reply_sender: Optional[callable] = None

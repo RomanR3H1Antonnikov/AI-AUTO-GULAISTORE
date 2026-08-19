@@ -32,3 +32,4 @@ class Config:
 
     # ── Notifications ─────────────────────────────────────────────────────────
     owner_telegram_id: int = int(os.environ.get("OWNER_TELEGRAM_ID", "0"))
+    developer_telegram_id: int = int(os.environ.get("DEVELOPER_TELEGRAM_ID", "0"))
