@@ -278,14 +278,16 @@ async def main_loop(cfg: Config) -> None:
 
     openai_client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-    client = TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash)
-    await client.connect()
-    if not await client.is_user_authorized():
-        logger.error(
-            "Telethon session is not authorized. "
-            "Run interactively: python -m price_monitor.main --auth"
+    def _no_interactive_auth():
+        raise RuntimeError(
+            "Telethon session expired. Run: python -m price_monitor.main --auth"
         )
-        await client.disconnect()
+
+    client = TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash)
+    try:
+        await client.start(phone=_no_interactive_auth, password=_no_interactive_auth)
+    except RuntimeError as exc:
+        logger.error("%s", exc)
         await db.close()
         sys.exit(1)
 
@@ -303,6 +305,7 @@ async def main_loop(cfg: Config) -> None:
         except Exception:
             logger.exception("Error handling owner price query")
 
+    async def _scheduled_checks():
         while True:
             now = datetime.now(_MSK)
             next_run = _next_run(now)
@@ -312,31 +315,18 @@ async def main_loop(cfg: Config) -> None:
                 next_run.strftime("%H:%M"), wait / 3600,
             )
             await asyncio.sleep(wait)
-
-            # Reconnect if the client dropped during the long idle sleep.
-            if not client.is_connected():
-                logger.warning("Telethon disconnected during idle — reconnecting")
-                try:
-                    await client.connect()
-                    logger.info("Reconnected successfully")
-                except Exception:
-                    logger.exception("Reconnect failed — skipping this run")
-                    continue
-
             try:
                 await run_check(client, db, cfg, openai_client)
-            except ConnectionError:
-                logger.warning("ConnectionError during price check — reconnecting and retrying")
-                try:
-                    await client.connect()
-                    await run_check(client, db, cfg, openai_client)
-                except Exception:
-                    logger.exception("Retry after reconnect also failed — skipping this run")
             except Exception:
                 logger.exception("Unhandled error in price check")
 
-    await client.disconnect()
-    await db.close()
+    asyncio.ensure_future(_scheduled_checks())
+
+    try:
+        await client.run_until_disconnected()
+    finally:
+        await client.disconnect()
+        await db.close()
 
 
 async def auth_and_exit(cfg: Config) -> None:
