@@ -278,20 +278,30 @@ async def main_loop(cfg: Config) -> None:
 
     openai_client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-    async with TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash) as client:
-        me = await client.get_me()
-        logger.info("Connected as %s (@%s)", me.first_name, me.username)
+    client = TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash)
+    await client.connect()
+    if not await client.is_user_authorized():
+        logger.error(
+            "Telethon session is not authorized. "
+            "Run interactively: python -m price_monitor.main --auth"
+        )
+        await client.disconnect()
+        await db.close()
+        sys.exit(1)
 
-        @client.on(events.NewMessage(from_users=cfg.owner_telegram_id))
-        async def on_owner_message(event):
-            if not event.is_reply:
-                return
-            if event.reply_to_msg_id not in _report_msg_ids:
-                return
-            try:
-                await _handle_owner_price_query(event, db, openai_client)
-            except Exception:
-                logger.exception("Error handling owner price query")
+    me = await client.get_me()
+    logger.info("Connected as %s (@%s)", me.first_name, me.username)
+
+    @client.on(events.NewMessage(from_users=cfg.owner_telegram_id))
+    async def on_owner_message(event):
+        if not event.is_reply:
+            return
+        if event.reply_to_msg_id not in _report_msg_ids:
+            return
+        try:
+            await _handle_owner_price_query(event, db, openai_client)
+        except Exception:
+            logger.exception("Error handling owner price query")
 
         while True:
             now = datetime.now(_MSK)
@@ -303,21 +313,44 @@ async def main_loop(cfg: Config) -> None:
             )
             await asyncio.sleep(wait)
 
+            # Reconnect if the client dropped during the long idle sleep.
+            if not client.is_connected():
+                logger.warning("Telethon disconnected during idle — reconnecting")
+                try:
+                    await client.connect()
+                    logger.info("Reconnected successfully")
+                except Exception:
+                    logger.exception("Reconnect failed — skipping this run")
+                    continue
+
             try:
                 await run_check(client, db, cfg, openai_client)
+            except ConnectionError:
+                logger.warning("ConnectionError during price check — reconnecting and retrying")
+                try:
+                    await client.connect()
+                    await run_check(client, db, cfg, openai_client)
+                except Exception:
+                    logger.exception("Retry after reconnect also failed — skipping this run")
             except Exception:
                 logger.exception("Unhandled error in price check")
 
+    await client.disconnect()
     await db.close()
 
 
 async def auth_and_exit(cfg: Config) -> None:
     """Interactive one-time authentication — creates the .session file."""
-    async with TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash) as client:
-        await client.start(phone=cfg.phone)
-        me = await client.get_me()
-        logger.info("Authenticated as: %s (@%s)", me.first_name, me.username)
-        logger.info("Session saved → %s.session", cfg.session_path)
+    import getpass
+    client = TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash)
+    await client.start(
+        phone=cfg.phone,
+        password=lambda: getpass.getpass('Enter your Telegram 2FA Cloud Password: '),
+    )
+    me = await client.get_me()
+    logger.info("Authenticated as: %s (@%s)", me.first_name, me.username)
+    logger.info("Session saved → %s.session", cfg.session_path)
+    await client.disconnect()
 
 
 if __name__ == "__main__":
