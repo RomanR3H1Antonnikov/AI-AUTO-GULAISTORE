@@ -227,9 +227,17 @@ class TelegramAdapter:
             markup = r.get("markup_pct") or 0
             raw = r["price"]
             final = round(raw * (1 + markup / 100))
-            changed = r.get("price_changed_at") or r.get("updated_at") or "неизвестно"
-            if isinstance(changed, str) and len(changed) > 16:
-                changed = changed[:16]
+            changed_raw = r.get("price_changed_at") or r.get("updated_at")
+            if changed_raw:
+                try:
+                    from datetime import datetime, timezone, timedelta as _td
+                    _MSK = timezone(_td(hours=3))
+                    dt = datetime.fromisoformat(str(changed_raw)).replace(tzinfo=timezone.utc)
+                    changed = dt.astimezone(_MSK).strftime("%Y-%m-%d %H:%M МСК")
+                except Exception:
+                    changed = str(changed_raw)[:16]
+            else:
+                changed = "неизвестно"
             lines.append(
                 f"• {r['name']}\n"
                 f"  SKU: {r['sku']}\n"
