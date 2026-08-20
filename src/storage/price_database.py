@@ -35,6 +35,11 @@ CREATE TABLE IF NOT EXISTS price_history (
     new_price   INTEGER NOT NULL,
     changed_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS price_report_messages (
+    msg_id     INTEGER PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 # Migration for existing DBs that don't have the `available` column yet.
@@ -304,3 +309,19 @@ class PriceDatabase:
                 rows = [dict(r) async for r in cur]
 
         return rows
+
+    # ── Price report message tracking ─────────────────────────────────────────
+
+    async def save_report_msg_id(self, msg_id: int) -> None:
+        """Remember that this bot message ID is a price report (for owner price queries)."""
+        await self._db.execute(
+            "INSERT OR IGNORE INTO price_report_messages (msg_id) VALUES (?)", (msg_id,)
+        )
+        await self._db.commit()
+
+    async def is_report_msg_id(self, msg_id: int) -> bool:
+        """Return True if this bot message ID was a price report."""
+        async with self._db.execute(
+            "SELECT 1 FROM price_report_messages WHERE msg_id=?", (msg_id,)
+        ) as cur:
+            return await cur.fetchone() is not None

@@ -30,6 +30,7 @@ class Config:
     # ── Shared price database ─────────────────────────────────────────────────
     db_path: str = os.environ.get("PRICE_DB_PATH", "prices.db")
 
-    # ── Notifications ─────────────────────────────────────────────────────────
+    # ── Notifications (sent via Telegram bot, not userbot) ───────────────────
+    bot_token: str = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     owner_telegram_id: int = int(os.environ.get("OWNER_TELEGRAM_ID", "0"))
     developer_telegram_id: int = int(os.environ.get("DEVELOPER_TELEGRAM_ID", "0"))

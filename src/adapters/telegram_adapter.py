@@ -209,9 +209,64 @@ class TelegramAdapter:
 
     # ── Owner non-command messages ────────────────────────────────────────────
 
+    async def _handle_price_query(self, message: Message) -> None:
+        """Owner replied to a price report — answer via LLM using prices.db."""
+        question = (message.text or "").strip()
+        if not question:
+            return
+
+        db = self.engine.price_db
+        results = await db.search_prices(question, limit=15)
+        if not results:
+            await message.answer("Ничего не найдено по этому запросу в базе цен.")
+            return
+
+        lines: list[str] = []
+        for r in results:
+            status = "в наличии" if r["available"] else "❌ нет в прайсе (пропало)"
+            markup = r.get("markup_pct") or 0
+            raw = r["price"]
+            final = round(raw * (1 + markup / 100))
+            changed = r.get("price_changed_at") or r.get("updated_at") or "неизвестно"
+            if isinstance(changed, str) and len(changed) > 16:
+                changed = changed[:16]
+            lines.append(
+                f"• {r['name']}\n"
+                f"  SKU: {r['sku']}\n"
+                f"  Закупочная: {raw:,} ₽".replace(",", " ")
+                + (f"  Наценка: {markup}% → итог: {final:,} ₽".replace(",", " ") if markup else "") + "\n"
+                f"  Статус: {status}\n"
+                f"  Изменено/пропало: {changed}"
+            )
+
+        context = "\n\n".join(lines)
+        prompt = (
+            "Ты — аналитик магазина Gulai Store, отвечаешь владельцу на вопрос о ценах.\n"
+            "Используй ТОЛЬКО данные из базы ниже. Отвечай кратко, по-русски.\n"
+            "Если несколько подходящих позиций — перечисли все.\n"
+            "Формат: название, закупочная, наценка (если есть), итоговая, статус, дата изменения.\n\n"
+            f"Вопрос: {question}\n\n"
+            f"Данные из базы:\n{context}"
+        )
+        try:
+            resp = await self.engine.openai_client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.1,
+                max_tokens=500,
+            )
+            answer = resp.choices[0].message.content.strip()
+        except Exception as exc:
+            logger.error("LLM price query failed: %s", exc)
+            answer = f"Ошибка LLM: {exc}\n\nРезультаты поиска:\n{context}"
+
+        await message.answer(answer)
+        logger.info("Answered price query for owner: %r", question[:60])
+
     async def _handle_owner_message(self, message: Message) -> None:
         """
         Owner replied to an escalation notification → relay their answer to Avito.
+        Owner replied to a price report → answer price query via LLM.
         Plain (non-reply) messages from owner are silently ignored.
         """
         if message.reply_to_message is None:
@@ -221,7 +276,12 @@ class TelegramAdapter:
         replied_msg_id = message.reply_to_message.message_id
         relay = await self.engine.db.get_escalation_relay(replied_msg_id)
         if relay is None:
-            # Owner replied to a lead/toxicity notification, not an escalation
+            if (
+                self.engine.price_db is not None
+                and await self.engine.price_db.is_report_msg_id(replied_msg_id)
+            ):
+                await self._handle_price_query(message)
+                return
             logger.debug("owner replied to non-escalation tg_msg_id=%d — ignored", replied_msg_id)
             return
 
