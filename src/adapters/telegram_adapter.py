@@ -249,7 +249,7 @@ class TelegramAdapter:
             f"Данные из базы:\n{context}"
         )
         try:
-            resp = await self.engine.openai_client.chat.completions.create(
+            resp = await self.engine.client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1,
