@@ -161,12 +161,16 @@ async def _send_owner_report(
         lines.append(f"🏎 Уточнить у владельца: {stats['needs_check']}")
     lines.append("\n💬 Ответь на это сообщение любым вопросом о ценах — я проверю базу.")
 
+    _MAX_LIST = 20  # max items per section to stay under Telegram's 4096-char limit
+
     if changed_items:
         lines.append("\n— Изменения цен —")
-        for item in changed_items:
+        for item in changed_items[:_MAX_LIST]:
             price_str = _format_price(item["final_price"]) if item.get("final_price") else "?"
             symbol = "🆕" if item["status"] == "new" else ("🔄" if item["status"] == "restored" else "💰")
             lines.append(f"{symbol} {item['name']}: {price_str}")
+        if len(changed_items) > _MAX_LIST:
+            lines.append(f"… и ещё {len(changed_items) - _MAX_LIST} позиций")
 
     if needs_check_items:
         lines.append("\n— Уточнить у владельца (🏎) —")
@@ -175,8 +179,10 @@ async def _send_owner_report(
 
     if disappeared_items:
         lines.append("\n— Пропали из прайса —")
-        for item in disappeared_items:
+        for item in disappeared_items[:_MAX_LIST]:
             lines.append(f"❌ {item['name']}")
+        if len(disappeared_items) > _MAX_LIST:
+            lines.append(f"… и ещё {len(disappeared_items) - _MAX_LIST} позиций")
 
     text = "\n".join(lines)
     try:
