@@ -504,24 +504,53 @@ class DialogEngine:
                             lines.append(f"  • {name} — цена уточняется")
                     else:
                         # Single-SKU path (MacBook, iPad, iMac)
-                        db_price: Optional[int] = None
-                        known_unavail = False
-                        sku = item.get("db_sku")
-                        if self.price_db and sku:
-                            try:
-                                db_price, known_unavail = await self.price_db.get_price_info(sku)
-                            except Exception:
-                                logger.warning("price_db lookup failed for sku=%s", sku)
-                        if known_unavail:
-                            lines.append(f"  • {name} — временно снята из прайса, уточни у владельца")
-                        elif db_price is not None:
-                            price_str = f"{db_price + markup:,}".replace(",", " ")
-                            lines.append(f"  • {name} — {price_str} ₽")
-                        elif item.get("price"):
-                            price_str = f"{item['price']:,}".replace(",", " ")
-                            lines.append(f"  • {name} — {price_str} ₽")
+                        sku        = item.get("db_sku")
+                        sku_silver = item.get("db_sku_silver")
+
+                        if sku_silver:
+                            # Two-color entry (Black + Silver): show each price separately
+                            async def _lookup(s):
+                                if not (self.price_db and s):
+                                    return None, False
+                                try:
+                                    return await self.price_db.get_price_info(s)
+                                except Exception:
+                                    logger.warning("price_db lookup failed for sku=%s", s)
+                                    return None, False
+
+                            b_price, b_unavail = await _lookup(sku)
+                            s_price, s_unavail = await _lookup(sku_silver)
+                            parts: list[str] = []
+                            if b_unavail:
+                                parts.append("Black: временно нет в прайсе")
+                            elif b_price is not None:
+                                parts.append(f"Black: {b_price + markup:,}".replace(",", " ") + " ₽")
+                            if s_unavail:
+                                parts.append("Silver: временно нет в прайсе")
+                            elif s_price is not None:
+                                parts.append(f"Silver: {s_price + markup:,}".replace(",", " ") + " ₽")
+                            if parts:
+                                lines.append(f"  • {name} — {' | '.join(parts)}")
+                            else:
+                                lines.append(f"  • {name} — цена уточняется")
                         else:
-                            lines.append(f"  • {name} — цена уточняется")
+                            db_price: Optional[int] = None
+                            known_unavail = False
+                            if self.price_db and sku:
+                                try:
+                                    db_price, known_unavail = await self.price_db.get_price_info(sku)
+                                except Exception:
+                                    logger.warning("price_db lookup failed for sku=%s", sku)
+                            if known_unavail:
+                                lines.append(f"  • {name} — временно снята из прайса, уточни у владельца")
+                            elif db_price is not None:
+                                price_str = f"{db_price + markup:,}".replace(",", " ")
+                                lines.append(f"  • {name} — {price_str} ₽")
+                            elif item.get("price"):
+                                price_str = f"{item['price']:,}".replace(",", " ")
+                                lines.append(f"  • {name} — {price_str} ₽")
+                            else:
+                                lines.append(f"  • {name} — цена уточняется")
                 else:
                     # Legacy-style: yaml price, optionally overridden by live price
                     yaml_price: int = item.get("price", 0)
