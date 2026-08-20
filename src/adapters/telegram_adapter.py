@@ -315,6 +315,8 @@ class TelegramAdapter:
                 await self.avito_reply_sender(relay["external_id"], reformulated)
                 await self.engine.db.add_message(relay["dialog_id"], "assistant", reformulated)
                 await self.engine.db.increment_relay_reply_count(replied_msg_id)
+                # Re-activate bot so it can answer client follow-ups (owner's reply is now in context)
+                await self.engine.db.update_dialog_status(relay["dialog_id"], "bot_active", None)
                 await message.answer(f"✅ {label}:\n\n{reformulated}")
                 logger.info(
                     "owner reply #%d relayed to Avito chat %s: %r",

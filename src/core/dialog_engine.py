@@ -640,6 +640,8 @@ class DialogEngine:
         if last:
             sent = datetime.fromisoformat(last["sent_at"]).replace(tzinfo=timezone.utc)
             if datetime.now(timezone.utc) - sent < timedelta(minutes=10):
+                logger.info("dialog %d: escalation deduped (sent %.1f min ago)", dialog_id,
+                            (datetime.now(timezone.utc) - sent).total_seconds() / 60)
                 return
 
         # Detect if bot is asking to clarify price/availability (not in DB)
@@ -688,6 +690,9 @@ class DialogEngine:
                 external_id=dialog["external_id"],
                 context=context,
             )
+        await self.db.update_dialog_status(dialog_id, "owner_takeover", "escalation_pending")
+        logger.info("dialog %d: escalation sent (tg_msg_id=%s) — bot silenced pending owner reply",
+                    dialog_id, tg_msg_id)
 
     # ── Main entry point ──────────────────────────────────────────────────────
 
@@ -726,6 +731,10 @@ class DialogEngine:
             if dialog.get("takeover_type") == "checkmark_silence":
                 # Permanent manager takeover (✅✅✅) — stay silent; only /start <id> can undo.
                 logger.info("dialog %d: permanent silence (manager ✅✅✅ takeover)", dialog_id)
+                return None
+            if dialog.get("takeover_type") == "escalation_pending":
+                # Escalation fired; waiting for owner reply — stay silent.
+                logger.info("dialog %d: escalation pending owner reply — staying silent", dialog_id)
                 return None
             # Client re-engaged → auto-resume regardless of why takeover was set.
             # Bot only stays permanently silent for toxic content (handled in step 5).
