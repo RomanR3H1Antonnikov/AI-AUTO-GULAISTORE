@@ -490,6 +490,7 @@ class DialogEngine:
                     if sku_esim or sku_nano or sku_activ:
                         # Multi-variant iPhone: eSIM | нано+eSIM | актив
                         parts: list[str] = []
+                        available_prices: list[int] = []
                         for label, sku in [("eSIM", sku_esim), ("нано+eSIM", sku_nano), ("актив", sku_activ)]:
                             if not sku:
                                 continue
@@ -503,9 +504,16 @@ class DialogEngine:
                             if known_unavail:
                                 parts.append(f"{label}: временно нет в прайсе")
                             elif v_price is not None:
-                                parts.append(f"{label}: {v_price + markup:,}".replace(",", " ") + " ₽")
+                                final = v_price + markup
+                                available_prices.append(final)
+                                parts.append(f"{label}: {final:,}".replace(",", " ") + " ₽")
                         if parts:
-                            lines.append(f"  • {name} — {' | '.join(parts)}")
+                            # Prepend explicit minimum so LLM never miscalculates "от X ₽"
+                            from_str = (
+                                f"от {min(available_prices):,}".replace(",", " ") + " ₽ — "
+                                if available_prices else ""
+                            )
+                            lines.append(f"  • {name} — {from_str}{' | '.join(parts)}")
                         else:
                             lines.append(f"  • {name} — цена уточняется")
                     else:
