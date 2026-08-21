@@ -125,8 +125,9 @@ categories:
   iPhone 17:
     - name: "iPhone 17 256 Гб Black"
       markup: 1500
+      db_sku_esim:  "17_256_black"
       db_sku_nano:  "17_256_black_nano"
-      db_sku_activ: "17_256_black"
+      db_sku_activ: "17_256_black_актив"
     - name: "iPhone 17 512 Гб Black"
       markup: 1500
       db_sku_nano:  "17_512_black_nano"
@@ -160,7 +161,7 @@ categories:
     - name: "iPhone 17 256 Гб White"
       markup: 1500
       db_sku_nano:  "17_256_white_nano"
-      db_sku_activ: "17_256_white"
+      db_sku_activ: "17_256_white_актив"
     - name: "iPhone 17 512 Гб White"
       markup: 1500
       db_sku_nano:  "17_512_white_nano"

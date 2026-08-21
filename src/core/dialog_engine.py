@@ -12,9 +12,8 @@ from typing import Optional
 import yaml
 from openai import AsyncOpenAI
 
-from .lead_detector import LeadDetector
+from .message_classifier import MessageClassifier
 from .stock_source import StockSource
-from .toxicity_detector import ToxicityDetector
 from .transport import IncomingMessage, Transport
 from ..storage.database import Database
 from ..storage.price_database import PriceDatabase
@@ -428,8 +427,7 @@ class DialogEngine:
         self.price_db = price_db  # optional live price override
 
         clf_model = config.get("classifier_model", "gpt-4o-mini")
-        self.lead_detector = LeadDetector(openai_client, clf_model)
-        self.toxicity_detector = ToxicityDetector(openai_client, clf_model)
+        self.classifier = MessageClassifier(openai_client, clf_model)
 
         self.llm_model: str = config.get("llm_model", "gpt-4o-mini")
         self.history_limit: int = config.get("history_limit", _HISTORY_LIMIT_DEFAULT)
@@ -824,8 +822,8 @@ class DialogEngine:
                 logger.info("dialog %d: reciprocal closing after goodbye — staying silent", dialog_id)
                 return None
 
-        # 5. Toxicity gate
-        is_toxic, toxic_reason = await self.toxicity_detector.classify(message.text)
+        # 5. Combined classify: toxicity + lead (single LLM call)
+        is_toxic, toxic_reason, is_lead, lead_reason = await self.classifier.classify(message.text)
         if is_toxic:
             if status == "bot_active":
                 logger.info("toxic message in dialog %d: %s", dialog_id, toxic_reason)
@@ -860,7 +858,7 @@ class DialogEngine:
             model=self.llm_model,
             messages=llm_msgs,
             temperature=0.7,
-            max_tokens=500,
+            max_tokens=350,
         )
         reply = response.choices[0].message.content.strip()
         usage = response.usage
@@ -872,8 +870,7 @@ class DialogEngine:
         # 9. Persist reply
         await self.db.add_message(dialog_id, "assistant", reply)
 
-        # 10. Lead detection (on user message)
-        is_lead, lead_reason = await self.lead_detector.classify(message.text)
+        # 10. Lead notification (classified earlier in step 5)
         if is_lead:
             await self._notify_lead(transport, dialog, message.text, lead_reason)
 
