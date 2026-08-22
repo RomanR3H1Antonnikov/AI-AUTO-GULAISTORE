@@ -145,8 +145,11 @@ async def _send_owner_report(
 
 # ── Price check cycle ─────────────────────────────────────────────────────────
 
-async def run_check(client: TelegramClient, bot: Bot, db: PriceDatabase, cfg: Config) -> None:
-    """One price-check cycle: fetch all sources, deduplicate, persist changes."""
+async def run_check(client: TelegramClient, bot: Bot, db: PriceDatabase, cfg: Config) -> int:
+    """One price-check cycle: fetch all sources, deduplicate, persist changes.
+
+    Returns the number of entries seen across all sources (0 = nothing fetched).
+    """
     run_started_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     run_time_msk = datetime.now(_MSK)
     logger.info("=== Price check at %s MSK ===", run_time_msk.strftime("%H:%M:%S"))
@@ -170,6 +173,7 @@ async def run_check(client: TelegramClient, bot: Bot, db: PriceDatabase, cfg: Co
         sources_seen.add("bot")
     if not sources_seen:
         logger.warning("All sources returned 0 entries — skipping prune entirely")
+        return 0
 
     stats = {"new": 0, "restored": 0, "changed": 0, "unchanged": 0, "needs_check": 0}
     changed_items: list[dict] = []
@@ -209,6 +213,8 @@ async def run_check(client: TelegramClient, bot: Bot, db: PriceDatabase, cfg: Co
     else:
         logger.info("No changes detected — skipping owner report")
 
+    return len(seen)
+
 
 # ── Main loop ─────────────────────────────────────────────────────────────────
 
@@ -233,17 +239,37 @@ async def main_loop(cfg: Config) -> None:
             )
             await asyncio.sleep(wait)
 
-            client = TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash)
-            try:
-                await client.connect()
-                if not await client.is_user_authorized():
-                    logger.error("Telethon session expired — run: python -m price_monitor.main --auth")
-                    break
-                await run_check(client, bot, db, cfg)
-            except Exception:
-                logger.exception("Unhandled error in price check")
-            finally:
-                await client.disconnect()
+            _RETRY_DELAY = 15 * 60  # seconds between retries on empty result
+            _MAX_RETRIES = 3
+            for attempt in range(1 + _MAX_RETRIES):
+                client = TelegramClient(cfg.session_path, cfg.api_id, cfg.api_hash)
+                try:
+                    await client.connect()
+                    if not await client.is_user_authorized():
+                        logger.error(
+                            "Telethon session expired — run: python -m price_monitor.main --auth"
+                        )
+                        break
+                    entries = await run_check(client, bot, db, cfg)
+                except Exception:
+                    logger.exception("Unhandled error in price check (attempt %d)", attempt + 1)
+                    entries = -1  # treat errors as "nothing fetched"
+                finally:
+                    await client.disconnect()
+
+                if entries != 0:
+                    break  # got data (or error on first attempt) — no retry needed
+                if attempt < _MAX_RETRIES:
+                    logger.warning(
+                        "All sources returned 0 — retry %d/%d in %d min",
+                        attempt + 1, _MAX_RETRIES, _RETRY_DELAY // 60,
+                    )
+                    await asyncio.sleep(_RETRY_DELAY)
+                else:
+                    logger.error(
+                        "All %d retries exhausted — prices unchanged until next scheduled run",
+                        _MAX_RETRIES,
+                    )
     finally:
         await bot.session.close()
         await db.close()
