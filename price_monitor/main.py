@@ -15,8 +15,11 @@ Normal operation (managed by systemd):
 import asyncio
 import logging
 import os
+import re
 import sys
 from datetime import datetime, timezone, timedelta
+
+import aiosqlite
 
 from aiogram import Bot
 from dotenv import load_dotenv
@@ -143,6 +146,144 @@ async def _send_owner_report(
             logger.warning("Failed to send report copy to developer %d", developer_id)
 
 
+# ── Proactive Avito notifications ────────────────────────────────────────────
+
+_KW_RE = re.compile(r'[a-zа-яё]{3,}|\d{3,4}', re.IGNORECASE | re.UNICODE)
+_MIN_KW_OVERLAP = 2
+
+
+def _extract_kw(text: str) -> set[str]:
+    return set(_KW_RE.findall(text.lower()))
+
+
+async def _notify_price_changes_to_avito_dialogs(
+    changed_items: list[dict],
+    cfg: Config,
+    run_time_msk: datetime,
+) -> None:
+    """
+    After a price update, proactively message active Avito dialogs where the
+    specific products discussed had price changes. Sends only the relevant
+    positions (matched by keyword overlap), not a generic broadcast.
+    """
+    # Only items the bot can actually quote (skip needs_check anomalies)
+    quotable = [i for i in changed_items if not i.get("needs_check") and i.get("final_price")]
+    if not quotable:
+        return
+
+    if not cfg.avito_client_id or not cfg.avito_client_secret or not cfg.avito_user_id:
+        logger.info("AVITO_CLIENT_ID/SECRET/USER_ID not set — skipping proactive notifications")
+        return
+
+    # Cutoff: today 09:30 MSK (= 06:30 UTC)
+    today = run_time_msk.date()
+    cutoff_msk = datetime(today.year, today.month, today.day, 9, 30, tzinfo=_MSK)
+    cutoff_utc = cutoff_msk.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+    item_kw_pairs = [(item, _extract_kw(item["name"])) for item in quotable]
+
+    conn = None
+    api = None
+    try:
+        conn = await aiosqlite.connect(cfg.gulai_db_path)
+        conn.row_factory = aiosqlite.Row
+
+        # All Avito dialogs where the bot replied since 09:30 MSK
+        async with conn.execute("""
+            SELECT DISTINCT d.id, d.external_id
+            FROM dialogs d
+            JOIN messages m ON m.dialog_id = d.id
+            WHERE d.transport = 'avito'
+              AND NOT (d.status = 'owner_takeover' AND d.takeover_type = 'checkmark_silence')
+              AND m.role = 'assistant'
+              AND m.ts >= ?
+        """, (cutoff_utc,)) as cur:
+            dialogs = [dict(r) async for r in cur]
+
+        if not dialogs:
+            logger.info("No active Avito dialogs since 09:30 MSK — no proactive notifications")
+            return
+
+        logger.info("Checking %d Avito dialogs for price-change relevance", len(dialogs))
+        notified = 0
+
+        for dialog in dialogs:
+            dialog_id = dialog["id"]
+
+            # One notification per dialog per day
+            async with conn.execute("""
+                SELECT 1 FROM notifications
+                WHERE dialog_id = ? AND type = 'price_update' AND sent_at >= ?
+            """, (dialog_id, cutoff_utc)) as cur:
+                if await cur.fetchone():
+                    continue
+
+            # Messages from today's session (user + assistant for keywords)
+            async with conn.execute("""
+                SELECT text FROM messages
+                WHERE dialog_id = ? AND ts >= ?
+                ORDER BY ts DESC LIMIT 20
+            """, (dialog_id, cutoff_utc)) as cur:
+                msgs = [row[0] async for row in cur]
+
+            if not msgs:
+                continue
+
+            dialog_kw = _extract_kw(" ".join(msgs))
+            relevant = [
+                item for item, kw in item_kw_pairs
+                if len(kw & dialog_kw) >= _MIN_KW_OVERLAP
+            ]
+            if not relevant:
+                continue
+
+            # Build targeted message with only matched positions
+            lines = ["Хочу уточнить — цены обновились!"]
+            lines.append("")
+            for item in relevant[:8]:
+                price_str = f"{item['final_price']:,}".replace(",", " ")
+                lines.append(f"• {item['name']} — {price_str} ₽")
+            lines.append("")
+            lines.append("Если остались вопросы — пишите, всё расскажу!")
+            text = "\n".join(lines)
+
+            # Lazy init — only if there's something to actually send
+            if api is None:
+                from src.adapters.avito_auth import AvitoAuthClient
+                from src.adapters.avito_api_client import AvitoApiClient
+                auth = AvitoAuthClient(cfg.avito_client_id, cfg.avito_client_secret)
+                api = AvitoApiClient(auth)
+                await api.start()
+
+            try:
+                await api.send_message(cfg.avito_user_id, dialog["external_id"], text)
+                await conn.execute(
+                    "INSERT INTO notifications (dialog_id, type) VALUES (?,?)",
+                    (dialog_id, "price_update"),
+                )
+                await conn.commit()
+                logger.info(
+                    "Price update sent to Avito dialog %d (%s) — %d item(s) matched",
+                    dialog_id, dialog["external_id"], len(relevant),
+                )
+                notified += 1
+            except Exception as exc:
+                logger.warning(
+                    "Failed to send price update to Avito dialog %s: %s",
+                    dialog["external_id"], exc,
+                )
+
+        logger.info("Proactive price notifications done: %d sent", notified)
+
+    except Exception:
+        logger.exception("Error in _notify_price_changes_to_avito_dialogs")
+    finally:
+        if api is not None:
+            await api.close()
+        if conn is not None:
+            await conn.close()
+
+
 # ── Price check cycle ─────────────────────────────────────────────────────────
 
 async def run_check(client: TelegramClient, bot: Bot, db: PriceDatabase, cfg: Config) -> int:
@@ -189,7 +330,8 @@ async def run_check(client: TelegramClient, bot: Bot, db: PriceDatabase, cfg: Co
         if status in ("new", "restored", "changed"):
             final_price, _ = await db.get_price_info(sku)
             changed_items.append({"sku": sku, "name": name, "price": price,
-                                   "final_price": final_price, "status": status})
+                                   "final_price": final_price, "status": status,
+                                   "needs_check": needs_check})
 
     disappeared_count, disappeared_items = await db.prune_stale(
         run_started_at, sources_seen=sources_seen or None
@@ -212,6 +354,9 @@ async def run_check(client: TelegramClient, bot: Bot, db: PriceDatabase, cfg: Co
         )
     else:
         logger.info("No changes detected — skipping owner report")
+
+    if changed_items:
+        await _notify_price_changes_to_avito_dialogs(changed_items, cfg, run_time_msk)
 
     return len(seen)
 

@@ -34,3 +34,11 @@ class Config:
     bot_token: str = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     owner_telegram_id: int = int(os.environ.get("OWNER_TELEGRAM_ID", "0"))
     developer_telegram_id: int = int(os.environ.get("DEVELOPER_TELEGRAM_ID", "0"))
+
+    # ── Avito API (for proactive price-change notifications to buyers) ────────
+    avito_client_id: str = os.environ.get("AVITO_CLIENT_ID", "")
+    avito_client_secret: str = os.environ.get("AVITO_CLIENT_SECRET", "")
+    avito_user_id: int = int(os.environ.get("AVITO_USER_ID", "0"))
+
+    # ── Main dialog database (gulaistore.db) ──────────────────────────────────
+    gulai_db_path: str = os.environ.get("GULAI_DB_PATH", "gulaistore.db")
