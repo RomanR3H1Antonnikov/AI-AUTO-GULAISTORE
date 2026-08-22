@@ -275,6 +275,14 @@ class Database:
         )
         await self._db.commit()
 
+    async def clear_escalation_cooldown(self, dialog_id: int) -> None:
+        """Remove escalation cooldown so the next 'уточню' triggers a fresh notification."""
+        await self._db.execute(
+            "DELETE FROM notifications WHERE dialog_id=? AND type='escalation'",
+            (dialog_id,),
+        )
+        await self._db.commit()
+
     # ── Token usage ──────────────────────────────────────────────────────────
 
     async def get_daily_tokens(self, dialog_id: Optional[int] = None) -> int:

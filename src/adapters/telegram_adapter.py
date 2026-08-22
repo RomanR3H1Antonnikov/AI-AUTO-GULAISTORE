@@ -317,6 +317,8 @@ class TelegramAdapter:
                 await self.engine.db.increment_relay_reply_count(replied_msg_id)
                 # Re-activate bot so it can answer client follow-ups (owner's reply is now in context)
                 await self.engine.db.update_dialog_status(relay["dialog_id"], "bot_active", None)
+                # Clear cooldown so next bot "уточню" triggers a fresh escalation if needed
+                await self.engine.db.clear_escalation_cooldown(relay["dialog_id"])
                 await message.answer(f"✅ {label}:\n\n{reformulated}")
                 logger.info(
                     "owner reply #%d relayed to Avito chat %s: %r",
