@@ -23,6 +23,7 @@ Direction detection (no 'direction' field in webhook):
 
 import asyncio
 import logging
+from collections import OrderedDict
 from dataclasses import replace
 from typing import Optional
 
@@ -33,6 +34,11 @@ from ..core.dialog_engine import DialogEngine
 from ..core.transport import IncomingMessage, Transport
 
 logger = logging.getLogger(__name__)
+
+# In-memory dedup for Avito duplicate webhook deliveries.
+# Keyed by Avito message ID; FIFO eviction keeps memory bounded.
+_SEEN_MSG_IDS: OrderedDict[str, bool] = OrderedDict()
+_MAX_SEEN_IDS = 2000
 
 # Only text messages can be answered; everything else is silently skipped.
 _ANSWERABLE_TYPES = {"text"}
@@ -77,6 +83,19 @@ class AvitoWebhookServer:
 
     async def _process(self, body: dict) -> None:
         """Parse webhook body, run engine, send reply — all in background."""
+        # Dedup: Avito occasionally delivers the same webhook twice.
+        # Use the message's own Avito ID as the dedup key.
+        avito_msg_id: str = str(
+            (body.get("payload", {}).get("value") or {}).get("id", "")
+        )
+        if avito_msg_id:
+            if avito_msg_id in _SEEN_MSG_IDS:
+                logger.debug("Duplicate Avito message %s — skipped", avito_msg_id)
+                return
+            _SEEN_MSG_IDS[avito_msg_id] = True
+            if len(_SEEN_MSG_IDS) > _MAX_SEEN_IDS:
+                _SEEN_MSG_IDS.popitem(last=False)
+
         # System events (e.g. buyer viewed phone number) → proactive greeting
         if await self._maybe_greet_on_system_event(body):
             return
