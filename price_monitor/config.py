@@ -42,3 +42,6 @@ class Config:
 
     # ── Main dialog database (gulaistore.db) ──────────────────────────────────
     gulai_db_path: str = os.environ.get("GULAI_DB_PATH", "gulaistore.db")
+
+    # ── Catalog (for per-item markup applied to notification prices) ──────────
+    catalog_path: str = os.environ.get("CATALOG_PATH", "data/catalog.yaml")

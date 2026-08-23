@@ -21,6 +21,7 @@ from datetime import datetime, timezone, timedelta
 from typing import Optional
 
 import aiosqlite
+import yaml
 
 from aiogram import Bot
 from dotenv import load_dotenv
@@ -135,8 +136,20 @@ async def _send_owner_report(
 
 # ── Proactive Avito notifications ────────────────────────────────────────────
 
-_KW_RE = re.compile(r'[a-zа-яё]{3,}|\d{3,4}', re.IGNORECASE | re.UNICODE)
-_MIN_KW_OVERLAP = 2
+# Capture 2-4 digit numbers so iPhone generation ("17", "16") is a keyword.
+_KW_RE = re.compile(r'[a-zа-яё]{3,}|\d{2,4}', re.IGNORECASE | re.UNICODE)
+# Higher threshold: after stripping the shared category keyword, need 3 real matches.
+_MIN_KW_OVERLAP = 3
+
+# Keywords excluded from overlap when category already matches both sides.
+# Removes the trivial shared signal ("iphone" in every iPhone item) so overlap
+# counts only distinguishing characteristics: generation, storage, color, etc.
+_CAT_EXCL: dict[str, set[str]] = {
+    "iphone":  {"iphone", "айфон"},
+    "macbook": {"macbook", "макбук"},
+    "imac":    {"imac", "аймак"},
+    "ipad":    {"ipad", "айпад"},
+}
 
 # How many hours back from run time to look for the last buyer message.
 # Dialogs where the buyer's last message is older than this window are
@@ -161,6 +174,24 @@ _CLOSING_RE = re.compile(
     r'|удачи)\s*$',
     re.I | re.UNICODE,
 )
+
+
+def _load_catalog_markup(catalog_path: str) -> dict[str, int]:
+    """Build sku→markup lookup from catalog.yaml so notifications show buyer prices."""
+    try:
+        with open(catalog_path, encoding="utf-8") as f:
+            cat = yaml.safe_load(f)
+    except Exception:
+        logger.warning("Could not load catalog for markup: %s", catalog_path)
+        return {}
+    result: dict[str, int] = {}
+    for items in (cat.get("categories") or {}).values():
+        for item in items:
+            markup: int = item.get("markup", 0)
+            for key in ("db_sku", "db_sku_esim", "db_sku_nano", "db_sku_activ"):
+                if sku := item.get(key):
+                    result[sku] = markup
+    return result
 
 
 def _extract_kw(text: str) -> set[str]:
@@ -214,6 +245,9 @@ async def _notify_price_changes_to_avito_dialogs(
         logger.info("AVITO_CLIENT_ID/SECRET/USER_ID not set — skipping proactive notifications")
         return
 
+    # Markup lookup: sku → markup (₽) so notification shows buyer price, not purchase price.
+    sku_markup = _load_catalog_markup(cfg.catalog_path)
+
     # Window cutoffs
     today = run_time_msk.date()
     cutoff_msk = datetime(today.year, today.month, today.day, 9, 30, tzinfo=_MSK)
@@ -224,9 +258,10 @@ async def _notify_price_changes_to_avito_dialogs(
         run_time_msk - timedelta(hours=_ACTIVE_WINDOW_HOURS)
     ).astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
-    # Attach category to each item for category-based filtering
+    # Attach category and buyer price to each item
     item_kw_pairs = [
-        (item, _extract_kw(item["name"]), _sku_cat(item["sku"]))
+        (item, _extract_kw(item["name"]), _sku_cat(item["sku"]),
+         item["final_price"] + sku_markup.get(item["sku"], 0))
         for item in quotable
     ]
 
@@ -303,23 +338,32 @@ async def _notify_price_changes_to_avito_dialogs(
             dialog_kw = _extract_kw(all_text)
             dialog_cat = _detect_cat(all_text)
 
-            # Match items: same category (if detectable) + keyword overlap
-            relevant = []
-            for item, kw, item_cat in item_kw_pairs:
-                # Category gate: if both sides have a detectable category, they must match
+            # Match items: same category + keyword overlap.
+            # When category matches on both sides, strip the shared category keyword
+            # ("iphone", "macbook", …) from the overlap so only distinguishing
+            # characteristics count: model generation, storage, color.
+            excl = _CAT_EXCL.get(dialog_cat, set()) if dialog_cat else set()
+            dialog_kw_eff = dialog_kw - excl
+
+            scored: list[tuple[int, dict, int]] = []  # (overlap_count, item, buyer_price)
+            for item, kw, item_cat, buyer_price in item_kw_pairs:
                 if dialog_cat and item_cat and dialog_cat != item_cat:
                     continue
-                if len(kw & dialog_kw) >= _MIN_KW_OVERLAP:
-                    relevant.append(item)
+                overlap = len((kw - excl) & dialog_kw_eff)
+                if overlap >= _MIN_KW_OVERLAP:
+                    scored.append((overlap, item, buyer_price))
 
-            if not relevant:
+            if not scored:
                 continue
 
-            # Build targeted message
+            # Sort by overlap descending so the most relevant items appear first
+            scored.sort(key=lambda x: x[0], reverse=True)
+
+            # Build targeted message with buyer prices (purchase price + markup)
             lines = ["Хочу уточнить — цены обновились!"]
             lines.append("")
-            for item in relevant[:8]:
-                price_str = f"{item['final_price']:,}".replace(",", " ")
+            for _, item, buyer_price in scored[:8]:
+                price_str = f"{buyer_price:,}".replace(",", " ")
                 lines.append(f"• {item['name']} — {price_str} ₽")
             lines.append("")
             lines.append("Если остались вопросы — пишите, всё расскажу!")
@@ -341,7 +385,7 @@ async def _notify_price_changes_to_avito_dialogs(
                 await conn.commit()
                 logger.info(
                     "Price update sent to dialog %d (%s) cat=%s — %d item(s)",
-                    dialog_id, dialog["external_id"], dialog_cat, len(relevant),
+                    dialog_id, dialog["external_id"], dialog_cat, len(scored),
                 )
                 notified += 1
             except Exception as exc:
