@@ -18,6 +18,7 @@ import os
 import re
 import sys
 from datetime import datetime, timezone, timedelta
+from typing import Optional
 
 import aiosqlite
 
@@ -151,9 +152,56 @@ async def _send_owner_report(
 _KW_RE = re.compile(r'[a-zа-яё]{3,}|\d{3,4}', re.IGNORECASE | re.UNICODE)
 _MIN_KW_OVERLAP = 2
 
+# How many hours back from run time to look for the last buyer message.
+# Dialogs where the buyer's last message is older than this window are
+# considered "ended" and skipped (e.g. buyer said "Нет, спасибо" in the morning).
+_ACTIVE_WINDOW_HOURS = 6
+
+# Product category patterns — used to prevent cross-category false matches
+# (e.g. MacBook "Silver 512" matching an iMac "Silver 512" listing).
+_CAT_RE: dict[str, re.Pattern] = {
+    "iphone":  re.compile(r'\biphone\b|\bайфон\b', re.I),
+    "macbook": re.compile(r'\b(?:macbook|neo|макбук)\b', re.I),
+    "imac":    re.compile(r'\bimac\b|\bаймак\b', re.I),
+    "ipad":    re.compile(r'\bipad\b|\bайпад\b', re.I),
+}
+
+# Closing phrases — skip dialog if the LAST user message matches
+_CLOSING_RE = re.compile(
+    r'^\s*(?:нет[,\s)!]*(?:спасибо|благодарю|спс)?'
+    r'|спасибо[,!]?\s*(?:хорошего|всего|за|большое|вам)?'
+    r'|хорошего\s+дня|до\s+свидания|всего\s+доброго'
+    r'|не\s+надо|не\s+интересует|позже\s*напишу'
+    r'|удачи)\s*$',
+    re.I | re.UNICODE,
+)
+
 
 def _extract_kw(text: str) -> set[str]:
     return set(_KW_RE.findall(text.lower()))
+
+
+def _detect_cat(text: str) -> Optional[str]:
+    """Return product category ('iphone'/'macbook'/'imac'/'ipad') or None."""
+    for cat, pat in _CAT_RE.items():
+        if pat.search(text):
+            return cat
+    return None
+
+
+def _sku_cat(sku: str) -> Optional[str]:
+    """Infer product category from SKU naming convention."""
+    s = sku.lower()
+    # iPhone SKUs start with 14_, 15_, 16_, 17_, …
+    if re.match(r'1[4-9]_', s):
+        return "iphone"
+    if "imac" in s:
+        return "imac"
+    if "ipad" in s:
+        return "ipad"
+    if any(w in s for w in ("macbook", "neo", "air_", "pro_")):
+        return "macbook"
+    return None
 
 
 async def _notify_price_changes_to_avito_dialogs(
@@ -164,9 +212,14 @@ async def _notify_price_changes_to_avito_dialogs(
     """
     After a price update, proactively message active Avito dialogs where the
     specific products discussed had price changes. Sends only the relevant
-    positions (matched by keyword overlap), not a generic broadcast.
+    positions (matched by keyword overlap + category), not a generic broadcast.
+
+    A dialog is considered "active" only if:
+      - status = bot_active (not owner_takeover in any form)
+      - buyer's last message is within _ACTIVE_WINDOW_HOURS of the price run
+      - buyer's last message is NOT a closing/decline phrase
+      - at least one changed item matches the dialog's product category
     """
-    # Only items the bot can actually quote (skip needs_check anomalies)
     quotable = [i for i in changed_items if not i.get("needs_check") and i.get("final_price")]
     if not quotable:
         return
@@ -175,12 +228,21 @@ async def _notify_price_changes_to_avito_dialogs(
         logger.info("AVITO_CLIENT_ID/SECRET/USER_ID not set — skipping proactive notifications")
         return
 
-    # Cutoff: today 09:30 MSK (= 06:30 UTC)
+    # Window cutoffs
     today = run_time_msk.date()
     cutoff_msk = datetime(today.year, today.month, today.day, 9, 30, tzinfo=_MSK)
     cutoff_utc = cutoff_msk.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
-    item_kw_pairs = [(item, _extract_kw(item["name"])) for item in quotable]
+    # "Active" = buyer wrote something within the last _ACTIVE_WINDOW_HOURS
+    recent_cutoff_utc = (
+        run_time_msk - timedelta(hours=_ACTIVE_WINDOW_HOURS)
+    ).astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+    # Attach category to each item for category-based filtering
+    item_kw_pairs = [
+        (item, _extract_kw(item["name"]), _sku_cat(item["sku"]))
+        for item in quotable
+    ]
 
     conn = None
     api = None
@@ -188,23 +250,34 @@ async def _notify_price_changes_to_avito_dialogs(
         conn = await aiosqlite.connect(cfg.gulai_db_path)
         conn.row_factory = aiosqlite.Row
 
-        # All Avito dialogs where the bot replied since 09:30 MSK
+        # Dialogs where:
+        #   - bot_active (no owner_takeover of any kind)
+        #   - bot replied since 09:30 MSK today
+        #   - buyer sent a message within the active window
         async with conn.execute("""
             SELECT DISTINCT d.id, d.external_id
             FROM dialogs d
-            JOIN messages m ON m.dialog_id = d.id
             WHERE d.transport = 'avito'
-              AND NOT (d.status = 'owner_takeover' AND d.takeover_type = 'checkmark_silence')
-              AND m.role = 'assistant'
-              AND m.ts >= ?
-        """, (cutoff_utc,)) as cur:
+              AND d.status = 'bot_active'
+              AND EXISTS (
+                  SELECT 1 FROM messages
+                  WHERE dialog_id = d.id AND role = 'assistant' AND ts >= ?
+              )
+              AND EXISTS (
+                  SELECT 1 FROM messages
+                  WHERE dialog_id = d.id AND role = 'user' AND ts >= ?
+              )
+        """, (cutoff_utc, recent_cutoff_utc)) as cur:
             dialogs = [dict(r) async for r in cur]
 
         if not dialogs:
-            logger.info("No active Avito dialogs since 09:30 MSK — no proactive notifications")
+            logger.info("No active Avito dialogs in window — no proactive notifications")
             return
 
-        logger.info("Checking %d Avito dialogs for price-change relevance", len(dialogs))
+        logger.info(
+            "Checking %d Avito dialogs (bot_active, buyer wrote in last %dh)",
+            len(dialogs), _ACTIVE_WINDOW_HOURS,
+        )
         notified = 0
 
         for dialog in dialogs:
@@ -218,26 +291,45 @@ async def _notify_price_changes_to_avito_dialogs(
                 if await cur.fetchone():
                     continue
 
-            # Messages from today's session (user + assistant for keywords)
+            # Fetch recent messages for keyword extraction + last-user-msg check
             async with conn.execute("""
-                SELECT text FROM messages
+                SELECT role, text FROM messages
                 WHERE dialog_id = ? AND ts >= ?
                 ORDER BY ts DESC LIMIT 20
             """, (dialog_id, cutoff_utc)) as cur:
-                msgs = [row[0] async for row in cur]
+                rows = [dict(r) async for r in cur]
 
-            if not msgs:
+            if not rows:
                 continue
 
-            dialog_kw = _extract_kw(" ".join(msgs))
-            relevant = [
-                item for item, kw in item_kw_pairs
-                if len(kw & dialog_kw) >= _MIN_KW_OVERLAP
-            ]
+            # Skip if buyer's last message looks like a conversation-ending phrase
+            last_user_text = next(
+                (r["text"] for r in rows if r["role"] == "user"), ""
+            )
+            if last_user_text and _CLOSING_RE.search(last_user_text.strip()):
+                logger.debug(
+                    "Dialog %d skipped — last user msg looks like closing: %r",
+                    dialog_id, last_user_text[:60],
+                )
+                continue
+
+            all_text = " ".join(r["text"] for r in rows)
+            dialog_kw = _extract_kw(all_text)
+            dialog_cat = _detect_cat(all_text)
+
+            # Match items: same category (if detectable) + keyword overlap
+            relevant = []
+            for item, kw, item_cat in item_kw_pairs:
+                # Category gate: if both sides have a detectable category, they must match
+                if dialog_cat and item_cat and dialog_cat != item_cat:
+                    continue
+                if len(kw & dialog_kw) >= _MIN_KW_OVERLAP:
+                    relevant.append(item)
+
             if not relevant:
                 continue
 
-            # Build targeted message with only matched positions
+            # Build targeted message
             lines = ["Хочу уточнить — цены обновились!"]
             lines.append("")
             for item in relevant[:8]:
@@ -247,7 +339,6 @@ async def _notify_price_changes_to_avito_dialogs(
             lines.append("Если остались вопросы — пишите, всё расскажу!")
             text = "\n".join(lines)
 
-            # Lazy init — only if there's something to actually send
             if api is None:
                 from src.adapters.avito_auth import AvitoAuthClient
                 from src.adapters.avito_api_client import AvitoApiClient
@@ -263,8 +354,8 @@ async def _notify_price_changes_to_avito_dialogs(
                 )
                 await conn.commit()
                 logger.info(
-                    "Price update sent to Avito dialog %d (%s) — %d item(s) matched",
-                    dialog_id, dialog["external_id"], len(relevant),
+                    "Price update sent to dialog %d (%s) cat=%s — %d item(s)",
+                    dialog_id, dialog["external_id"], dialog_cat, len(relevant),
                 )
                 notified += 1
             except Exception as exc:
