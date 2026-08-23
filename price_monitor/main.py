@@ -45,20 +45,6 @@ logger = logging.getLogger(__name__)
 
 _MSK = timezone(timedelta(hours=3))
 
-# Two fixed runs per day (MSK): morning and evening.
-_RUN_TIMES: list[tuple[int, int]] = [(10, 30), (18, 0)]
-
-
-def _next_run(now: datetime) -> datetime:
-    """Return the next scheduled run datetime in MSK."""
-    base = now.replace(second=0, microsecond=0)
-    for h, m in _RUN_TIMES:
-        candidate = base.replace(hour=h, minute=m)
-        if candidate > now:
-            return candidate
-    h, m = _RUN_TIMES[0]
-    return (base + timedelta(days=1)).replace(hour=h, minute=m)
-
 
 def _format_price(price: int) -> str:
     return f"{price:,}".replace(",", " ") + " ₽"
@@ -464,16 +450,15 @@ async def main_loop(cfg: Config) -> None:
 
     bot = Bot(token=cfg.bot_token)
 
+    interval_sec = cfg.check_interval_hours * 3600
+
     try:
         while True:
-            now = datetime.now(_MSK)
-            next_run = _next_run(now)
-            wait = (next_run - now).total_seconds()
             logger.info(
-                "Next price check at %s MSK (in %.1fh).",
-                next_run.strftime("%H:%M"), wait / 3600,
+                "Next price check in %.1fh (interval=%.1fh).",
+                cfg.check_interval_hours, cfg.check_interval_hours,
             )
-            await asyncio.sleep(wait)
+            await asyncio.sleep(interval_sec)
 
             _RETRY_DELAY = 15 * 60  # seconds between retries on empty result
             _MAX_RETRIES = 3
