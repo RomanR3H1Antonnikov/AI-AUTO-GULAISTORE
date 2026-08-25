@@ -1,0 +1,242 @@
+# avito_listings.yaml
+# Mapping: Avito AdId → SKUs that determine listing price
+#
+# price = min(prices.db[sku] + markup  for sku in price_skus  if sku in db)
+# If price_skus is empty or none have a DB price → listing skipped (not updated)
+# For multi-color listings: include the primary (esim) SKU per color → min across colors
+
+listings:
+
+  # ── iPhone 17 Pro Max ────────────────────────────────────────────────────
+  - ad_id: 8280501357
+    title: "iPhone 17 Pro Max 256 ГБ"
+    markup: 1500
+    price_skus:
+      - "17_pro_max_256_blue"
+      - "17_pro_max_256_orange"
+      - "17_pro_max_256_silver"
+
+  - ad_id: 8280415032
+    title: "iPhone 17 Pro Max 512 ГБ"
+    markup: 1500
+    price_skus:
+      - "17_pro_max_512_blue"
+      - "17_pro_max_512_orange"
+      - "17_pro_max_512_silver"
+
+  - ad_id: 8280650314
+    title: "iPhone 17 Pro Max 1 ТБ"
+    markup: 1500
+    price_skus:
+      - "17_pro_max_1tb_blue"
+      - "17_pro_max_1tb_orange"
+      - "17_pro_max_1tb_silver"
+
+  # ── iPhone 17 Pro ─────────────────────────────────────────────────────────
+  - ad_id: 8279978201
+    title: "iPhone 17 Pro 256 ГБ"
+    markup: 1500
+    price_skus:
+      - "17_pro_256_blue"
+      - "17_pro_256_orange"
+      - "17_pro_256_silver"
+
+  - ad_id: 8152871167
+    title: "iPhone 17 Pro 512 ГБ (старое объявление SIM+eSIM)"
+    markup: 1500
+    price_skus:
+      - "17_pro_512_blue"
+      - "17_pro_512_orange"
+      - "17_pro_512_silver"
+
+  - ad_id: 8280667149
+    title: "iPhone 17 Pro 512 ГБ"
+    markup: 1500
+    price_skus:
+      - "17_pro_512_blue"
+      - "17_pro_512_orange"
+      - "17_pro_512_silver"
+
+  - ad_id: 8280503456
+    title: "iPhone 17 Pro 1 ТБ"
+    markup: 1500
+    price_skus:
+      - "17_pro_1tb_blue"
+      - "17_pro_1tb_orange"
+      - "17_pro_1tb_silver"
+
+  # ── iPhone 17 ────────────────────────────────────────────────────────────
+  - ad_id: 8279940656
+    title: "iPhone 17 256 ГБ"
+    markup: 1500
+    price_skus:
+      - "17_256_black"        # esim
+      - "17_256_blue"         # esim
+      - "17_256_sage_nano"    # nano (no esim for this color)
+      - "17_256_lavender_nano"
+      - "17_256_white_nano"
+
+  - ad_id: 8279904211
+    title: "iPhone 17 512 ГБ"
+    markup: 1500
+    price_skus:
+      - "17_512_black_nano"
+      - "17_512_blue_nano"
+      - "17_512_sage"
+      - "17_512_lavender_nano"
+      - "17_512_white_nano"
+
+  # ── MacBook NEO ───────────────────────────────────────────────────────────
+  - ad_id: 8152293865
+    title: "MacBook NEO 256 ГБ Citrus"
+    markup: 1500
+    price_skus: ["neo_8_256_citrus"]
+
+  - ad_id: 8152612925
+    title: "MacBook NEO 512 ГБ Citrus"
+    markup: 1500
+    price_skus: ["neo_8_512_citrus"]
+
+  - ad_id: 8151941386
+    title: "MacBook NEO 256 ГБ Blush"
+    markup: 1500
+    price_skus: ["neo_8_256_blush"]
+
+  - ad_id: 8152227671
+    title: "MacBook NEO 256 ГБ Indigo"
+    markup: 1500
+    price_skus: ["neo_8_256_indigo"]
+
+  - ad_id: 8152341630
+    title: "MacBook NEO 512 ГБ Blush"
+    markup: 1500
+    price_skus: ["neo_8_512_blush"]
+
+  - ad_id: 8152604104
+    title: "MacBook NEO 256 ГБ Silver"
+    markup: 1500
+    price_skus: ["neo_8_256_silver"]
+
+  - ad_id: 8152768350
+    title: "MacBook NEO 512 ГБ Indigo"
+    markup: 1500
+    price_skus: ["neo_8_512_indigo"]
+
+  - ad_id: 8248781671
+    title: "MacBook NEO 512 ГБ Silver"
+    markup: 1500
+    price_skus: ["neo_8_512_silver"]
+
+  # ── MacBook Air 13 ────────────────────────────────────────────────────────
+  - ad_id: 8152383441
+    title: "MacBook Air 13/15 M5 16/512 ГБ Silver (комбо-объявление)"
+    markup: 2500
+    price_skus:
+      - "air_15_m5_16_512_silver"
+      # air_13_m5_16_512_silver нет db_sku в каталоге
+
+  - ad_id: 8248820667
+    title: "MacBook Air 13 M5 16/512 ГБ"
+    markup: 2500
+    price_skus:
+      - "air_13_m5_16_512_starlight"
+      - "air_13_m5_16_512_sky_blue"
+      # Silver и Midnight нет db_sku в каталоге
+
+  - ad_id: 8248110533
+    title: "MacBook Air 13 M5 16/1 ТБ"
+    markup: 2500
+    price_skus:
+      - "air_13_m5_16_1tb_starlight"
+      - "air_13_m5_16_1tb_midnight"
+      - "air_13_m5_16_1tb_sky_blue"
+
+  - ad_id: 8248038611
+    title: "MacBook Air 13 M5 24/1 ТБ"
+    markup: 2500
+    price_skus:
+      - "air_13_m5_24_1tb_starlight"
+      - "air_13_m5_24_1tb_silver"
+
+  # ── MacBook Air 15 ────────────────────────────────────────────────────────
+  - ad_id: 8248155607
+    title: "MacBook Air 15 M5 16/512 ГБ"
+    markup: 2500
+    price_skus:
+      - "air_15_m5_16_512_starlight"
+      - "air_15_m5_16_512_silver"
+      - "air_15_m5_16_512_midnight"
+      - "air_15_m5_16_512_sky_blue"
+
+  - ad_id: 8248389540
+    title: "MacBook Air 15 M5 16/1 ТБ"
+    markup: 2500
+    price_skus:
+      - "air_15_m5_16_1tb_starlight"
+      - "air_15_m5_16_1tb_silver"
+      - "air_15_m5_16_1tb_midnight"
+      - "air_15_m5_16_1tb_sky_blue"
+
+  - ad_id: 8248573046
+    title: "MacBook Air 15 M5 32/1 ТБ"
+    markup: 2500
+    price_skus:
+      - "air_15_m5_32_1tb_starlight"
+      - "air_15_m5_32_1tb_sky_blue"
+      # Silver и Midnight нет db_sku в каталоге
+
+  # ── MacBook Pro 16 ───────────────────────────────────────────────────────
+  - ad_id: 8216843793
+    title: "MacBook Pro 16 M5 Pro 64/2 ТБ"
+    markup: 5000
+    price_skus:
+      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_black"
+      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_silver"
+
+  - ad_id: 8216660814
+    title: "MacBook Pro 16 M5 Pro 64/1 ТБ"
+    markup: 5000
+    price_skus:
+      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_black"
+      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_silver"
+
+  # ── MacBook Pro 14 ───────────────────────────────────────────────────────
+  - ad_id: 8216478175
+    title: "MacBook Pro 14 M5 16/1 ТБ"
+    markup: 3000
+    price_skus: []  # нет db_sku для 16ГБ модели в каталоге — обновление невозможно
+
+  - ad_id: 8248310735
+    title: "MacBook Pro 14 M5 16/512 ГБ"
+    markup: 3000
+    price_skus: []  # нет db_sku для 16ГБ модели в каталоге — обновление невозможно
+
+  # ── iMac M4 ───────────────────────────────────────────────────────────────
+  - ad_id: 8248756628
+    title: "iMac 24 M4 16/256 ГБ"
+    markup: 3500
+    price_skus:
+      - "imac_m4_8_8_16_256_silver"
+      - "imac_m4_10_10_16_256_silver"
+
+  - ad_id: 8248789791
+    title: "iMac 24 M4 16/512 ГБ"
+    markup: 3500
+    price_skus:
+      - "imac_m4_8_8_16_512_silver"
+      - "imac_m4_10_10_16_512_silver"
+
+  # ── iPad ─────────────────────────────────────────────────────────────────
+  - ad_id: 8279898118
+    title: "iPad Air 11 M4 128/256 ГБ"
+    markup: 2000
+    price_skus:
+      - "ipad_air_11_m4_128_wi_fi_grey"
+      # 256GB Wi-Fi нет db_sku в каталоге
+
+  - ad_id: 8280590745
+    title: "iPad Pro 11 M5 256 ГБ"
+    markup: 2000
+    price_skus:
+      - "ipad_pro_11_m5_256_wi_fi_black"
+      - "ipad_pro_11_m5_256_lte_silver"
