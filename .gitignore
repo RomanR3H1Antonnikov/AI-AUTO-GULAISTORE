@@ -43,3 +43,7 @@ apirules/
 
 # Local diagnostic dumps
 scripts/channel_dump.txt
+
+# Generated test artifacts
+infoautodownload/test_feed.xml
+infoautodownload/page_checkfile.txt

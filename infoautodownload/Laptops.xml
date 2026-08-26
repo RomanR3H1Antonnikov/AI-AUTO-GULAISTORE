@@ -1,0 +1,61 @@
+<Ads formatVersion="3" target="Avito.ru">
+    <Ad>
+        <Id>id1</Id>
+        <Address>Санкт-Петербург, Лиговский проспект, 1</Address>
+        <Category>Ноутбуки</Category>
+        <AdType>Продаю своё</AdType>
+        <Title>Ноутбук игровой</Title>
+        <Description>Продается ноутбук, бу 2 года, игры работают хорошо.</Description>
+        <Price>25300</Price>
+        <Vendor>ASUS</Vendor>
+        <Model>A516J</Model>
+        <ProcessorLine>Core i7</ProcessorLine>
+        <Processor>Intel Core i7-1065G7, 1.3 ГГц</Processor>
+        <ProcessorCores>4</ProcessorCores>
+        <VideocardType>Дискретная</VideocardType>
+        <Videocard>NVIDIA GeForce MX330</Videocard>
+        <VRamSize>2</VRamSize>
+        <ScreenSize>15.6</ScreenSize>
+        <ScreenRes>1920x1080</ScreenRes>
+        <DrivesConfig>SSD</DrivesConfig>
+        <DriveSize>512</DriveSize>
+        <RamSize>16</RamSize>
+        <OperatingSystem>Без ОС (DOS)</OperatingSystem>
+        <Color>Серебристый</Color>
+        <Condition>Б/у</Condition>
+        <Devicework>
+            <Option>Не включается</Option>
+        </Devicework>
+        <AkbH>Меньше 30 минут</AkbH>
+        <Akb>120</Akb>
+        <Set>
+            <Option>Коробка</Option>
+        </Set>
+        <BoxSealed>Да</BoxSealed>
+        <KBLayout>Есть кириллица</KBLayout>
+        <DeviceFlaws>
+            <Option>Перегревается и выключается</Option>
+        </DeviceFlaws>
+        <Flaws>
+            <Option>Микрофон</Option>
+        </Flaws>
+        <CompFlaws>
+            <Option>Видеокарта</Option>
+        </CompFlaws>
+        <FunctionsFlaws>
+            <Option>Bluetooth</Option>
+        </FunctionsFlaws>
+        <ConnFlaws>
+            <Option>USB</Option>
+        </ConnFlaws>
+        <ScreenCondition>Без дефектов</ScreenCondition>
+        <CaseCondition>Без дефектов</CaseCondition>
+        <KBCondition>Без дефектов</KBCondition>
+        <Images>
+            <Image url="http://img.test.ru/8F7B-4A4F3A0F2BA1.jpg"/>
+        </Images>
+        <ListingFee>Single</ListingFee>
+        <AdStatus>Free</AdStatus>
+        <ManagerName>Иван Петров-Водкин</ManagerName>
+    </Ad>
+</Ads>

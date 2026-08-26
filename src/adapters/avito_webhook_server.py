@@ -23,12 +23,13 @@ Direction detection (no 'direction' field in webhook):
 
 import asyncio
 import logging
+import os
 from collections import OrderedDict
 from dataclasses import replace
 from typing import Optional
 
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from ..core.dialog_engine import DialogEngine
 from ..core.transport import IncomingMessage, Transport
@@ -80,6 +81,17 @@ class AvitoWebhookServer:
         @app.get("/health")
         async def health() -> dict:
             return {"status": "ok"}
+
+        @app.get("/avito-feed.xml")
+        async def avito_feed() -> Response:
+            from autoload.feed_generator import generate_feed
+            xml = await asyncio.to_thread(
+                generate_feed,
+                listings_json=os.environ.get("AUTOLOAD_LISTINGS_JSON", "infoautodownload/listings_data.json"),
+                avito_yaml=os.environ.get("AUTOLOAD_AVITO_YAML", "data/avito_listings.yaml"),
+                prices_db=os.environ.get("PRICES_DB_PATH", "prices.db"),
+            )
+            return Response(content=xml, media_type="application/xml; charset=utf-8")
 
     async def _process(self, body: dict) -> None:
         """Parse webhook body, run engine, send reply — all in background."""
