@@ -167,18 +167,94 @@ categories:
       db_sku_nano:  "17_512_white_nano"
       db_sku_activ: "17_512_white_актив"
 
+  iPhone Air:
+    - name: "iPhone Air 256 ГБ (Black · Blue · White)"
+      markup: 1500
+      db_sku:       "air_256_black"
+      db_sku_blue:  "air_256_blue"
+      db_sku_white: "air_256_white"
+    - name: "iPhone Air 512 ГБ (Black · Blue · Gold · White)"
+      markup: 1500
+      db_sku:       "air_512_black"
+      db_sku_blue:  "air_512_blue"
+      db_sku_gold:  "air_512_gold"
+      db_sku_white: "air_512_white"
+    - name: "iPhone Air 1 ТБ (White)"
+      markup: 1500
+      db_sku: "air_1tb_white"
+
   iMac M4:
-    - { name: "iMac M4 8/8/16/256 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",   markup: 3500, db_sku: "imac_m4_8_8_16_256_silver" }
-    - { name: "iMac M4 10/10/16/256 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)", markup: 3500, db_sku: "imac_m4_10_10_16_256_silver" }
+    - name: "iMac M4 8/8/16/256 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 3500
+      db_sku_orange: "imac_m4_8_8_16_256_orange"
+      db_sku_purple: "imac_m4_8_8_16_256_purple"
+      db_sku_yellow: "imac_m4_8_8_16_256_yellow"
+    - name: "iMac M4 10/10/16/256 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 3500
+      db_sku:        "imac_m4_10_10_16_256_silver"
+      db_sku_orange: "imac_m4_10_10_16_256_orange"
+      db_sku_purple: "imac_m4_10_10_16_256_purple"
+      db_sku_yellow: "imac_m4_10_10_16_256_yellow"
     - { name: "iMac M4 10/10/24/256 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)", markup: 3500, db_sku: "imac_m4_10_10_24_256_green" }
-    - { name: "iMac M4 8/8/16/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",   markup: 3500, db_sku: "imac_m4_8_8_16_512_silver" }
-    - { name: "iMac M4 10/10/16/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)", markup: 3500, db_sku: "imac_m4_10_10_16_512_silver" }
-    - { name: "iMac M4 10/10/16/1 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",   markup: 3500, db_sku: "imac_m4_10_10_16_1tb_silver" }
-    - { name: "iMac M4 10/10/24/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)", markup: 3500, db_sku: "imac_m4_10_10_24_512_silver" }
-    - { name: "iMac M4 10/10/24/1 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",   markup: 5500, db_sku: "imac_m4_10_10_24_1tb_silver" }
-    - { name: "iMac M4 10/10/32/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",  markup: 5500, db_sku: "imac_m4_10_10_32_512_silver" }
-    - { name: "iMac M4 10/10/32/1 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",   markup: 5500, db_sku: "imac_m4_10_10_32_1tb_silver" }
-    - { name: "iMac M4 10/10/32/2 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)",   markup: 5500, db_sku: "imac_m4_10_10_32_2tb_silver" }
+    - name: "iMac M4 8/8/16/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 3500
+      db_sku:        "imac_m4_8_8_16_512_silver"
+      db_sku_green:  "imac_m4_8_8_16_512_green"
+      db_sku_pink:   "imac_m4_8_8_16_512_pink"
+      db_sku_purple: "imac_m4_8_8_16_512_purple"
+    - name: "iMac M4 10/10/16/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 3500
+      db_sku:        "imac_m4_10_10_16_512_silver"
+      db_sku_blue:   "imac_m4_10_10_16_512_blue"
+      db_sku_green:  "imac_m4_10_10_16_512_green"
+      db_sku_orange: "imac_m4_10_10_16_512_orange"
+      db_sku_purple: "imac_m4_10_10_16_512_purple"
+      db_sku_yellow: "imac_m4_10_10_16_512_yellow"
+    - name: "iMac M4 10/10/16/1 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 3500
+      db_sku:        "imac_m4_10_10_16_1tb_silver"
+      db_sku_blue:   "imac_m4_10_10_16_1tb_blue"
+      db_sku_green:  "imac_m4_10_10_16_1tb_green"
+      db_sku_orange: "imac_m4_10_10_16_1tb_orange"
+      db_sku_pink:   "imac_m4_10_10_16_1tb_pink"
+      db_sku_purple: "imac_m4_10_10_16_1tb_purple"
+      db_sku_yellow: "imac_m4_10_10_16_1tb_yellow"
+    - name: "iMac M4 10/10/24/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 3500
+      db_sku:        "imac_m4_10_10_24_512_silver"
+      db_sku_blue:   "imac_m4_10_10_24_512_blue"
+      db_sku_green:  "imac_m4_10_10_24_512_green"
+      db_sku_orange: "imac_m4_10_10_24_512_orange"
+      db_sku_pink:   "imac_m4_10_10_24_512_pink"
+      db_sku_purple: "imac_m4_10_10_24_512_purple"
+      db_sku_yellow: "imac_m4_10_10_24_512_yellow"
+    - name: "iMac M4 10/10/24/1 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 5500
+      db_sku:        "imac_m4_10_10_24_1tb_silver"
+      db_sku_blue:   "imac_m4_10_10_24_1tb_blue"
+      db_sku_orange: "imac_m4_10_10_24_1tb_orange"
+      db_sku_purple: "imac_m4_10_10_24_1tb_purple"
+      db_sku_yellow: "imac_m4_10_10_24_1tb_yellow"
+    - name: "iMac M4 10/10/32/512 ГБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 5500
+      db_sku:        "imac_m4_10_10_32_512_silver"
+      db_sku_blue:   "imac_m4_10_10_32_512_blue"
+      db_sku_green:  "imac_m4_10_10_32_512_green"
+      db_sku_orange: "imac_m4_10_10_32_512_orange"
+      db_sku_pink:   "imac_m4_10_10_32_512_pink"
+      db_sku_purple: "imac_m4_10_10_32_512_purple"
+    - name: "iMac M4 10/10/32/1 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 5500
+      db_sku:        "imac_m4_10_10_32_1tb_silver"
+      db_sku_blue:   "imac_m4_10_10_32_1tb_blue"
+      db_sku_green:  "imac_m4_10_10_32_1tb_green"
+      db_sku_yellow: "imac_m4_10_10_32_1tb_yellow"
+    - name: "iMac M4 10/10/32/2 ТБ (Blue · Purple · Pink · Orange · Yellow · Green · Silver)"
+      markup: 5500
+      db_sku:        "imac_m4_10_10_32_2tb_silver"
+      db_sku_blue:   "imac_m4_10_10_32_2tb_blue"
+      db_sku_orange: "imac_m4_10_10_32_2tb_orange"
+      db_sku_pink:   "imac_m4_10_10_32_2tb_pink"
 
   MacBook Pro 16:
     - { name: "MacBook Pro 16 M5 Max 18c/32c GPU 36 ГБ/2 ТБ (Black · Silver)",  markup: 5000, db_sku: "pro_16_m5_max_18c_cpu_32c_gpu_36_2tb_black",   db_sku_silver: "pro_16_m5_max_18c_cpu_32c_gpu_36_2tb_silver" }
@@ -232,6 +308,7 @@ categories:
     - { name: "MacBook Air 15 M5 32 ГБ/4 ТБ",   color: "Silver",     markup: 2500, db_sku: "air_15_m5_32_4tb_silver" }
     - { name: "MacBook Air 15 M5 32 ГБ/4 ТБ",   color: "Midnight",   markup: 2500, db_sku: "air_15_m5_32_4tb_midnight" }
     - { name: "MacBook Air 15 M5 32 ГБ/4 ТБ",   color: "Sky Blue",   markup: 2500, db_sku: "air_15_m5_32_4tb_sky_blue" }
+    - { name: "MacBook Air 15 M5 24 ГБ/1 ТБ",   color: "Starlight",  markup: 2500, db_sku: "air_15_m5_24_1tb_starlight" }
 
   MacBook Air 13:
     - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", color: "Starlight",  markup: 2500, db_sku: "air_13_m5_16_512_starlight" }
@@ -244,8 +321,8 @@ categories:
     - { name: "MacBook Air 13 M5 16 ГБ/1 ТБ",   color: "Silver",     markup: 2500 }
     - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Starlight",  markup: 2500, db_sku: "air_13_m5_24_1tb_starlight" }
     - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Silver",     markup: 2500, db_sku: "air_13_m5_24_1tb_silver" }
-    - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Midnight",   markup: 2500 }
-    - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Sky Blue",   markup: 2500 }
+    - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Midnight",   markup: 2500, db_sku: "air_13_m5_24_1tb_midnight" }
+    - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Sky Blue",   markup: 2500, db_sku: "air_13_m5_24_1tb_sky_blue" }
     - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Sky Blue",   markup: 2500, db_sku: "air_13_m5_32_2tb_70w_sky_blue" }
     - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Silver",     markup: 2500 }
     - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Starlight",  markup: 2500 }
@@ -256,15 +333,15 @@ categories:
     - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   color: "Midnight",   markup: 2500 }
 
   iPad Pro (LTE):
-    - { name: "iPad Pro 11 M5 256 ГБ LTE (Black · Silver)", markup: 3000, db_sku: "ipad_pro_11_m5_256_lte_silver" }
+    - { name: "iPad Pro 11 M5 256 ГБ LTE (Black · Silver)", markup: 3000, db_sku: "ipad_pro_11_m5_256_lte_black" }
     - { name: "iPad Pro 11 M5 512 ГБ LTE (Black · Silver)", markup: 3000, db_sku: "ipad_pro_11_m5_512_lte_black" }
     - { name: "iPad Pro 13 M5 256 ГБ LTE (Black · Silver)", markup: 3000, db_sku: "ipad_pro_13_m5_256_lte_black" }
     - { name: "iPad Pro 13 M5 512 ГБ LTE (Black · Silver)", markup: 3000, db_sku: "ipad_pro_13_m5_512_lte_black" }
-    - { name: "iPad Pro 13 M5 1 ТБ LTE (Black · Silver)",   markup: 3000, db_sku: "ipad_pro_13_m5_1tb_lte_black" }
-    - { name: "iPad Pro 13 M5 2 ТБ LTE (Black · Silver)",   markup: 3000, db_sku: "ipad_pro_13_m5_2tb_lte_black" }
+    - { name: "iPad Pro 13 M5 1 ТБ LTE (Black · Silver)",   markup: 3000, db_sku: "ipad_pro_13_m5_1tb_lte_black",  db_sku_nano: "ipad_pro_13_m5_1tb_lte_black_nano" }
+    - { name: "iPad Pro 13 M5 2 ТБ LTE (Black · Silver)",   markup: 3000, db_sku: "ipad_pro_13_m5_2tb_lte_black",  db_sku_nano: "ipad_pro_13_m5_2tb_lte_black_nano" }
 
   iPad Pro (Wi-Fi):
-    - { name: "iPad Pro 11 M5 256 ГБ Wi-Fi (Black · Silver)", markup: 2000, db_sku: "ipad_pro_11_m5_256_wi_fi_black" }
+    - { name: "iPad Pro 11 M5 256 ГБ Wi-Fi (Black · Silver)", markup: 2000, db_sku: "ipad_pro_11_m5_256_wi_fi_black", db_sku_silver: "ipad_pro_11_m5_256_silver_wi_fi" }
     - { name: "iPad Pro 11 M5 512 ГБ Wi-Fi (Black · Silver)", markup: 2000, db_sku: "ipad_pro_11_m5_512_space_black_wi_fi" }
     - { name: "iPad Pro 11 M5 2 ТБ Wi-Fi (Black · Silver)",   markup: 2000, db_sku: "ipad_pro_11_m5_2tb_wi_fi_black_nano" }
     - { name: "iPad Pro 13 M5 256 ГБ Wi-Fi (Black · Silver)", markup: 2000, db_sku: "ipad_pro_13_m5_256_wi_fi_black" }
