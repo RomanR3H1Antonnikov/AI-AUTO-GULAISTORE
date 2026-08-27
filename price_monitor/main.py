@@ -188,9 +188,9 @@ def _load_catalog_markup(catalog_path: str) -> dict[str, int]:
     for items in (cat.get("categories") or {}).values():
         for item in items:
             markup: int = item.get("markup", 0)
-            for key in ("db_sku", "db_sku_esim", "db_sku_nano", "db_sku_activ"):
-                if sku := item.get(key):
-                    result[sku] = markup
+            for key, val in item.items():
+                if key.startswith("db_sku") and isinstance(val, str) and val:
+                    result[val] = markup
     return result
 
 
