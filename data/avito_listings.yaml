@@ -132,8 +132,8 @@ listings:
     title: "MacBook Air 13/15 M5 16/512 ГБ Silver (комбо-объявление)"
     markup: 2500
     price_skus:
+      - "air_13_m5_16_512_silver"
       - "air_15_m5_16_512_silver"
-      # air_13_m5_16_512_silver нет db_sku в каталоге
 
   - ad_id: 8248820667
     title: "MacBook Air 13 M5 16/512 ГБ"

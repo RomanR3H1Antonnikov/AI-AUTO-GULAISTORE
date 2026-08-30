@@ -313,8 +313,8 @@ categories:
   MacBook Air 13:
     - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", color: "Starlight",  markup: 2500, db_sku: "air_13_m5_16_512_starlight" }
     - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", color: "Sky Blue",   markup: 2500, db_sku: "air_13_m5_16_512_sky_blue" }
-    - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", color: "Silver",     markup: 2500 }
-    - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", color: "Midnight",   markup: 2500 }
+    - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", color: "Silver",     markup: 2500, db_sku: "air_13_m5_16_512_silver" }
+    - { name: "MacBook Air 13 M5 16 ГБ/512 ГБ", color: "Midnight",   markup: 2500, db_sku: "air_13_m5_16_512_midnight" }
     - { name: "MacBook Air 13 M5 16 ГБ/1 ТБ",   color: "Starlight",  markup: 2500, db_sku: "air_13_m5_16_1tb_starlight" }
     - { name: "MacBook Air 13 M5 16 ГБ/1 ТБ",   color: "Midnight",   markup: 2500, db_sku: "air_13_m5_16_1tb_midnight" }
     - { name: "MacBook Air 13 M5 16 ГБ/1 ТБ",   color: "Sky Blue",   markup: 2500, db_sku: "air_13_m5_16_1tb_sky_blue" }

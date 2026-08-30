@@ -553,7 +553,7 @@ class DialogEngine:
                             if parts:
                                 lines.append(f"  • {name} — {' | '.join(parts)}")
                             else:
-                                lines.append(f"  • {name} — цена уточняется")
+                                lines.append(f"  • {name} — ⛔ЦЕНА НЕ ИЗВЕСТНА: скажи «Одну минуту, сейчас уточню» и НИ ОДНОЙ ЦИФРЫ")
                         else:
                             db_price: Optional[int] = None
                             known_unavail = False
@@ -571,7 +571,7 @@ class DialogEngine:
                                 price_str = f"{item['price']:,}".replace(",", " ")
                                 lines.append(f"  • {name} — {price_str} ₽")
                             else:
-                                lines.append(f"  • {name} — цена уточняется")
+                                lines.append(f"  • {name} — ⛔ЦЕНА НЕ ИЗВЕСТНА: скажи «Одну минуту, сейчас уточню» и НИ ОДНОЙ ЦИФРЫ")
                 else:
                     # Legacy-style: yaml price, optionally overridden by live price
                     yaml_price: int = item.get("price", 0)
