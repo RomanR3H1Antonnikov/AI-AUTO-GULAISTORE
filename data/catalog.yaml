@@ -294,7 +294,7 @@ categories:
     - { name: "MacBook Air 15 M5 16 ГБ/1 ТБ",   color: "Sky Blue",   markup: 0, db_sku: "air_15_m5_16_1tb_sky_blue" }
     - { name: "MacBook Air 15 M5 32 ГБ/512 ГБ", color: "Starlight",  markup: 0, db_sku: "air_15_m5_32_512_starlight" }
     - { name: "MacBook Air 15 M5 32 ГБ/512 ГБ", color: "Silver",     markup: 0, db_sku: "air_15_m5_32_512_silver" }
-    - { name: "MacBook Air 15 M5 32 ГБ/512 ГБ", color: "Midnight",   markup: 0, db_sku: "air_15_m5_32_512_70w_midnight" }
+    - { name: "MacBook Air 15 M5 32 ГБ/512 ГБ", color: "Midnight",   markup: 0, db_sku: "air_15_m5_32_512_midnight" }
     - { name: "MacBook Air 15 M5 32 ГБ/512 ГБ", color: "Sky Blue",   markup: 0, db_sku: "air_15_m5_32_512_sky_blue" }
     - { name: "MacBook Air 15 M5 32 ГБ/1 ТБ",   color: "Starlight",  markup: 0, db_sku: "air_15_m5_32_1tb_starlight" }
     - { name: "MacBook Air 15 M5 32 ГБ/1 ТБ",   color: "Sky Blue",   markup: 0, db_sku: "air_15_m5_32_1tb_sky_blue" }
@@ -323,12 +323,12 @@ categories:
     - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Silver",     markup: 0, db_sku: "air_13_m5_24_1tb_silver" }
     - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Midnight",   markup: 0, db_sku: "air_13_m5_24_1tb_midnight" }
     - { name: "MacBook Air 13 M5 24 ГБ/1 ТБ",   color: "Sky Blue",   markup: 0, db_sku: "air_13_m5_24_1tb_sky_blue" }
-    - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Sky Blue",   markup: 0, db_sku: "air_13_m5_32_2tb_70w_sky_blue" }
+    - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Sky Blue",   markup: 0, db_sku: "air_13_m5_32_2tb_sky_blue" }
     - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Silver",     markup: 0 }
     - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Starlight",  markup: 0 }
     - { name: "MacBook Air 13 M5 32 ГБ/2 ТБ",   color: "Midnight",   markup: 0 }
-    - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   color: "Silver",     markup: 0, db_sku: "air_13_m5_32_4tb_70w_silver" }
-    - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   color: "Sky Blue",   markup: 0, db_sku: "air_13_m5_32_4tb_70w_sky_blue" }
+    - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   color: "Silver",     markup: 0, db_sku: "air_13_m5_32_4tb_silver" }
+    - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   color: "Sky Blue",   markup: 0, db_sku: "air_13_m5_32_4tb_sky_blue" }
     - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   color: "Starlight",  markup: 0 }
     - { name: "MacBook Air 13 M5 32 ГБ/4 ТБ",   color: "Midnight",   markup: 0 }
 
@@ -368,4 +368,5 @@ categories:
     - { name: "iPad Air 13 M4 (2026) 128 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 0, db_sku: "ipad_air_13_m4_128_lte_grey" }
     - { name: "iPad Air 13 M4 (2026) 256 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 0, db_sku: "ipad_air_13_m4_256_lte_grey" }
     - { name: "iPad Air 13 M4 (2026) 512 ГБ LTE (Space Gray · Starlight · Purple · Blue)", markup: 0 }
+
 
