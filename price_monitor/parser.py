@@ -185,10 +185,11 @@ def _parse_channel_line(line: str) -> "ParsedPrice | None":
         return None
 
     price_clean = price_raw.strip().lstrip("`")
-    price_match = re.match(r"\d[\d\s\xa0]*", price_clean)
+    # Accept dotted-thousands (508.000), space/nbsp-thousands (4 500), or plain integer
+    price_match = re.match(r"\d{1,3}(?:[.\s\xa0]\d{3})+|\d+", price_clean)
     if not price_match:
         return None
-    price_str = re.sub(r"[\s\xa0]", "", price_match.group())
+    price_str = re.sub(r"[\s\xa0.]", "", price_match.group())
     try:
         price = int(price_str)
     except ValueError:
