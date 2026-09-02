@@ -107,6 +107,18 @@ _SIM_NANO_RE = re.compile(
     re.IGNORECASE | re.UNICODE,
 )
 
+# "GB"/"gb" suffix right after a digit (RAM/storage): 16GB → 16, 512GB → 512
+_GB_SUFFIX_RE = re.compile(r"(?<=\d)[Gg][Bb]\b", re.UNICODE)
+
+# "Touch ID" in NEO product names (512 variant): strip, keep base SKU
+_TOUCH_ID_RE = re.compile(r"\s*Touch\s+ID\b", re.IGNORECASE | re.UNICODE)
+
+# MacBook Air color-position normaliser (post-make_sku, on lowercase slug):
+# BSA channel: air_{size}_{color}_m5_{specs}  → canonical: air_{size}_m5_{specs}_{color}
+_AIR_COLOR_FIX_RE = re.compile(
+    r"^(air_\d+)_(midnight|silver|starlight|sky_blue|space_gray)_(m5_.+)$"
+)
+
 
 def _strip_leading_nonword(s: str) -> str:
     """Advance past leading emoji and other non-letter/non-digit characters."""
@@ -150,6 +162,8 @@ def _normalize_for_sku(name: str) -> str:
     s = _NEO_SCREEN_RE.sub("", s)       # "Neo 13" → "Neo"
     s = _YEAR_RE.sub("", s)             # 2026, 2025, …
     s = _TRAIL_CODE_RE.sub("", s)       # trailing "MDWK4"
+    s = _TOUCH_ID_RE.sub("", s)         # "Touch ID" in NEO 512 names
+    s = _GB_SUFFIX_RE.sub("", s)        # 16GB → 16, 512GB → 512
     # SIM-type suffixes: nano variants become _nano SKU; eSIM-only strips cleanly
     if _SIM_NANO_RE.search(s):
         s = _SIM_NANO_RE.sub(" nano", s)
@@ -163,7 +177,12 @@ def make_sku(text: str) -> str:
     text = _normalize_for_sku(text)
     text = text.lower().strip()
     text = re.sub(r"[^a-zа-яёё0-9]+", "_", text)
-    return text.strip("_")
+    text = text.strip("_")
+    # Canonical color position for MacBook Air: air_{size}_{color}_m5_... → air_{size}_m5_..._{color}
+    m = _AIR_COLOR_FIX_RE.match(text)
+    if m:
+        text = f"{m.group(1)}_{m.group(3)}_{m.group(2)}"
+    return text
 
 
 def _parse_channel_line(line: str) -> "ParsedPrice | None":
