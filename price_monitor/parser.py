@@ -71,8 +71,24 @@ _LEAD_JUNK_RE = re.compile(r'^[`.\s]+')
 _TAIL_JUNK_RE = re.compile(r'[\s,;.!?🔌]+$', re.UNICODE)
 
 # Hyphen-separator format: dotted-thousands price (63.000 / 172.000), ₽ optional.
-# BSA Store channel omits ₽ and may have no space around hyphen.
-_BOT_LINE_RE = re.compile(r"^(.+?)\s*-\s*(\d{2,3}(?:\.\d{3})+)\s*₽?\s*$", re.UNICODE)
+# BSA Store channel omits ₽, may have no space around hyphen, and appends flag+SIM
+# info AFTER the price (e.g. "17e 256 Black -57.700🇮🇳(1Sim + eSim )").
+# Group 3 captures everything after the price (suffix with SIM/активированный info).
+_BOT_LINE_RE = re.compile(r"^(.+?)\s*-\s*(\d{2,3}(?:\.\d{3})+)\*?\s*(?:₽\s*)?(.*)$", re.UNICODE)
+
+# BSA iPhone suffix: SIM info appears AFTER the price, not in the product name.
+# "1 Sim", "(1Sim", "🇮🇳1 sim" etc. → nano (physical SIM) variant.
+_SUFFIX_NANO_RE = re.compile(r"[12]\s*[Ss]im", re.UNICODE)
+# "актив" in suffix → activated phone variant.
+_SUFFIX_AKTIV_RE = re.compile(r"\bактив\b", re.IGNORECASE | re.UNICODE)
+
+# Cyrillic-to-Latin lookalike map: fixes channel typos in English product names,
+# e.g. "Bluе" (Cyrillic е U+0435) → "Blue". Only the most visually identical
+# letters are mapped to avoid corrupting Cyrillic-language product names.
+_CYR_TO_LAT = str.maketrans({
+    'е': 'e',  # Cyrillic е (U+0435) → Latin e — most common typo
+    'о': 'o',  # Cyrillic о (U+043E) → Latin o
+})
 
 # ── SKU normalisation (strips bot-specific noise so channel and bot match) ──
 
@@ -176,6 +192,7 @@ def make_sku(text: str) -> str:
     """Derive a stable lowercase SKU from a product name string."""
     text = _normalize_for_sku(text)
     text = text.lower().strip()
+    text = text.translate(_CYR_TO_LAT)   # fix Cyrillic lookalikes before regex
     text = re.sub(r"[^a-zа-яёё0-9]+", "_", text)
     text = text.strip("_")
     # Canonical color position for MacBook Air: air_{size}_{color}_m5_... → air_{size}_m5_..._{color}
@@ -226,12 +243,12 @@ def _parse_channel_line(line: str) -> "ParsedPrice | None":
 
 
 def _parse_bot_line(line: str) -> "ParsedPrice | None":
-    """Parse bot-format line: 'Name - 99.200₽'."""
+    """Parse bot-format line: 'Name - 99.200₽' or BSA iPhone format with suffix."""
     m = _BOT_LINE_RE.match(line)
     if not m:
         return None
 
-    name_raw, price_dotted = m.group(1), m.group(2)
+    name_raw, price_dotted, suffix = m.group(1), m.group(2), (m.group(3) or "")
 
     if SKIP_CONDITION_NOTES and _CONDITION_RE.search(name_raw):
         logger.debug("Skipping condition-note line: %r", line)
@@ -253,8 +270,22 @@ def _parse_bot_line(line: str) -> "ParsedPrice | None":
     if not name or len(name) < 3:
         return None
 
+    sku = make_sku(name)
+
+    # BSA iPhone format: SIM-type info is in the suffix after the price, not in the name.
+    # Apply nano/_актив modifier from suffix only if the name didn't already set one.
+    if not sku.endswith(("_nano", "_актив")):
+        is_nano = bool(_SUFFIX_NANO_RE.search(suffix))
+        is_aktiv = bool(_SUFFIX_AKTIV_RE.search(suffix))
+        if is_nano and is_aktiv:
+            return None  # nano+актив combo — no catalog SKU for this combination
+        if is_nano:
+            sku = sku + "_nano"
+        elif is_aktiv:
+            sku = sku + "_актив"
+
     needs_check = bool(_NEEDS_CHECK_RE.search(line))
-    return ParsedPrice(sku=make_sku(name), name=name, price=price, raw_line=line, needs_check=needs_check)
+    return ParsedPrice(sku=sku, name=name, price=price, raw_line=line, needs_check=needs_check)
 
 
 def parse_prices_from_text(text: str) -> list[ParsedPrice]:
