@@ -339,18 +339,18 @@ categories:
     - { name: "MacBook Pro 16 M5 Max 18c/40c GPU 128 ГБ/8 ТБ (Black · Silver)", markup: 0, db_sku: "pro_16_m5_max_18c_cpu_40c_gpu_128_8tb_black",  db_sku_silver: "pro_16_m5_max_18c_cpu_40c_gpu_128_8tb_silver" }
 
   MacBook Pro 14:
-    - { name: "MacBook Pro 14 M5 16 ГБ/512 ГБ (Black · Silver)",                    markup: 0 }
-    - { name: "MacBook Pro 14 M5 10c/10c GPU 16 ГБ/1 ТБ (Black · Silver)",          markup: 0 }
-    - { name: "MacBook Pro 14 M5 10c/10c GPU 24 ГБ/1 ТБ (Black · Silver)",          markup: 0 }
-    - { name: "MacBook Pro 14 M5 32 ГБ/1 ТБ (Black · Silver)",                      markup: 0 }
-    - { name: "MacBook Pro 14 M5 Pro 15c/16c GPU 24 ГБ/1 ТБ (Black · Silver)",      markup: 0 }
-    - { name: "MacBook Pro 14 M5 Pro 15c/16c GPU 24 ГБ/2 ТБ (Black · Silver)",      markup: 0 }
-    - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 24 ГБ/2 ТБ (Black · Silver)",      markup: 0 }
+    - { name: "MacBook Pro 14 M5 16 ГБ/512 ГБ (Black · Silver)",                    markup: 0, db_sku: "pro_14_m5_16_512_black",                             db_sku_silver: "pro_14_m5_16_512_silver" }
+    - { name: "MacBook Pro 14 M5 10c/10c GPU 16 ГБ/1 ТБ (Black · Silver)",          markup: 0, db_sku: "pro_14_m5_16_1tb_space_black",                      db_sku_silver: "pro_14_m5_10_10_16_1tb_silver" }
+    - { name: "MacBook Pro 14 M5 10c/10c GPU 24 ГБ/1 ТБ (Black · Silver)",          markup: 0, db_sku: "pro_14_m5_10_10_24_1tb_space_black",                 db_sku_silver: "pro_14_m5_10_10_24_1tb_silver" }
+    - { name: "MacBook Pro 14 M5 32 ГБ/1 ТБ (Black · Silver)",                      markup: 0, db_sku: "pro_14_space_black_m5_32_1tb",                       db_sku_silver: "pro_14_silver_m5_32_1tb" }
+    - { name: "MacBook Pro 14 M5 Pro 15c/16c GPU 24 ГБ/1 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_pro_15_16_24_1tb_space_black",             db_sku_silver: "pro_14_m5_pro_15_16_24_1tb_silver" }
+    - { name: "MacBook Pro 14 M5 Pro 15c/16c GPU 24 ГБ/2 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_black_m5_pro_15_16_24_2tb",                   db_sku_silver: "pro_14_silver_m5_pro_15_16_24_2tb" }
+    - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 24 ГБ/2 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_pro_18_20_24_2tb_space_black",             db_sku_silver: "pro_14_m5_pro_18_20_24_2tb_silver" }
     - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 48 ГБ/1 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_48_1tb_black",          db_sku_silver: "pro_14_m5_pro_18c_cpu_20c_gpu_48_1tb_silver" }
     - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 48 ГБ/2 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_48_2tb_black",          db_sku_silver: "pro_14_m5_pro_18c_cpu_20c_gpu_48_2tb_silver" }
     - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 64 ГБ/1 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_64_1tb_black",          db_sku_silver: "pro_14_m5_pro_18c_cpu_20c_gpu_64_1tb_silver" }
     - { name: "MacBook Pro 14 M5 Pro 18c/20c GPU 64 ГБ/2 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_pro_18c_cpu_20c_gpu_64_2tb_black",          db_sku_silver: "pro_14_m5_pro_18c_cpu_20c_gpu_64_2tb_silver" }
-    - { name: "MacBook Pro 14 M5 Max 18c/32c GPU 36 ГБ/2 ТБ (Black · Silver)",      markup: 0 }
+    - { name: "MacBook Pro 14 M5 Max 18c/32c GPU 36 ГБ/2 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_max_18_32_36_2tb_space_black",              db_sku_silver: "pro_14_m5_max_18_32_36_2tb_silver" }
     - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 64 ГБ/2 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_64_2tb_black",          db_sku_silver: "pro_14_m5_max_18c_cpu_40c_gpu_64_2tb_silver" }
     - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 64 ГБ/4 ТБ (Black · Silver)",      markup: 0, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_64_4tb_black",          db_sku_silver: "pro_14_m5_max_18c_cpu_40c_gpu_64_4tb_silver" }
     - { name: "MacBook Pro 14 M5 Max 18c/40c GPU 128 ГБ/2 ТБ (Black · Silver)",     markup: 0, db_sku: "pro_14_m5_max_18c_cpu_40c_gpu_128_2tb_black",         db_sku_silver: "pro_14_m5_max_18c_cpu_40c_gpu_128_2tb_silver" }

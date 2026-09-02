@@ -82,13 +82,18 @@ _SUFFIX_NANO_RE = re.compile(r"[12]\s*[Ss]im", re.UNICODE)
 # "актив" in suffix → activated phone variant.
 _SUFFIX_AKTIV_RE = re.compile(r"\bактив\b", re.IGNORECASE | re.UNICODE)
 
-# Cyrillic-to-Latin lookalike map: fixes channel typos in English product names,
-# e.g. "Bluе" (Cyrillic е U+0435) → "Blue". Only the most visually identical
-# letters are mapped to avoid corrupting Cyrillic-language product names.
+# Cyrillic-to-Latin lookalike map: fixes channel typos in English product names.
+# "Bluе" (Cyrillic е U+0435) → "Blue"; "М5" (Cyrillic М) → "M5" (Latin).
+# Only letters that appear in Apple chip/color names are mapped to avoid
+# corrupting Cyrillic-language product names elsewhere in the channel.
 _CYR_TO_LAT = str.maketrans({
-    'е': 'e',  # Cyrillic е (U+0435) → Latin e — most common typo
-    'о': 'o',  # Cyrillic о (U+043E) → Latin o
+    'е': 'e',  # Cyrillic е (U+0435) → Latin e — common in color names (Blue, White…)
+    'м': 'm',  # Cyrillic м (U+043C) → Latin m — М5 chip name written with Cyrillic М
 })
+
+# Warranty/guarantee lines: "🛡+12 месяцев -12.000₽" after _clean_name yields
+# "12 месяцев" which passes length check but isn't a product.
+_WARRANTY_RE = re.compile(r"^\d+\s+месяц", re.UNICODE | re.IGNORECASE)
 
 # ── SKU normalisation (strips bot-specific noise so channel and bot match) ──
 
@@ -108,8 +113,8 @@ _NEO_CHIP_RE = re.compile(r"\s+A\d+(?:\s+Pro)?\b", re.UNICODE)
 # Screen-size digit right after "Neo" ("Neo 13 ...") — not part of the spec
 _NEO_SCREEN_RE = re.compile(r"(?<=Neo)\s+1[35]\b", re.UNICODE)
 
-# Year: 2024/2025/2026/2027
-_YEAR_RE = re.compile(r"\s+\b20[2-3]\d\b", re.UNICODE)
+# Year: 2024/2025/2026/2027 — both bare " 2025" and parenthesised " (2025)" forms
+_YEAR_RE = re.compile(r"\s+\(?\b20[2-3]\d\b\)?", re.UNICODE)
 
 # Trailing unbracketed model code at end of string: " MDWK4", " MH304"
 _TRAIL_CODE_RE = re.compile(r"\s+[A-Z]{1,3}[A-Z0-9]{1,4}\d$", re.UNICODE)
@@ -269,6 +274,9 @@ def _parse_bot_line(line: str) -> "ParsedPrice | None":
     name = _clean_name(name_raw)
     if not name or len(name) < 3:
         return None
+
+    if _WARRANTY_RE.match(name):
+        return None  # "12 месяцев - 11.000₽" — warranty pricing, not a product
 
     sku = make_sku(name)
 
