@@ -70,9 +70,9 @@ _LEAD_JUNK_RE = re.compile(r'^[`.\s]+')
 # Any trailing non-letter, non-digit remnant (stray punctuation/emoji)
 _TAIL_JUNK_RE = re.compile(r'[\s,;.!?🔌]+$', re.UNICODE)
 
-# Bot format: "Name - 99.200₽" — price with dots as thousands separators + ₽ sign
-# Greedy (.+) so we split at the LAST " - " before the price
-_BOT_LINE_RE = re.compile(r"^(.+)\s+-\s+(\d[\d.]*)\s*₽", re.UNICODE)
+# Hyphen-separator format: dotted-thousands price (63.000 / 172.000), ₽ optional.
+# BSA Store channel omits ₽ and may have no space around hyphen.
+_BOT_LINE_RE = re.compile(r"^(.+?)\s*-\s*(\d{2,3}(?:\.\d{3})+)\s*₽?\s*$", re.UNICODE)
 
 # ── SKU normalisation (strips bot-specific noise so channel and bot match) ──
 

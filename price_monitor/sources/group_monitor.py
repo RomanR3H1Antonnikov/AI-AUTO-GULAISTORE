@@ -29,9 +29,9 @@ async def fetch_group_prices(
     all_prices: list[ParsedPrice] = []
     try:
         async for message in client.iter_messages(chat_id, limit=limit):
-            if not message.text:
+            if not message.message:
                 continue
-            prices = parse_prices_from_text(message.text)
+            prices = parse_prices_from_text(message.message)
             if prices:
                 logger.debug(
                     "Group msg id=%d: extracted %d price(s)", message.id, len(prices)
