@@ -1,243 +1,452 @@
-﻿# avito_listings.yaml
-# Mapping: Avito AdId в†’ SKUs that determine listing price
-#
-# price = min(prices.db[sku] + markup  for sku in price_skus  if sku in db)
-# If price_skus is empty or none have a DB price в†’ listing skipped (not updated)
-# For multi-color listings: include the primary (esim) SKU per color в†’ min across colors
-
 listings:
-
-  # в”Ђв”Ђ iPhone 17 Pro Max в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8280501357
-    title: "iPhone 17 Pro Max 256 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "17_pro_max_256_blue"
-      - "17_pro_max_256_orange"
-      - "17_pro_max_256_silver"
-
-  - ad_id: 8280415032
-    title: "iPhone 17 Pro Max 512 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "17_pro_max_512_blue"
-      - "17_pro_max_512_orange"
-      - "17_pro_max_512_silver"
-
-  - ad_id: 8280650314
-    title: "iPhone 17 Pro Max 1 РўР‘"
-    markup: 0
-    price_skus:
-      - "17_pro_max_1tb_blue"
-      - "17_pro_max_1tb_orange"
-      - "17_pro_max_1tb_silver"
-
-  # в”Ђв”Ђ iPhone 17 Pro в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8279978201
-    title: "iPhone 17 Pro 256 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "17_pro_256_blue"
-      - "17_pro_256_orange"
-      - "17_pro_256_silver"
-
-  - ad_id: 8152871167
-    title: "iPhone 17 Pro 512 Р“Р‘ (СЃС‚Р°СЂРѕРµ РѕР±СЉСЏРІР»РµРЅРёРµ SIM+eSIM)"
-    markup: 0
-    price_skus:
-      - "17_pro_512_blue"
-      - "17_pro_512_orange"
-      - "17_pro_512_silver"
-
-  - ad_id: 8280667149
-    title: "iPhone 17 Pro 512 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "17_pro_512_blue"
-      - "17_pro_512_orange"
-      - "17_pro_512_silver"
-
-  - ad_id: 8280503456
-    title: "iPhone 17 Pro 1 РўР‘"
-    markup: 0
-    price_skus:
-      - "17_pro_1tb_blue"
-      - "17_pro_1tb_orange"
-      - "17_pro_1tb_silver"
-
-  # в”Ђв”Ђ iPhone 17 в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8279940656
-    title: "iPhone 17 256 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "17_256_black"        # esim
-      - "17_256_blue"         # esim
-      - "17_256_sage_nano"    # nano (no esim for this color)
-      - "17_256_lavender_nano"
-      - "17_256_white_nano"
-
-  - ad_id: 8279904211
-    title: "iPhone 17 512 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "17_512_black_nano"
-      - "17_512_blue_nano"
-      - "17_512_sage"
-      - "17_512_lavender_nano"
-      - "17_512_white_nano"
-
-  # в”Ђв”Ђ MacBook NEO в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8152293865
-    title: "MacBook NEO 256 Р“Р‘ Citrus"
-    markup: 0
-    price_skus: ["neo_8_256_citrus"]
-
-  - ad_id: 8152612925
-    title: "MacBook NEO 512 Р“Р‘ Citrus"
-    markup: 0
-    price_skus: ["neo_8_512_citrus"]
-
-  - ad_id: 8151941386
-    title: "MacBook NEO 256 Р“Р‘ Blush"
-    markup: 0
-    price_skus: ["neo_8_256_blush"]
-
-  - ad_id: 8152227671
-    title: "MacBook NEO 256 Р“Р‘ Indigo"
-    markup: 0
-    price_skus: ["neo_8_256_indigo"]
-
-  - ad_id: 8152341630
-    title: "MacBook NEO 512 Р“Р‘ Blush"
-    markup: 0
-    price_skus: ["neo_8_512_blush"]
-
-  - ad_id: 8152604104
-    title: "MacBook NEO 256 Р“Р‘ Silver"
-    markup: 0
-    price_skus: ["neo_8_256_silver"]
-
-  - ad_id: 8152768350
-    title: "MacBook NEO 512 Р“Р‘ Indigo"
-    markup: 0
-    price_skus: ["neo_8_512_indigo"]
-
-  - ad_id: 8248781671
-    title: "MacBook NEO 512 Р“Р‘ Silver"
-    markup: 0
-    price_skus: ["neo_8_512_silver"]
-
-  # в”Ђв”Ђ MacBook Air 13 в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8152383441
-    title: "MacBook Air 13/15 M5 16/512 Р“Р‘ Silver (РєРѕРјР±Рѕ-РѕР±СЉСЏРІР»РµРЅРёРµ)"
-    markup: 0
-    price_skus:
-      - "air_13_m5_16_512_silver"
-      - "air_15_m5_16_512_silver"
-
-  - ad_id: 8248820667
-    title: "MacBook Air 13 M5 16/512 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "air_13_m5_16_512_starlight"
-      - "air_13_m5_16_512_sky_blue"
-      # Silver Рё Midnight РЅРµС‚ db_sku РІ РєР°С‚Р°Р»РѕРіРµ
-
-  - ad_id: 8248110533
-    title: "MacBook Air 13 M5 16/1 РўР‘"
-    markup: 0
-    price_skus:
-      - "air_13_m5_16_1tb_starlight"
-      - "air_13_m5_16_1tb_midnight"
-      - "air_13_m5_16_1tb_sky_blue"
-
-  - ad_id: 8248038611
-    title: "MacBook Air 13 M5 24/1 РўР‘"
-    markup: 0
-    price_skus:
-      - "air_13_m5_24_1tb_starlight"
-      - "air_13_m5_24_1tb_silver"
-
-  # в”Ђв”Ђ MacBook Air 15 в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8248155607
-    title: "MacBook Air 15 M5 16/512 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "air_15_m5_16_512_starlight"
-      - "air_15_m5_16_512_silver"
-      - "air_15_m5_16_512_midnight"
-      - "air_15_m5_16_512_sky_blue"
-
-  - ad_id: 8248389540
-    title: "MacBook Air 15 M5 16/1 РўР‘"
-    markup: 0
-    price_skus:
-      - "air_15_m5_16_1tb_starlight"
-      - "air_15_m5_16_1tb_silver"
-      - "air_15_m5_16_1tb_midnight"
-      - "air_15_m5_16_1tb_sky_blue"
-
-  - ad_id: 8248573046
-    title: "MacBook Air 15 M5 32/1 РўР‘"
-    markup: 0
-    price_skus:
-      - "air_15_m5_32_1tb_starlight"
-      - "air_15_m5_32_1tb_sky_blue"
-      # Silver Рё Midnight РЅРµС‚ db_sku РІ РєР°С‚Р°Р»РѕРіРµ
-
-  # в”Ђв”Ђ MacBook Pro 16 в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8216843793
-    title: "MacBook Pro 16 M5 Pro 64/2 РўР‘"
-    markup: 0
-    price_skus:
-      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_black"
-      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_silver"
-
-  - ad_id: 8216660814
-    title: "MacBook Pro 16 M5 Pro 64/1 РўР‘"
-    markup: 0
-    price_skus:
-      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_black"
-      - "pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_silver"
-
-  # в”Ђв”Ђ MacBook Pro 14 в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8216478175
-    title: "MacBook Pro 14 M5 16/1 РўР‘"
-    markup: 0
-    price_skus: []  # РЅРµС‚ db_sku РґР»СЏ 16Р“Р‘ РјРѕРґРµР»Рё РІ РєР°С‚Р°Р»РѕРіРµ вЂ” РѕР±РЅРѕРІР»РµРЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ
-
-  - ad_id: 8248310735
-    title: "MacBook Pro 14 M5 16/512 Р“Р‘"
-    markup: 0
-    price_skus: []  # РЅРµС‚ db_sku РґР»СЏ 16Р“Р‘ РјРѕРґРµР»Рё РІ РєР°С‚Р°Р»РѕРіРµ вЂ” РѕР±РЅРѕРІР»РµРЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ
-
-  # в”Ђв”Ђ iMac M4 в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8248756628
-    title: "iMac 24 M4 16/256 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "imac_m4_8_8_16_256_silver"
-      - "imac_m4_10_10_16_256_silver"
-
-  - ad_id: 8248789791
-    title: "iMac 24 M4 16/512 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "imac_m4_8_8_16_512_silver"
-      - "imac_m4_10_10_16_512_silver"
-
-  # в”Ђв”Ђ iPad в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-  - ad_id: 8279898118
-    title: "iPad Air 11 M4 128/256 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "ipad_air_11_m4_128_wi_fi_grey"
-      # 256GB Wi-Fi РЅРµС‚ db_sku РІ РєР°С‚Р°Р»РѕРіРµ
-
-  - ad_id: 8280590745
-    title: "iPad Pro 11 M5 256 Р“Р‘"
-    markup: 0
-    price_skus:
-      - "ipad_pro_11_m5_256_wi_fi_black"
-      - "ipad_pro_11_m5_256_lte_silver"
-
+- ad_id: 8280501357
+  title: iPhone 17 Pro Max 256 Р“Р‘
+  markup: 0
+  price_skus:
+  - 17_pro_max_256_blue
+  - 17_pro_max_256_orange
+  - 17_pro_max_256_silver
+- ad_id: 8280415032
+  title: iPhone 17 Pro Max 512 Р“Р‘
+  markup: 0
+  price_skus:
+  - 17_pro_max_512_blue
+  - 17_pro_max_512_orange
+  - 17_pro_max_512_silver
+- ad_id: 8280650314
+  title: iPhone 17 Pro Max 1 РўР‘
+  markup: 0
+  price_skus:
+  - 17_pro_max_1tb_blue
+  - 17_pro_max_1tb_orange
+  - 17_pro_max_1tb_silver
+- ad_id: 8279978201
+  title: iPhone 17 Pro 256 Р“Р‘
+  markup: 0
+  price_skus:
+  - 17_pro_256_blue
+  - 17_pro_256_orange
+  - 17_pro_256_silver
+- ad_id: 8152871167
+  title: iPhone 17 Pro 512 Р“Р‘ (СЃС‚Р°СЂРѕРµ РѕР±СЉСЏРІР»РµРЅРёРµ SIM+eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_512_blue
+  - 17_pro_512_orange
+  - 17_pro_512_silver
+- ad_id: 8280667149
+  title: iPhone 17 Pro 512 Р“Р‘
+  markup: 0
+  price_skus:
+  - 17_pro_512_blue
+  - 17_pro_512_orange
+  - 17_pro_512_silver
+- ad_id: 8280503456
+  title: iPhone 17 Pro 1 РўР‘
+  markup: 0
+  price_skus:
+  - 17_pro_1tb_blue
+  - 17_pro_1tb_orange
+  - 17_pro_1tb_silver
+- ad_id: 8279940656
+  title: iPhone 17 256 Р“Р‘
+  markup: 0
+  price_skus:
+  - 17_256_black
+  - 17_256_blue
+  - 17_256_sage_nano
+  - 17_256_lavender_nano
+  - 17_256_white_nano
+- ad_id: 8279904211
+  title: iPhone 17 512 Р“Р‘
+  markup: 0
+  price_skus:
+  - 17_512_black_nano
+  - 17_512_blue_nano
+  - 17_512_sage
+  - 17_512_lavender_nano
+  - 17_512_white_nano
+- ad_id: 8152293865
+  title: MacBook NEO 256 Р“Р‘ Citrus
+  markup: 0
+  price_skus:
+  - neo_8_256_citrus
+- ad_id: 8152612925
+  title: MacBook NEO 512 Р“Р‘ Citrus
+  markup: 0
+  price_skus:
+  - neo_8_512_citrus
+- ad_id: 8151941386
+  title: MacBook NEO 256 Р“Р‘ Blush
+  markup: 0
+  price_skus:
+  - neo_8_256_blush
+- ad_id: 8152227671
+  title: MacBook NEO 256 Р“Р‘ Indigo
+  markup: 0
+  price_skus:
+  - neo_8_256_indigo
+- ad_id: 8152341630
+  title: MacBook NEO 512 Р“Р‘ Blush
+  markup: 0
+  price_skus:
+  - neo_8_512_blush
+- ad_id: 8152604104
+  title: MacBook NEO 256 Р“Р‘ Silver
+  markup: 0
+  price_skus:
+  - neo_8_256_silver
+- ad_id: 8152768350
+  title: MacBook NEO 512 Р“Р‘ Indigo
+  markup: 0
+  price_skus:
+  - neo_8_512_indigo
+- ad_id: 8248781671
+  title: MacBook NEO 512 Р“Р‘ Silver
+  markup: 0
+  price_skus:
+  - neo_8_512_silver
+- ad_id: 8152383441
+  title: MacBook Air 13/15 M5 16/512 Р“Р‘ Silver (РєРѕРјР±Рѕ-РѕР±СЉСЏРІР»РµРЅРёРµ)
+  markup: 0
+  price_skus:
+  - air_13_m5_16_512_silver
+  - air_15_m5_16_512_silver
+- ad_id: 8248820667
+  title: MacBook Air 13 M5 16/512 Р“Р‘
+  markup: 0
+  price_skus:
+  - air_13_m5_16_512_starlight
+  - air_13_m5_16_512_sky_blue
+- ad_id: 8248110533
+  title: MacBook Air 13 M5 16/1 РўР‘
+  markup: 0
+  price_skus:
+  - air_13_m5_16_1tb_starlight
+  - air_13_m5_16_1tb_midnight
+  - air_13_m5_16_1tb_sky_blue
+- ad_id: 8248038611
+  title: MacBook Air 13 M5 24/1 РўР‘
+  markup: 0
+  price_skus:
+  - air_13_m5_24_1tb_starlight
+  - air_13_m5_24_1tb_silver
+- ad_id: 8248155607
+  title: MacBook Air 15 M5 16/512 Р“Р‘
+  markup: 0
+  price_skus:
+  - air_15_m5_16_512_starlight
+  - air_15_m5_16_512_silver
+  - air_15_m5_16_512_midnight
+  - air_15_m5_16_512_sky_blue
+- ad_id: 8248389540
+  title: MacBook Air 15 M5 16/1 РўР‘
+  markup: 0
+  price_skus:
+  - air_15_m5_16_1tb_starlight
+  - air_15_m5_16_1tb_silver
+  - air_15_m5_16_1tb_midnight
+  - air_15_m5_16_1tb_sky_blue
+- ad_id: 8248573046
+  title: MacBook Air 15 M5 32/1 РўР‘
+  markup: 0
+  price_skus:
+  - air_15_m5_32_1tb_starlight
+  - air_15_m5_32_1tb_sky_blue
+- ad_id: 8216843793
+  title: MacBook Pro 16 M5 Pro 64/2 РўР‘
+  markup: 0
+  price_skus:
+  - pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_black
+  - pro_16_m5_pro_18c_cpu_20c_gpu_64_2tb_silver
+- ad_id: 8216660814
+  title: MacBook Pro 16 M5 Pro 64/1 РўР‘
+  markup: 0
+  price_skus:
+  - pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_black
+  - pro_16_m5_pro_18c_cpu_20c_gpu_64_1tb_silver
+- ad_id: 8216478175
+  title: MacBook Pro 14 M5 16/1 РўР‘
+  markup: 0
+  price_skus: []
+- ad_id: 8248310735
+  title: MacBook Pro 14 M5 16/512 Р“Р‘
+  markup: 0
+  price_skus: []
+- ad_id: 8248756628
+  title: iMac 24 M4 16/256 Р“Р‘
+  markup: 0
+  price_skus:
+  - imac_m4_8_8_16_256_silver
+  - imac_m4_10_10_16_256_silver
+- ad_id: 8248789791
+  title: iMac 24 M4 16/512 Р“Р‘
+  markup: 0
+  price_skus:
+  - imac_m4_8_8_16_512_silver
+  - imac_m4_10_10_16_512_silver
+- ad_id: 8279898118
+  title: iPad Air 11 M4 128/256 Р“Р‘
+  markup: 0
+  price_skus:
+  - ipad_air_11_m4_128_wi_fi_grey
+- ad_id: 8280590745
+  title: iPad Pro 11 M5 256 Р“Р‘
+  markup: 0
+  price_skus:
+  - ipad_pro_11_m5_256_wi_fi_black
+  - ipad_pro_11_m5_256_lte_silver
+- ad_id: 409773543832
+  title: Планшет Apple iPad 11" (A16, 2025) 128 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_11_2025_128_wi_fi_blue
+  - ipad_11_2025_128_wi_fi_silver
+  - ipad_11_2025_128_wi_fi_pink
+- ad_id: 266480350852
+  title: Планшет Apple iPad 11" (A16, 2025) 256 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_11_2025_256_wi_fi_blue
+  - ipad_11_2025_256_wi_fi_silver
+  - ipad_11_2025_256_wi_fi_pink
+- ad_id: 178355569252
+  title: Планшет Apple iPad Mini 7" 128 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_mini_7_128_wi_fi_grey
+  - ipad_mini_7_128_wi_fi_blue
+- ad_id: 613764782712
+  title: Планшет Apple iPad Pro 11" (M5, 2025) 256 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_pro_11_m5_256_wi_fi_black
+  - ipad_pro_11_m5_256_wi_fi_silver
+- ad_id: 972695599562
+  title: Планшет Apple iPad Pro 11" (M5, 2025) 512 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_pro_11_m5_512_wi_fi_black
+  - ipad_pro_11_m5_512_wi_fi_silver
+- ad_id: 376149995982
+  title: Планшет Apple iPad Pro 11" (M5, 2025) 1 ТБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_pro_11_m5_1tb_wi_fi_black
+  - ipad_pro_11_m5_1tb_wi_fi_silver
+- ad_id: 252587465172
+  title: Планшет Apple iPad Pro 11" (M5, 2025) 256 ГБ LTE
+  markup: 0
+  price_skus:
+  - ipad_pro_11_m5_256_lte_black
+  - ipad_pro_11_m5_256_lte_silver
+- ad_id: 677940322792
+  title: Планшет Apple iPad Pro 11" (M5, 2025) 1 ТБ LTE
+  markup: 0
+  price_skus:
+  - ipad_pro_11_m5_1tb_lte_black
+  - ipad_pro_11_m5_1tb_lte_silver
+- ad_id: 128111305162
+  title: Планшет Apple iPad Pro 11" (M5, 2025) 2 ТБ LTE
+  markup: 0
+  price_skus:
+  - ipad_pro_11_m5_2tb_lte_black
+  - ipad_pro_11_m5_2tb_lte_silver
+- ad_id: 880102712762
+  title: Планшет Apple iPad Pro 13" (M5, 2025) 256 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_pro_13_m5_256_wi_fi_black
+  - ipad_pro_13_m5_256_wi_fi_silver
+- ad_id: 387168810662
+  title: Планшет Apple iPad Pro 13" (M5, 2025) 512 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_pro_13_m5_512_wi_fi_black
+  - ipad_pro_13_m5_512_wi_fi_silver
+- ad_id: 271656994802
+  title: Планшет Apple iPad Pro 13" (M5, 2025) 1 ТБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_pro_13_m5_1tb_wi_fi_black
+  - ipad_pro_13_m5_1tb_wi_fi_silver
+- ad_id: 873524474402
+  title: Планшет Apple iPad Pro 13" (M5, 2025) 2 ТБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_pro_13_m5_2tb_wi_fi_black
+  - ipad_pro_13_m5_2tb_wi_fi_silver
+- ad_id: 611500236062
+  title: Apple iPhone 16 128 ГБ (SIM)
+  markup: 0
+  price_skus:
+  - 16_128_black
+  - 16_128_blue
+  - 16_128_pink
+  - 16_128_white
+- ad_id: 974532574052
+  title: Apple iPhone 16 256 ГБ (SIM)
+  markup: 0
+  price_skus:
+  - 16_256_black
+  - 16_256_blue
+  - 16_256_pink
+  - 16_256_white
+- ad_id: 390945771722
+  title: Apple iPhone 17 256 ГБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_256_black
+  - 17_256_blue
+  - 17_256_lavender
+  - 17_256_sage
+  - 17_256_white
+- ad_id: 669356397752
+  title: Apple iPhone 17 256 ГБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_256_black_nano
+  - 17_256_blue_nano
+  - 17_256_lavender_nano
+  - 17_256_sage_nano
+  - 17_256_white_nano
+- ad_id: 219125254192
+  title: Apple iPhone 17 512 ГБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_512_black
+  - 17_512_blue
+  - 17_512_lavender
+  - 17_512_sage
+  - 17_512_white
+- ad_id: 647204326182
+  title: Apple iPhone 17 512 ГБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_512_black_nano
+  - 17_512_blue_nano
+  - 17_512_lavender_nano
+  - 17_512_sage_nano
+  - 17_512_white_nano
+- ad_id: 667130219622
+  title: Apple iPhone 17 Air 1 ТБ
+  markup: 0
+  price_skus:
+  - air_1tb_black
+  - air_1tb_blue
+  - air_1tb_gold
+  - air_1tb_white
+- ad_id: 713445677242
+  title: Apple iPhone 17 Air 256 ГБ
+  markup: 0
+  price_skus:
+  - air_256_black
+  - air_256_blue
+  - air_256_gold
+  - air_256_white
+- ad_id: 743826479542
+  title: Apple iPhone 17 Air 512 ГБ
+  markup: 0
+  price_skus:
+  - air_512_black
+  - air_512_blue
+  - air_512_gold
+  - air_512_white
+- ad_id: 498775832072
+  title: Apple iPhone 17 Pro 1 ТБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_1tb_blue
+  - 17_pro_1tb_orange
+  - 17_pro_1tb_silver
+- ad_id: 554239870182
+  title: Apple iPhone 17 Pro 1 ТБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_1tb_blue_nano
+  - 17_pro_1tb_orange_nano
+  - 17_pro_1tb_silver_nano
+- ad_id: 395322318412
+  title: Apple iPhone 17 Pro 256 ГБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_256_blue
+  - 17_pro_256_orange
+  - 17_pro_256_silver
+- ad_id: 770966262222
+  title: Apple iPhone 17 Pro 256 ГБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_256_blue_nano
+  - 17_pro_256_orange_nano
+  - 17_pro_256_silver_nano
+- ad_id: 965610392452
+  title: Apple iPhone 17 Pro 512 ГБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_512_blue
+  - 17_pro_512_orange
+  - 17_pro_512_silver
+- ad_id: 779528177062
+  title: Apple iPhone 17 Pro 512 ГБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_512_blue_nano
+  - 17_pro_512_orange_nano
+  - 17_pro_512_silver_nano
+- ad_id: 236091660132
+  title: Apple iPhone 17 Pro Max 1 ТБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_1tb_blue
+  - 17_pro_max_1tb_orange
+  - 17_pro_max_1tb_silver
+- ad_id: 497956930092
+  title: Apple iPhone 17 Pro Max 1 ТБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_1tb_blue_nano
+  - 17_pro_max_1tb_orange_nano
+  - 17_pro_max_1tb_silver_nano
+- ad_id: 435100358532
+  title: Apple iPhone 17 Pro Max 2 ТБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_2tb_blue
+  - 17_pro_max_2tb_orange
+  - 17_pro_max_2tb_silver
+- ad_id: 199460178322
+  title: Apple iPhone 17 Pro Max 2 ТБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_2tb_blue_nano
+  - 17_pro_max_2tb_orange_nano
+  - 17_pro_max_2tb_silver_nano
+- ad_id: 676051461412
+  title: Apple iPhone 17 Pro Max 256 ГБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_256_blue
+  - 17_pro_max_256_orange
+  - 17_pro_max_256_silver
+- ad_id: 461533466882
+  title: Apple iPhone 17 Pro Max 256 ГБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_256_blue_nano
+  - 17_pro_max_256_orange_nano
+  - 17_pro_max_256_silver_nano
+- ad_id: 157317398462
+  title: Apple iPhone 17 Pro Max 512 ГБ (eSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_512_blue
+  - 17_pro_max_512_orange
+  - 17_pro_max_512_silver
+- ad_id: 325177358492
+  title: Apple iPhone 17 Pro Max 512 ГБ (nanoSIM + eSIM)
+  markup: 0
+  price_skus:
+  - 17_pro_max_512_blue_nano
+  - 17_pro_max_512_orange_nano
+  - 17_pro_max_512_silver_nano
