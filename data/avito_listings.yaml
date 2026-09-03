@@ -544,20 +544,6 @@ listings:
   title: Ноутбук Apple MacBook Pro 16" (M5 Pro, 64 ГБ, 2 ТБ
   markup: 0
   static_price: 478880
-- ad_id: store77-MD4A4
-  title: Планшет Apple iPad 11 128 ГБ Wi-Fi
-  markup: 0
-  price_skus:
-  - ipad_11_2025_128_wi_fi_blue
-  - ipad_11_2025_128_wi_fi_silver
-  - ipad_11_2025_128_wi_fi_pink
-- ad_id: store77-MD4H4
-  title: Планшет Apple iPad 11 256 ГБ Wi-Fi
-  markup: 0
-  price_skus:
-  - ipad_11_2025_256_wi_fi_blue
-  - ipad_11_2025_256_wi_fi_silver
-  - ipad_11_2025_256_wi_fi_pink
 - ad_id: '409773543832'
   title: Планшет Apple iPad 11" (A16, 2025) 128 ГБ Wi-Fi
   markup: 0
