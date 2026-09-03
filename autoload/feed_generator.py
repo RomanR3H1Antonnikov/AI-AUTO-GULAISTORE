@@ -2,13 +2,19 @@
 Avito Autoload XML feed generator.
 
 Reads listings_data.json (static listing metadata: images, descriptions,
-category-specific fields), avito_listings.yaml (SKU → Ad mapping), and
-prices.db (live purchase prices), then emits a valid Avito Autoload XML v3
-feed where each listing's price = min(db_price + markup for sku in price_skus).
+category-specific fields), avito_listings.yaml (ad mapping), and
+prices.db (live purchase prices), then emits a valid Avito Autoload XML v3 feed.
 
-Listings with no price_skus or no matching DB rows are silently skipped.
-The <AvitoId> tag ensures Avito updates existing listings rather than creating
-duplicates.
+Pricing logic per listing entry:
+  price_skus → min(db_price + markup) across available SKUs  (dynamic, Apple)
+  static_price → fixed price from catalog                     (Samsung, Dyson, etc.)
+
+Listings with neither price source, or where price_skus yields no DB hit and
+no static_price fallback, are silently skipped.
+
+ID logic:
+  numeric ad_id  → <Id> + <AvitoId>  (updates existing Avito listing)
+  string  ad_id  → <Id> only         (creates new Avito listing on first upload)
 """
 
 import json
@@ -21,29 +27,28 @@ import yaml
 
 logger = logging.getLogger(__name__)
 
-# Extra-field keys that are Avito internal/billing metadata — not valid in XML.
 _SKIP_XML_FIELDS = {
-    "Address",          # added explicitly
-    "AdType",           # added explicitly
-    "ListingFee",
-    "ContactPhone",
-    "ImageNames",
-    "ContactMethod",
-    "AvitoDateEnd",
-    "EMail",
-    "CompanyName",
-    "AvitoStatus",
-    "MultiItem",
+    "Address", "AdType", "ListingFee", "ContactPhone", "ImageNames",
+    "ContactMethod", "AvitoDateEnd", "EMail", "CompanyName",
+    "AvitoStatus", "MultiItem",
 }
 
-# Fields exported as pipe-separated that map to <Field><Option>...</Option></Field>.
-_OPTION_FIELDS = {"Set", "Devicework", "Flaws", "DeviceFlaws", "CompFlaws", "FunctionsFlaws", "ConnFlaws"}
+_OPTION_FIELDS = {
+    "Set", "Devicework", "Flaws", "DeviceFlaws",
+    "CompFlaws", "FunctionsFlaws", "ConnFlaws",
+}
 
 
-def _load_listings_map(json_path: str) -> dict[int, dict]:
+def _load_listings_map(json_path: str) -> dict[str, dict]:
+    """Key listings by internal_id (falls back to str(avito_id))."""
     with open(json_path, encoding="utf-8") as f:
         items = json.load(f)
-    return {item["avito_id"]: item for item in items if isinstance(item["avito_id"], int)}
+    result: dict[str, dict] = {}
+    for item in items:
+        key = item.get("internal_id") or str(item.get("avito_id", ""))
+        if key:
+            result[key] = item
+    return result
 
 
 def _calc_price(price_skus: list[str], markup: int, db_path: str) -> int | None:
@@ -67,7 +72,6 @@ def _calc_price(price_skus: list[str], markup: int, db_path: str) -> int | None:
 
 
 def _add_field(parent: Element, field: str, value: str) -> None:
-    """Add a field element, using <Option> sub-elements for multi-value fields."""
     if field in _OPTION_FIELDS or " | " in value:
         el = SubElement(parent, field)
         for opt in value.split(" | "):
@@ -78,17 +82,20 @@ def _add_field(parent: Element, field: str, value: str) -> None:
         SubElement(parent, field).text = value
 
 
-def _build_ad(parent: Element, listing: dict, price: int) -> None:
+def _build_ad(parent: Element, listing: dict, ad_id: str, price: int) -> None:
     ad = SubElement(parent, "Ad")
 
-    SubElement(ad, "Id").text = str(listing["avito_id"])
-    SubElement(ad, "AvitoId").text = str(listing["avito_id"])
+    SubElement(ad, "Id").text = ad_id
+
+    # Only add AvitoId for numeric IDs (existing listings) — tells Avito to update, not create
+    avito_id = listing.get("avito_id")
+    if isinstance(avito_id, int):
+        SubElement(ad, "AvitoId").text = str(avito_id)
 
     extra = listing.get("extra_fields", {})
 
     address = extra.get("Address", "Москва, улица Барклая, 8")
     SubElement(ad, "Address").text = address
-
     SubElement(ad, "Category").text = listing["category"]
 
     ad_type = extra.get("AdType", "Товар приобретен на продажу")
@@ -133,33 +140,36 @@ def generate_feed(
     skipped_no_listing = 0
 
     for mapping in mappings:
-        ad_id = int(mapping["ad_id"])
+        ad_id = str(mapping["ad_id"])
         price_skus: list[str] = mapping.get("price_skus") or []
         markup = int(mapping.get("markup", 0))
+        static_price: int = int(mapping.get("static_price", 0))
 
+        # Resolve price: dynamic from DB first, fall back to static
         price = _calc_price(price_skus, markup, prices_db)
+        if price is None and static_price > 0:
+            price = static_price
         if price is None:
-            logger.debug("Skip ad_id=%d — no price in DB for skus: %s", ad_id, price_skus)
+            logger.debug("Skip ad_id=%s — no price", ad_id)
             skipped_no_price += 1
             continue
 
         listing = listings_map.get(ad_id)
         if not listing:
-            logger.warning("Skip ad_id=%d — not found in listings_data.json", ad_id)
+            logger.warning("Skip ad_id=%s — not found in listings_data.json", ad_id)
             skipped_no_listing += 1
             continue
 
-        _build_ad(root, listing, price)
+        _build_ad(root, listing, ad_id, price)
         included += 1
 
     logger.info(
-        "Feed generated: %d ads included, %d skipped (no price), %d skipped (no listing data)",
+        "Feed: %d included, %d skipped (no price), %d skipped (no listing data)",
         included, skipped_no_price, skipped_no_listing,
     )
 
     xml_bytes = tostring(root, encoding="unicode")
     pretty = parseString(xml_bytes).toprettyxml(indent="    ", encoding=None)
-    # toprettyxml prepends <?xml version="1.0" ?>; replace with explicit UTF-8 declaration
     lines = pretty.split("\n")
     if lines[0].startswith("<?xml"):
         lines = lines[1:]

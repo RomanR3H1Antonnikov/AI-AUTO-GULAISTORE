@@ -396,11 +396,14 @@ def main() -> None:
     with open(LISTINGS_YAML, encoding="utf-8") as f:
         existing_yaml = yaml.safe_load(f)
     existing_listings: list[dict] = existing_yaml.get("listings", [])
-    existing_ad_ids = {int(e["ad_id"]) for e in existing_listings}
+    existing_ad_ids = {str(e["ad_id"]) for e in existing_listings}
 
     with open(LISTINGS_JSON, encoding="utf-8") as f:
         existing_json: list[dict] = json.load(f)
-    existing_json_ids = {d["avito_id"] for d in existing_json}
+    existing_json_ids = {
+        item.get("internal_id") or str(item.get("avito_id", ""))
+        for item in existing_json
+    }
 
     # Read catalog
     wb = openpyxl.load_workbook(CATALOG_XLS)
@@ -451,30 +454,29 @@ def main() -> None:
         extra = make_extra_fields(name, brand, cat)
         title = name[:50]
 
-        # Add to avito_listings.yaml only if Apple (has price_skus for dynamic pricing)
-        if is_existing and skus and avito_id not in existing_ad_ids:
-            new_yaml_entries.append({
-                "ad_id": avito_id,
-                "title": title,
-                "markup": 0,
-                "price_skus": skus,
-            })
-            existing_ad_ids.add(avito_id)
+        # Add to avito_listings.yaml if not already there
+        if item_id not in existing_ad_ids:
+            entry: dict = {"ad_id": item_id, "title": title, "markup": 0}
+            if skus:
+                entry["price_skus"] = skus        # dynamic: Apple
+            else:
+                entry["static_price"] = price     # static: Samsung/Dyson/etc.
+            new_yaml_entries.append(entry)
+            existing_ad_ids.add(item_id)
 
-        # Add to listings_data.json if existing listing and not already there
-        if is_existing and skus and avito_id not in existing_json_ids:
+        # Add to listings_data.json if not already there
+        if item_id not in existing_json_ids:
             new_json_entries.append({
-                "avito_id": avito_id,
+                "avito_id": avito_id,             # None for store77-* items
                 "internal_id": item_id,
                 "title": title,
                 "price": price,
                 "category": av_cat,
                 "image_urls": photo_url,
                 "description": description,
-                "sheet": cat,
                 "extra_fields": {**extra, "Address": STORE_ADDRESS},
             })
-            existing_json_ids.add(avito_id)
+            existing_json_ids.add(item_id)
 
         # Always add to XML feed
         build_xml_ad(root, item_id, avito_id, title, description,
@@ -511,10 +513,9 @@ def main() -> None:
         print("  listings_data.json — no new entries (all already present)")
 
     # Summary
-    print(f"\nNew YAML entries ({len(new_yaml_entries)}):")
-    for e in new_yaml_entries:
-        skus_str = ", ".join(e["price_skus"][:3]) + ("…" if len(e["price_skus"]) > 3 else "")
-        print(f"  {e['ad_id']}  [{skus_str or 'static price'}]  {e['title'][:40]}")
+    dynamic = sum(1 for e in new_yaml_entries if e.get("price_skus"))
+    static  = sum(1 for e in new_yaml_entries if e.get("static_price"))
+    print(f"\nNew YAML entries: {len(new_yaml_entries)} ({dynamic} dynamic, {static} static)")
 
 
 if __name__ == "__main__":

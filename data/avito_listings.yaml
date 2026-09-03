@@ -196,87 +196,523 @@ listings:
   price_skus:
   - ipad_pro_11_m5_256_wi_fi_black
   - ipad_pro_11_m5_256_lte_silver
-- ad_id: 409773543832
+- ad_id: marshall-major-iv-black
+  title: Marshall Major IV
+  markup: 0
+  static_price: 4000
+- ad_id: marshall-major-v-black
+  title: Marshall Major V
+  markup: 0
+  static_price: 4600
+- ad_id: store77-MM4BL
+  title: Беспроводные наушники Marshall Minor 4
+  markup: 0
+  static_price: 10480
+- ad_id: store77-MMIIIBL
+  title: Беспроводные наушники Marshall Monitor III A.N.C.
+  markup: 0
+  static_price: 22880
+- ad_id: store77-MM2ANCBL
+  title: Беспроводные наушники Marshall Motif II A.N.C.
+  markup: 0
+  static_price: 12480
+- ad_id: marshall-acton-iii-black
+  title: Marshall Acton III
+  markup: 0
+  static_price: 16500
+- ad_id: store77-ME2BL
+  title: Портативная акустика Marshall Emberton 2
+  markup: 0
+  static_price: 13380
+- ad_id: marshall-emberton-3-black
+  title: Marshall Emberton 3
+  markup: 0
+  static_price: 11000
+- ad_id: store77-1007443
+  title: Портативная акустика Marshall KilBurn 3
+  markup: 0
+  static_price: 40280
+- ad_id: marshall-stanmore-iii-black
+  title: Marshall Stanmore III
+  markup: 0
+  static_price: 17500
+- ad_id: marshall-woburn-iii-black
+  title: Marshall Woburn III
+  markup: 0
+  static_price: 27500
+- ad_id: store77-MFEW4
+  title: Монитор Apple Studio Display 27" 5K (2026) подстав
+  markup: 0
+  static_price: 228880
+- ad_id: store77-MFEX4
+  title: Монитор Apple Studio Display 27" 5K (2026) подстав
+  markup: 0
+  static_price: 183580
+- ad_id: store77-MFF14
+  title: Монитор Apple Studio Display 27" 5K (2026) с нанот
+  markup: 0
+  static_price: 199980
+- ad_id: store77-MFF04
+  title: Монитор Apple Studio Display 27" 5K (2026), с нано
+  markup: 0
+  static_price: 254980
+- ad_id: store77-MYJK3/MMYW3
+  title: Монитор Apple Studio Display 27" 5K с нанотекстуро
+  markup: 0
+  static_price: 185980
+- ad_id: store77-MFEP4
+  title: Монитор Apple Studio Display XDR 5K Retina 27" (20
+  markup: 0
+  static_price: 408980
+- ad_id: store77-MFEL4
+  title: Монитор Apple Studio Display XDR 5K Retina 27" (20
+  markup: 0
+  static_price: 375980
+- ad_id: store77-Z19F000D9
+  title: Моноблок Apple iMac 24" Retina 4.5K (M3 8C CPU, 10
+  markup: 0
+  static_price: 169380
+- ad_id: store77-Z1A0000BQ
+  title: Моноблок Apple iMac 24" Retina 4.5K (M3 8C CPU, 10
+  markup: 0
+  static_price: 194780
+- ad_id: store77-Z19S001Q2
+  title: Моноблок Apple iMac 24" Retina 4.5K (M3 8C CPU, 10
+  markup: 0
+  static_price: 216380
+- ad_id: store77-Z19K000D6/MQRR3
+  title: Моноблок Apple iMac 24" Retina 4.5K (M3 8C CPU, 10
+  markup: 0
+  static_price: 147280
+- ad_id: store77-Z1EQ000N2
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 231980
+- ad_id: store77-MWV13
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 159980
+- ad_id: store77-MWUV3
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 190980
+- ad_id: store77-Z1EQ001SN
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 256980
+- ad_id: store77-Z1EM00090
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 201980
+- ad_id: store77-MD2T4
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 226980
+- ad_id: store77-Z1EQ000N4
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 283980
+- ad_id: store77-Z1EQ000N5
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 325980
+- ad_id: store77-Z1EQ000N3
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 10C CPU, 1
+  markup: 0
+  static_price: 248980
+- ad_id: store77-MWUF3
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 8C CPU, 8C
+  markup: 0
+  static_price: 164980
+- ad_id: store77-Z1E5000JW
+  title: Моноблок Apple iMac 24" Retina 4.5K (M4 8C CPU, 8C
+  markup: 0
+  static_price: 180980
+- ad_id: store77-MU9D3
+  title: Настольный компьютер Apple Mac Mini (M4 10C CPU/10
+  markup: 0
+  static_price: 72580
+- ad_id: store77-MU9E3
+  title: Настольный компьютер Apple Mac Mini (M4 10C CPU/10
+  markup: 0
+  static_price: 78480
+- ad_id: store77-MCYT4
+  title: Настольный компьютер Apple Mac Mini (M4 10C CPU/10
+  markup: 0
+  static_price: 129980
+- ad_id: store77-Z1JV0007W
+  title: Настольный компьютер Apple Mac Mini (M4 Pro 12C CP
+  markup: 0
+  static_price: 249980
+- ad_id: store77-MCX44
+  title: Настольный компьютер Apple Mac Mini (M4 Pro 12C CP
+  markup: 0
+  static_price: 148980
+- ad_id: store77-MU963
+  title: 'Настольный компьютер Apple Mac Studio (M4 Max 14С '
+  markup: 0
+  static_price: 305180
+- ad_id: store77-Z1CD002W0
+  title: 'Настольный компьютер Apple Mac Studio (M4 Max 16С '
+  markup: 0
+  static_price: 476980
+- ad_id: store77-Z1CD00239
+  title: 'Настольный компьютер Apple Mac Studio (M4 Max 16С '
+  markup: 0
+  static_price: 476980
+- ad_id: store77-MDHC4
+  title: Ноутбук Apple MacBook Air 13.6" (M5, 16 ГБ, 1 ТБ S
+  markup: 0
+  static_price: 135740
+- ad_id: store77-MDHA4
+  title: Ноутбук Apple MacBook Air 13.6" (M5, 16 ГБ, 512 ГБ
+  markup: 0
+  static_price: 124680
+- ad_id: store77-MDHD4
+  title: Ноутбук Apple MacBook Air 13.6" (M5, 24 ГБ, 1 ТБ S
+  markup: 0
+  static_price: 163880
+- ad_id: store77-Z1LA000SZ
+  title: Ноутбук Apple MacBook Air 13.6" (M5, 16 ГБ, 2 ТБ S
+  markup: 0
+  static_price: 241680
+- ad_id: store77-Z1LA000T1
+  title: Ноутбук Apple MacBook Air 13.6" (M5, 16 ГБ, 4 ТБ S
+  markup: 0
+  static_price: 345180
+- ad_id: store77-Z1LB000NN
+  title: Ноутбук Apple MacBook Air 13.6" (M5, 24 ГБ, 2 ТБ S
+  markup: 0
+  static_price: 274380
+- ad_id: store77-Z1L8000QL
+  title: Ноутбук Apple MacBook Air 13.6" (M5, 32 ГБ, 2 ТБ S
+  markup: 0
+  static_price: 236180
+- ad_id: store77-MDVE4
+  title: Ноутбук Apple MacBook Air 15" (M5, 16 ГБ, 1 ТБ SSD
+  markup: 0
+  static_price: 160480
+- ad_id: store77-MDVD4
+  title: Ноутбук Apple MacBook Air 15" (M5, 16 ГБ, 512 ГБ S
+  markup: 0
+  static_price: 137980
+- ad_id: store77-MDVU4
+  title: Ноутбук Apple MacBook Air 15" (M5, 24 ГБ, 1 ТБ SSD
+  markup: 0
+  static_price: 189970
+- ad_id: store77-Z1M1000RN
+  title: Ноутбук Apple MacBook Air 15" (M5, 16 ГБ, 2 ТБ SSD
+  markup: 0
+  static_price: 263480
+- ad_id: store77-Z1M1000RQ
+  title: Ноутбук Apple MacBook Air 15" (M5, 16 ГБ, 4 ТБ SSD
+  markup: 0
+  static_price: 366880
+- ad_id: store77-Z1M2000VW
+  title: Ноутбук Apple MacBook Air 15" (M5, 24 ГБ, 2 ТБ SSD
+  markup: 0
+  static_price: 290680
+- ad_id: store77-Z1M2000VYрус
+  title: Ноутбук Apple MacBook Air 15" (M5, 24 ГБ, 4 ТБ SSD
+  markup: 0
+  static_price: 406980
+- ad_id: store77-Z1LZ00057
+  title: Ноутбук Apple MacBook Air 15" (M5, 32 ГБ, 1 ТБ SSD
+  markup: 0
+  static_price: 238880
+- ad_id: store77-Z1LZ0005A
+  title: Ноутбук Apple MacBook Air 15" (M5, 32 ГБ, 2 ТБ SSD
+  markup: 0
+  static_price: 287880
+- ad_id: store77-Z1LZ0005D2рус
+  title: Ноутбук Apple MacBook Air 15" (M5, 32 ГБ, 4 ТБ SSD
+  markup: 0
+  static_price: 414980
+- ad_id: store77-Z1LZ00054
+  title: Ноутбук Apple MacBook Air 15" (M5, 32 ГБ, 512 ГБ S
+  markup: 0
+  static_price: 210180
+- ad_id: store77-MHFF4
+  title: 'Ноутбук Apple MacBook Neo 13" (A18 Pro, 8 ГБ, 256 '
+  markup: 0
+  static_price: 64980
+- ad_id: store77-MHFJ4
+  title: 'Ноутбук Apple MacBook Neo 13" (A18 Pro, 8 ГБ, 512 '
+  markup: 0
+  static_price: 74980
+- ad_id: store77-MGDQ4
+  title: Ноутбук Apple MacBook Pro 14" (M5 Max, 36 ГБ, 2 ТБ
+  markup: 0
+  static_price: 349790
+- ad_id: store77-MGDN4
+  title: Ноутбук Apple MacBook Pro 14" (M5 Pro, 24 ГБ, 1 ТБ
+  markup: 0
+  static_price: 218980
+- ad_id: store77-MJLV4
+  title: Ноутбук Apple MacBook Pro 14" (M5 Pro, 24 ГБ, 2 ТБ
+  markup: 0
+  static_price: 231780
+- ad_id: store77-MDE14
+  title: Ноутбук Apple MacBook Pro 14" (M5, 16 ГБ, 1 ТБ SSD
+  markup: 0
+  static_price: 181880
+- ad_id: store77-MDE44
+  title: Ноутбук Apple MacBook Pro 14" (M5, 16 ГБ, 512 ГБ S
+  markup: 0
+  static_price: 179680
+- ad_id: store77-MDE34
+  title: Ноутбук Apple MacBook Pro 14" (M5, 24 ГБ, 1 ТБ SSD
+  markup: 0
+  static_price: 200980
+- ad_id: store77-MJ3D4
+  title: Ноутбук Apple MacBook Pro 14" (M5, 32 ГБ, 1 ТБ SSD
+  markup: 0
+  static_price: 250970
+- ad_id: store77-Z1MK000VS
+  title: Ноутбук Apple MacBook Pro 14" (M5 Max, 128 ГБ, 4 Т
+  markup: 0
+  static_price: 747480
+- ad_id: store77-Z1MK000VU
+  title: Ноутбук Apple MacBook Pro 14" (M5 Max, 128 ГБ, 8 Т
+  markup: 0
+  static_price: 900480
+- ad_id: store77-Z1MK000VK
+  title: Ноутбук Apple MacBook Pro 14" (M5 Max, 48 ГБ, 2 ТБ
+  markup: 0
+  static_price: 450980
+- ad_id: store77-Z1MH0007W
+  title: Ноутбук Apple MacBook Pro 14" (M5 Pro, 48 ГБ, 1 ТБ
+  markup: 0
+  static_price: 336580
+- ad_id: store77-Z1ML001V5рус
+  title: Ноутбук Apple MacBook Pro 14" (M5 Pro, 64 ГБ, 1 ТБ
+  markup: 0
+  static_price: 407180
+- ad_id: store77-MX2X3
+  title: 'Ноутбук Apple MacBook Pro 16" (M4 Pro, 24 ГБ, 512 '
+  markup: 0
+  static_price: 216980
+- ad_id: store77-MX2U3
+  title: 'Ноутбук Apple MacBook Pro 16" (M4 Pro, 48 ГБ, 512 '
+  markup: 0
+  static_price: 271800
+- ad_id: store77-MGED4
+  title: Ноутбук Apple MacBook Pro 16" (M5 Max, 36 ГБ, 2 ТБ
+  markup: 0
+  static_price: 335980
+- ad_id: store77-MGEE4
+  title: Ноутбук Apple MacBook Pro 16" (M5 Max, 48 ГБ, 2 ТБ
+  markup: 0
+  static_price: 429970
+- ad_id: store77-MGEA4
+  title: Ноутбук Apple MacBook Pro 16" (M5 Pro, 24 ГБ, 1 ТБ
+  markup: 0
+  static_price: 261990
+- ad_id: store77-MGE64
+  title: Ноутбук Apple MacBook Pro 16" (M5 Pro, 48 ГБ, 1 ТБ
+  markup: 0
+  static_price: 321980
+- ad_id: store77-Z1MY00029рус
+  title: Ноутбук Apple MacBook Pro 16" (M5 Max, 128 ГБ, 2 Т
+  markup: 0
+  static_price: 734680
+- ad_id: store77-Z1MY0002F
+  title: Ноутбук Apple MacBook Pro 16" (M5 Max, 128 ГБ, 8 Т
+  markup: 0
+  static_price: 935780
+- ad_id: store77-ZIN10002Z
+  title: Ноутбук Apple MacBook Pro 16" (M5 Max, 36 ГБ, 4 ТБ
+  markup: 0
+  static_price: 569980
+- ad_id: store77-ZIMY0002B
+  title: Ноутбук Apple MacBook Pro 16" (M5 Max, 48 ГБ, 4 ТБ
+  markup: 0
+  static_price: 579480
+- ad_id: store77-ZIMY00028
+  title: Ноутбук Apple MacBook Pro 16" (M5 Max, 64 ГБ, 2 ТБ
+  markup: 0
+  static_price: 557980
+- ad_id: store77-Z1MW0003X
+  title: Ноутбук Apple MacBook Pro 16" (M5 Pro, 48 ГБ, 2 ТБ
+  markup: 0
+  static_price: 413580
+- ad_id: store77-Z1N00003P
+  title: Ноутбук Apple MacBook Pro 16" (M5 Pro, 64 ГБ, 1 ТБ
+  markup: 0
+  static_price: 438180
+- ad_id: store77-Z1MW00040
+  title: Ноутбук Apple MacBook Pro 16" (M5 Pro, 64 ГБ, 2 ТБ
+  markup: 0
+  static_price: 478880
+- ad_id: store77-MD4A4
+  title: Планшет Apple iPad 11 128 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_11_2025_128_wi_fi_blue
+  - ipad_11_2025_128_wi_fi_silver
+  - ipad_11_2025_128_wi_fi_pink
+- ad_id: store77-MD4H4
+  title: Планшет Apple iPad 11 256 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_11_2025_256_wi_fi_blue
+  - ipad_11_2025_256_wi_fi_silver
+  - ipad_11_2025_256_wi_fi_pink
+- ad_id: '409773543832'
   title: Планшет Apple iPad 11" (A16, 2025) 128 ГБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_11_2025_128_wi_fi_blue
   - ipad_11_2025_128_wi_fi_silver
   - ipad_11_2025_128_wi_fi_pink
-- ad_id: 266480350852
+- ad_id: '266480350852'
   title: Планшет Apple iPad 11" (A16, 2025) 256 ГБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_11_2025_256_wi_fi_blue
   - ipad_11_2025_256_wi_fi_silver
   - ipad_11_2025_256_wi_fi_pink
-- ad_id: 178355569252
+- ad_id: store77-MH314
+  title: Планшет Apple iPad Air 11" M4 128 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_air_11_m4_2026_128_wi_fi_grey
+  - ipad_air_11_m4_2026_128_wi_fi_blue
+  - ipad_air_11_m4_2026_128_wi_fi_purple
+- ad_id: store77-MH364
+  title: Планшет Apple iPad Air 11" M4 256 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_air_11_m4_2026_256_wi_fi_grey
+  - ipad_air_11_m4_2026_256_wi_fi_blue
+  - ipad_air_11_m4_2026_256_wi_fi_purple
+- ad_id: store77-MH5P4
+  title: Планшет Apple iPad Air 13" M4 128 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_air_13_m4_2026_128_wi_fi_grey
+  - ipad_air_13_m4_2026_128_wi_fi_blue
+- ad_id: store77-MH5V4
+  title: Планшет Apple iPad Air 13" M4 256 ГБ Wi-Fi
+  markup: 0
+  price_skus:
+  - ipad_air_13_m4_2026_256_wi_fi_grey
+  - ipad_air_13_m4_2026_256_wi_fi_blue
+- ad_id: '178355569252'
   title: Планшет Apple iPad Mini 7" 128 ГБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_mini_7_128_wi_fi_grey
   - ipad_mini_7_128_wi_fi_blue
-- ad_id: 613764782712
+- ad_id: '613764782712'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 256 ГБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_pro_11_m5_256_wi_fi_black
   - ipad_pro_11_m5_256_wi_fi_silver
-- ad_id: 972695599562
+- ad_id: '972695599562'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 512 ГБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_pro_11_m5_512_wi_fi_black
   - ipad_pro_11_m5_512_wi_fi_silver
-- ad_id: 376149995982
+- ad_id: '376149995982'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 1 ТБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_pro_11_m5_1tb_wi_fi_black
   - ipad_pro_11_m5_1tb_wi_fi_silver
-- ad_id: 252587465172
+- ad_id: '252587465172'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 256 ГБ LTE
   markup: 0
   price_skus:
   - ipad_pro_11_m5_256_lte_black
   - ipad_pro_11_m5_256_lte_silver
-- ad_id: 677940322792
+- ad_id: '677940322792'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 1 ТБ LTE
   markup: 0
   price_skus:
   - ipad_pro_11_m5_1tb_lte_black
   - ipad_pro_11_m5_1tb_lte_silver
-- ad_id: 128111305162
+- ad_id: '128111305162'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 2 ТБ LTE
   markup: 0
   price_skus:
   - ipad_pro_11_m5_2tb_lte_black
   - ipad_pro_11_m5_2tb_lte_silver
-- ad_id: 880102712762
+- ad_id: '880102712762'
   title: Планшет Apple iPad Pro 13" (M5, 2025) 256 ГБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_pro_13_m5_256_wi_fi_black
   - ipad_pro_13_m5_256_wi_fi_silver
-- ad_id: 387168810662
+- ad_id: '387168810662'
   title: Планшет Apple iPad Pro 13" (M5, 2025) 512 ГБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_pro_13_m5_512_wi_fi_black
   - ipad_pro_13_m5_512_wi_fi_silver
-- ad_id: 271656994802
+- ad_id: '271656994802'
   title: Планшет Apple iPad Pro 13" (M5, 2025) 1 ТБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_pro_13_m5_1tb_wi_fi_black
   - ipad_pro_13_m5_1tb_wi_fi_silver
-- ad_id: 873524474402
+- ad_id: '873524474402'
   title: Планшет Apple iPad Pro 13" (M5, 2025) 2 ТБ Wi-Fi
   markup: 0
   price_skus:
   - ipad_pro_13_m5_2tb_wi_fi_black
   - ipad_pro_13_m5_2tb_wi_fi_silver
-- ad_id: 611500236062
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-ultra-146-12-256gb-5g-silver
+  title: 'Планшет Samsung Galaxy Tab S11 Ultra, 12 ГБ + 256 '
+  markup: 0
+  static_price: 105990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-ultra-146-12-256gb-wi-fi-silver
+  title: 'Планшет Samsung Galaxy Tab S11 Ultra, 12 ГБ + 256 '
+  markup: 0
+  static_price: 98990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-ultra-146-12-512gb-5g-silver
+  title: 'Планшет Samsung Galaxy Tab S11 Ultra, 12 ГБ + 512 '
+  markup: 0
+  static_price: 122990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-ultra-146-12-512gb-wi-fi-silver
+  title: 'Планшет Samsung Galaxy Tab S11 Ultra, 12 ГБ + 512 '
+  markup: 0
+  static_price: 106990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-ultra-146-16-1tb-5g-silver
+  title: Планшет Samsung Galaxy Tab S11 Ultra, 16 ГБ + 1 ТБ
+  markup: 0
+  static_price: 142990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-ultra-146-16-1tb-wi-fi-silver
+  title: Планшет Samsung Galaxy Tab S11 Ultra, 16 ГБ + 1 ТБ
+  markup: 0
+  static_price: 123990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-11-12-128gb-5g-silver
+  title: Планшет Samsung Galaxy Tab S11, 12 ГБ + 128 ГБ, 5G
+  markup: 0
+  static_price: 73990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-11-12-128gb-wi-fi-silver
+  title: Планшет Samsung Galaxy Tab S11, 12 ГБ + 128 ГБ, Wi
+  markup: 0
+  static_price: 71990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-11-12-256gb-5g-silver
+  title: Планшет Samsung Galaxy Tab S11, 12 ГБ + 256 ГБ, 5G
+  markup: 0
+  static_price: 84990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-11-12-256gb-wi-fi-silver
+  title: Планшет Samsung Galaxy Tab S11, 12 ГБ + 256 ГБ, Wi
+  markup: 0
+  static_price: 77990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-11-12-512gb-5g-silver
+  title: Планшет Samsung Galaxy Tab S11, 12 ГБ + 512 ГБ, 5G
+  markup: 0
+  static_price: 89990
+- ad_id: biggeek-planset-samsung-galaxy-tab-s11-11-12-512gb-wi-fi-silver
+  title: Планшет Samsung Galaxy Tab S11, 12 ГБ + 512 ГБ, Wi
+  markup: 0
+  static_price: 83990
+- ad_id: '611500236062'
   title: Apple iPhone 16 128 ГБ (SIM)
   markup: 0
   price_skus:
@@ -284,7 +720,7 @@ listings:
   - 16_128_blue
   - 16_128_pink
   - 16_128_white
-- ad_id: 974532574052
+- ad_id: '974532574052'
   title: Apple iPhone 16 256 ГБ (SIM)
   markup: 0
   price_skus:
@@ -292,7 +728,7 @@ listings:
   - 16_256_blue
   - 16_256_pink
   - 16_256_white
-- ad_id: 390945771722
+- ad_id: '390945771722'
   title: Apple iPhone 17 256 ГБ (eSIM + eSIM)
   markup: 0
   price_skus:
@@ -301,7 +737,7 @@ listings:
   - 17_256_lavender
   - 17_256_sage
   - 17_256_white
-- ad_id: 669356397752
+- ad_id: '669356397752'
   title: Apple iPhone 17 256 ГБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
@@ -310,7 +746,7 @@ listings:
   - 17_256_lavender_nano
   - 17_256_sage_nano
   - 17_256_white_nano
-- ad_id: 219125254192
+- ad_id: '219125254192'
   title: Apple iPhone 17 512 ГБ (eSIM + eSIM)
   markup: 0
   price_skus:
@@ -319,7 +755,7 @@ listings:
   - 17_512_lavender
   - 17_512_sage
   - 17_512_white
-- ad_id: 647204326182
+- ad_id: '647204326182'
   title: Apple iPhone 17 512 ГБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
@@ -328,7 +764,7 @@ listings:
   - 17_512_lavender_nano
   - 17_512_sage_nano
   - 17_512_white_nano
-- ad_id: 667130219622
+- ad_id: '667130219622'
   title: Apple iPhone 17 Air 1 ТБ
   markup: 0
   price_skus:
@@ -336,7 +772,7 @@ listings:
   - air_1tb_blue
   - air_1tb_gold
   - air_1tb_white
-- ad_id: 713445677242
+- ad_id: '713445677242'
   title: Apple iPhone 17 Air 256 ГБ
   markup: 0
   price_skus:
@@ -344,7 +780,7 @@ listings:
   - air_256_blue
   - air_256_gold
   - air_256_white
-- ad_id: 743826479542
+- ad_id: '743826479542'
   title: Apple iPhone 17 Air 512 ГБ
   markup: 0
   price_skus:
@@ -352,101 +788,529 @@ listings:
   - air_512_blue
   - air_512_gold
   - air_512_white
-- ad_id: 498775832072
+- ad_id: '498775832072'
   title: Apple iPhone 17 Pro 1 ТБ (eSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_1tb_blue
   - 17_pro_1tb_orange
   - 17_pro_1tb_silver
-- ad_id: 554239870182
+- ad_id: '554239870182'
   title: Apple iPhone 17 Pro 1 ТБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_1tb_blue_nano
   - 17_pro_1tb_orange_nano
   - 17_pro_1tb_silver_nano
-- ad_id: 395322318412
+- ad_id: '395322318412'
   title: Apple iPhone 17 Pro 256 ГБ (eSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_256_blue
   - 17_pro_256_orange
   - 17_pro_256_silver
-- ad_id: 770966262222
+- ad_id: '770966262222'
   title: Apple iPhone 17 Pro 256 ГБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_256_blue_nano
   - 17_pro_256_orange_nano
   - 17_pro_256_silver_nano
-- ad_id: 965610392452
+- ad_id: '965610392452'
   title: Apple iPhone 17 Pro 512 ГБ (eSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_512_blue
   - 17_pro_512_orange
   - 17_pro_512_silver
-- ad_id: 779528177062
+- ad_id: '779528177062'
   title: Apple iPhone 17 Pro 512 ГБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_512_blue_nano
   - 17_pro_512_orange_nano
   - 17_pro_512_silver_nano
-- ad_id: 236091660132
+- ad_id: '236091660132'
   title: Apple iPhone 17 Pro Max 1 ТБ (eSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_1tb_blue
   - 17_pro_max_1tb_orange
   - 17_pro_max_1tb_silver
-- ad_id: 497956930092
+- ad_id: '497956930092'
   title: Apple iPhone 17 Pro Max 1 ТБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_1tb_blue_nano
   - 17_pro_max_1tb_orange_nano
   - 17_pro_max_1tb_silver_nano
-- ad_id: 435100358532
+- ad_id: '435100358532'
   title: Apple iPhone 17 Pro Max 2 ТБ (eSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_2tb_blue
   - 17_pro_max_2tb_orange
   - 17_pro_max_2tb_silver
-- ad_id: 199460178322
+- ad_id: '199460178322'
   title: Apple iPhone 17 Pro Max 2 ТБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_2tb_blue_nano
   - 17_pro_max_2tb_orange_nano
   - 17_pro_max_2tb_silver_nano
-- ad_id: 676051461412
+- ad_id: '676051461412'
   title: Apple iPhone 17 Pro Max 256 ГБ (eSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_256_blue
   - 17_pro_max_256_orange
   - 17_pro_max_256_silver
-- ad_id: 461533466882
+- ad_id: '461533466882'
   title: Apple iPhone 17 Pro Max 256 ГБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_256_blue_nano
   - 17_pro_max_256_orange_nano
   - 17_pro_max_256_silver_nano
-- ad_id: 157317398462
+- ad_id: '157317398462'
   title: Apple iPhone 17 Pro Max 512 ГБ (eSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_512_blue
   - 17_pro_max_512_orange
   - 17_pro_max_512_silver
-- ad_id: 325177358492
+- ad_id: '325177358492'
   title: Apple iPhone 17 Pro Max 512 ГБ (nanoSIM + eSIM)
   markup: 0
   price_skus:
   - 17_pro_max_512_blue_nano
   - 17_pro_max_512_orange_nano
   - 17_pro_max_512_silver_nano
+- ad_id: biggeek-smartfon-google-pixel-11-pro-fold-256gb-16gb-olive-g
+  title: 'Смартфон Google Pixel 11 Pro Fold, 16 ГБ + 256 ГБ '
+  markup: 0
+  static_price: 162990
+- ad_id: biggeek-smartfon-google-pixel-11-pro-fold-512gb-16gb-olive-g
+  title: 'Смартфон Google Pixel 11 Pro Fold, 16 ГБ + 512 ГБ '
+  markup: 0
+  static_price: 180990
+- ad_id: biggeek-smartfon-google-pixel-11-pro-xl-256gb-12gb-fog-g
+  title: Смартфон Google Pixel 11 Pro XL, 12 ГБ + 256 ГБ (в
+  markup: 0
+  static_price: 136990
+- ad_id: biggeek-smartfon-google-pixel-11-pro-xl-512gb-16gb-fog-g
+  title: Смартфон Google Pixel 11 Pro XL, 16 ГБ + 512 ГБ (в
+  markup: 0
+  static_price: 163990
+- ad_id: biggeek-smartfon-google-pixel-11-pro-256gb-12gb-fog-g
+  title: Смартфон Google Pixel 11 Pro, 12 ГБ + 256 ГБ (верс
+  markup: 0
+  static_price: 120990
+- ad_id: biggeek-smartfon-google-pixel-11-pro-1tb-16gb-obsidian-matte-g
+  title: Смартфон Google Pixel 11 Pro, 16 ГБ + 1 ТБ (версия
+  markup: 0
+  static_price: 169990
+- ad_id: biggeek-smartfon-google-pixel-11-pro-512gb-16gb-fog-g
+  title: Смартфон Google Pixel 11 Pro, 16 ГБ + 512 ГБ (верс
+  markup: 0
+  static_price: 137990
+- ad_id: biggeek-smartfon-google-pixel-11-256gb-12gb-frost-g
+  title: Смартфон Google Pixel 11, 12 ГБ + 256 ГБ (версия G
+  markup: 0
+  static_price: 90990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-ultra-12-gb-256-gb-goluboj-sky-blue-snapdragon
+  title: 'Смартфон Samsung Galaxy S26 Ultra, 12 ГБ + 256 ГБ '
+  markup: 0
+  static_price: 83990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-ultra-12-gb-512-gb-belyj-white-snapdragon
+  title: 'Смартфон Samsung Galaxy S26 Ultra, 12 ГБ + 512 ГБ '
+  markup: 0
+  static_price: 101990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-ultra-16-gb-1-tb-goluboj-sky-blue-snapdragon
+  title: Смартфон Samsung Galaxy S26 Ultra, 16 ГБ + 1 ТБ (S
+  markup: 0
+  static_price: 123990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-12-gb-256-gb-serebristyj-silver-shadow-exynos
+  title: Смартфон Samsung Galaxy S26, 12 ГБ + 256 ГБ (Exyno
+  markup: 0
+  static_price: 67990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-12-gb-256-gb-goluboj-sky-blue-snapdragon
+  title: Смартфон Samsung Galaxy S26, 12 ГБ + 256 ГБ (Snapd
+  markup: 0
+  static_price: 65990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-12-gb-512-gb-belyj-white-exynos
+  title: Смартфон Samsung Galaxy S26, 12 ГБ + 512 ГБ (Exyno
+  markup: 0
+  static_price: 74990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-12-gb-512-gb-belyj-white-snapdragon
+  title: Смартфон Samsung Galaxy S26, 12 ГБ + 512 ГБ (Snapd
+  markup: 0
+  static_price: 88990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-plus-12-gb-256-gb-goluboj-sky-blue-exynos
+  title: Смартфон Samsung Galaxy S26+, 12 ГБ + 256 ГБ (Exyn
+  markup: 0
+  static_price: 73990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-plus-12-gb-256-gb-belyj-white-snapdragon
+  title: Смартфон Samsung Galaxy S26+, 12 ГБ + 256 ГБ (Snap
+  markup: 0
+  static_price: 86990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-plus-12-gb-256-gb-cernyj-black-exynos
+  title: Смартфон Samsung Galaxy S26+, 12 ГБ + 256 ГБ (Exyn
+  markup: 0
+  static_price: 75990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-plus-12-gb-512-gb-belyj-white-exynos
+  title: Смартфон Samsung Galaxy S26+, 12 ГБ + 512 ГБ (Exyn
+  markup: 0
+  static_price: 84990
+- ad_id: biggeek-smartfon-samsung-galaxy-s26-plus-12-gb-512-gb-goluboj-sky-blue-snapdragon
+  title: Смартфон Samsung Galaxy S26+, 12 ГБ + 512 ГБ (Snap
+  markup: 0
+  static_price: 95990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-flip8-12-gb-plus-256-gb-grafitovyj-graphite-exynos
+  title: Смартфон Samsung Galaxy Z Flip8, 12 ГБ + 256 ГБ (E
+  markup: 0
+  static_price: 81990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-flip8-12-gb-plus-512-gb-grafitovyj-graphite-exynos
+  title: Смартфон Samsung Galaxy Z Flip8, 12 ГБ + 512 ГБ (E
+  markup: 0
+  static_price: 94990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-fold8-ultra-12-gb-256-gb-seryj-graphite-snapdragon
+  title: Смартфон Samsung Galaxy Z Fold8 Ultra, 12 ГБ + 256
+  markup: 0
+  static_price: 146990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-fold8-ultra-12-gb-512-gb-seryj-graphite-snapdragon
+  title: Смартфон Samsung Galaxy Z Fold8 Ultra, 12 ГБ + 512
+  markup: 0
+  static_price: 156990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-fold8-ultra-16-gb-1-tb-seryj-graphite-snapdragon
+  title: Смартфон Samsung Galaxy Z Fold8 Ultra, 16 ГБ + 1 Т
+  markup: 0
+  static_price: 209990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-fold8-12-gb-256-gb-lavanda-lavender-snapdragon
+  title: Смартфон Samsung Galaxy Z Fold8, 12 ГБ + 256 ГБ (S
+  markup: 0
+  static_price: 131990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-fold8-12-gb-512-gb-seryj-graphite-snapdragon
+  title: Смартфон Samsung Galaxy Z Fold8, 12 ГБ + 512 ГБ (S
+  markup: 0
+  static_price: 150990
+- ad_id: biggeek-smartfon-samsung-galaxy-z-fold8-16-gb-1-tb-seryj-graphite-snapdragon
+  title: Смартфон Samsung Galaxy Z Fold8, 16 ГБ + 1 ТБ (Sna
+  markup: 0
+  static_price: 192990
+- ad_id: biggeek-smartfon-xiaomi-17-ultra-16gb-1tb-starlit-green-gl
+  title: Смартфон Xiaomi 17 Ultra, 16 ГБ + 1 ТБ (версия Glo
+  markup: 0
+  static_price: 120990
+- ad_id: biggeek-smartfon-xiaomi-17-ultra-16gb-512gb-starlit-green-gl
+  title: Смартфон Xiaomi 17 Ultra, 16 ГБ + 512 ГБ (версия G
+  markup: 0
+  static_price: 101990
+- ad_id: biggeek-smartfon-xiaomi-17-12gb-256gb-alpine-pink-gl
+  title: Смартфон Xiaomi 17, 12 ГБ + 256 ГБ (версия Global)
+  markup: 0
+  static_price: 73990
+- ad_id: biggeek-smartfon-xiaomi-17-12gb-512gb-black-gl
+  title: Смартфон Xiaomi 17, 12 ГБ + 512 ГБ (версия Global)
+  markup: 0
+  static_price: 76990
+- ad_id: biggeek-smartfon-xiaomi-17t-pro-12gb-1tb-deep-blue-gl
+  title: Смартфон Xiaomi 17T Pro, 12 ГБ + 1 ТБ (версия Glob
+  markup: 0
+  static_price: 72990
+- ad_id: biggeek-smartfon-xiaomi-17t-pro-12gb-256gb-deep-blue-gl
+  title: Смартфон Xiaomi 17T Pro, 12 ГБ + 256 ГБ (версия Gl
+  markup: 0
+  static_price: 59990
+- ad_id: biggeek-smartfon-xiaomi-17t-pro-12gb-512gb-deep-blue-gl
+  title: Смартфон Xiaomi 17T Pro, 12 ГБ + 512 ГБ (версия Gl
+  markup: 0
+  static_price: 64990
+- ad_id: biggeek-smartfon-xiaomi-17t-12gb-256gb-opal-white-gl
+  title: Смартфон Xiaomi 17T, 12 ГБ + 256 ГБ (версия Global
+  markup: 0
+  static_price: 43990
+- ad_id: biggeek-smartfon-xiaomi-17t-12gb-512gb-blue-gl
+  title: Смартфон Xiaomi 17T, 12 ГБ + 512 ГБ (версия Global
+  markup: 0
+  static_price: 46990
+- ad_id: store77-DAHT01AP
+  title: Выпрямитель Dyson Airstrait HT01
+  markup: 0
+  static_price: 32180
+- ad_id: store77-HS08AS (143161-01) EU
+  title: 'Стайлер Dyson Airwrap Coanda2x™ HS09 для кудрявых '
+  markup: 0
+  static_price: 56980
+- ad_id: store77-HS09JPL
+  title: Стайлер Dyson Airwrap Coanda2x™ HS09
+  markup: 0
+  static_price: 44580
+- ad_id: store77-HS05LCN
+  title: Стайлер Dyson Airwrap Complete Long HS05
+  markup: 0
+  static_price: 39680
+- ad_id: store77-HS08CCVBT EU
+  title: 'Стайлер Dyson Airwrap i.d. Long HS08 для кудрявых '
+  markup: 0
+  static_price: 42980
+- ad_id: store77-HS08PBRC (107214-01)
+  title: Стайлер Dyson Airwrap i.d. Long HS08 для прямых во
+  markup: 0
+  static_price: 36280
+- ad_id: store77-HD07FF
+  title: Фен Dyson Supersonic HD07
+  markup: 0
+  static_price: 38680
+- ad_id: store77-DSHD17PKP/(599275-01)
+  title: Фен Dyson Supersonic HD17 R Pro для прямых волос (
+  markup: 0
+  static_price: 40080
+- ad_id: store77-HD16CPT EU
+  title: Фен Dyson Supersonic Nural HD16 для кудрявых волос
+  markup: 0
+  static_price: 42380
+- ad_id: store77-DG5DCB (448091-01)
+  title: Беспроводной пылесос Dyson Gen5 Detect Absolute SV
+  markup: 0
+  static_price: 69080
+- ad_id: store77-DPVFB EU (492747-01)
+  title: Беспроводной пылесос Dyson PencilVac Fluffy
+  markup: 0
+  static_price: 42980
+- ad_id: store77-DPVFB (492714-01)
+  title: Беспроводной пылесос Dyson PencilVac Fluffycone
+  markup: 0
+  static_price: 40480
+- ad_id: store77-DPWBC EU(637249-01)
+  title: Беспроводной пылесос Dyson PencilWash
+  markup: 0
+  static_price: 41880
+- ad_id: store77-DV10ACG (448883-01/394433-01)
+  title: Беспроводной пылесос Dyson V10 Absolute
+  markup: 0
+  static_price: 40480
+- ad_id: store77-SV12RDIRNKR(447796-01)
+  title: Беспроводной пылесос Dyson V10 Cyclon
+  markup: 0
+  static_price: 37480
+- ad_id: store77-SV55-AMVNBKEU(639793-02-03)
+  title: Беспроводной пылесос Dyson V10 Konical
+  markup: 0
+  static_price: 43480
+- ad_id: store77-DV12dsa (448884-01/470521-01/405880-01)
+  title: Беспроводной пылесос Dyson V12 Detect Slim Absolut
+  markup: 0
+  static_price: 43580
+- ad_id: store77-DV12DSSNGEU (485450-01)
+  title: Беспроводной пылесос Dyson V12s Detect Slim Submar
+  markup: 0
+  static_price: 46780
+- ad_id: store77-DV15DANG(446986-01)
+  title: Беспроводной пылесос Dyson V15 Detect Absolute SV4
+  markup: 0
+  static_price: 58880
+- ad_id: store77-DV15DSGG (448798-01/448799-01)
+  title: Беспроводной пылесос Dyson V15s Detect Submarine
+  markup: 0
+  static_price: 61680
+- ad_id: store77-DV16PABCKR (495960-01)
+  title: Беспроводной пылесос Dyson V16 Piston Animal с под
+  markup: 0
+  static_price: 86280
+- ad_id: store77-DV16PASBC
+  title: Беспроводной пылесос Dyson V16 Piston Animal Subma
+  markup: 0
+  static_price: 77380
+- ad_id: store77-DV16PABC
+  title: Беспроводной пылесос Dyson V16 Piston Animal
+  markup: 0
+  static_price: 63380
+- ad_id: store77-DV8AGN (476547-01)
+  title: Беспроводной пылесос Dyson V8 Absolute
+  markup: 0
+  static_price: 28580
+- ad_id: store77-DV8ASN (492637-01)
+  title: Беспроводной пылесос Dyson V8 Advanced
+  markup: 0
+  static_price: 33580
+- ad_id: store77-SV55-AMAGNBLK (226587-01) EU
+  title: Беспроводной пылесос Dyson V8 Cyclone
+  markup: 0
+  static_price: 30280
+- ad_id: store77-DCWHPBRC (426450-01)
+  title: Моющий пылесос Dyson Clean+Wash Hygiene
+  markup: 0
+  static_price: 48680
+- ad_id: store77-DG1WBBL (473817-01)
+  title: Моющий пылесос Dyson G1 Wash
+  markup: 0
+  static_price: 41180
+- ad_id: store77-Lego10313
+  title: Конструктор LEGO Botanicals 10313 Букет полевых цв
+  markup: 0
+  static_price: 9880
+- ad_id: store77-Lego10374
+  title: Конструктор LEGO Botanicals 10374 Букет розовых ро
+  markup: 0
+  static_price: 10880
+- ad_id: store77-Lego11501
+  title: Конструктор LEGO Botanicals 11501 Букет тюльпанов
+  markup: 0
+  static_price: 10280
+- ad_id: store77-Lego11502
+  title: Конструктор LEGO Botanicals 11502 Букет подсолнухо
+  markup: 0
+  static_price: 10880
+- ad_id: store77-Lego11504
+  title: Конструктор LEGO Botanicals 11504 Лилия мира в гор
+  markup: 0
+  static_price: 10680
+- ad_id: store77-DO360ACB
+  title: Экшн-камера DJI Osmo 360 Adventure Combo
+  markup: 0
+  static_price: 39680
+- ad_id: store77-DO360SCB
+  title: Экшн-камера DJI Osmo 360 Standard Combo
+  markup: 0
+  static_price: 29780
+- ad_id: store77-DOP4PACB
+  title: Экшн-камера DJI Osmo Action 4 Adventure Combo
+  markup: 0
+  static_price: 30780
+- ad_id: store77-DOA4SCB
+  title: Экшн-камера DJI Osmo Action 4 Standard Combo
+  markup: 0
+  static_price: 22680
+- ad_id: store77-DOA5PACB
+  title: Экшн-камера DJI Osmo Action 5 Pro Adventure Combo
+  markup: 0
+  static_price: 35780
+- ad_id: store77-DOA5PSCB
+  title: Экшн-камера DJI Osmo Action 5 Pro Standart Combo
+  markup: 0
+  static_price: 29180
+- ad_id: store77-DOA6ACB
+  title: Экшн-камера DJI Osmo Action 6 Adventure Combo
+  markup: 0
+  static_price: 45180
+- ad_id: store77-DOA6SCB
+  title: Экшн-камера DJI Osmo Action 6 Standart Combo
+  markup: 0
+  static_price: 41580
+- ad_id: store77-DON128B
+  title: Экшн-камера DJI Osmo Nano 128 ГБ
+  markup: 0
+  static_price: 30880
+- ad_id: store77-DON64B
+  title: Экшн-камера DJI Osmo Nano 64 ГБ
+  markup: 0
+  static_price: 28680
+- ad_id: store77-DOP3CCB
+  title: Экшн-камера DJI Osmo Pocket 3 Creator Combo
+  markup: 0
+  static_price: 39680
+- ad_id: store77-DOP4CCB
+  title: Экшн-камера DJI Osmo Pocket 4 Creator Combo
+  markup: 0
+  static_price: 52880
+- ad_id: store77-DOP4B
+  title: Экшн-камера DJI Osmo Pocket 4
+  markup: 0
+  static_price: 42980
+- ad_id: store77-GPH12
+  title: Экшн-камера GoPro HERO 12 Black Edition
+  markup: 0
+  static_price: 25380
+- ad_id: store77-GPH13CE
+  title: Экшн-камера GoPro HERO 13 Black Creator Edition
+  markup: 0
+  static_price: 48980
+- ad_id: store77-GPH13BE
+  title: Экшн-камера GoPro HERO 13 Black Edition
+  markup: 0
+  static_price: 29180
+- ad_id: store77-GPH13SB
+  title: Экшн-камера GoPro HERO 13 Black Speciality Bundle
+  markup: 0
+  static_price: 31980
+- ad_id: store77-I360AP2MM93
+  title: Экшн-камера Insta360 Ace Pro 2 MM93 Limited Editio
+  markup: 0
+  static_price: 52280
+- ad_id: store77-I360G3S128W
+  title: Экшн-камера Insta360 GO 3S 128 ГБ
+  markup: 0
+  static_price: 24280
+- ad_id: store77-I3603S64B
+  title: Экшн-камера Insta360 GO 3S 64 ГБ
+  markup: 0
+  static_price: 22180
+- ad_id: store77-I360GOUCBW
+  title: Экшн-камера Insta360 GO Ultra Creator Bundle
+  markup: 0
+  static_price: 39680
+- ad_id: store77-I360GOUW
+  title: Экшн-камера Insta360 GO Ultra
+  markup: 0
+  static_price: 34180
+- ad_id: store77-I360LUW
+  title: Экшн-камера Insta360 Luna Ultra
+  markup: 0
+  static_price: 62780
+- ad_id: store77-CINSABTA-LUNA04
+  title: Экшн-камера Insta360 Luna Ultra Creator Bundle
+  markup: 0
+  static_price: 84780
+- ad_id: store77-I360X3
+  title: Экшн-камера Insta360 X3
+  markup: 0
+  static_price: 23180
+- ad_id: marshall-middleton-cream
+  title: Marshall Middleton
+  markup: 0
+  static_price: 19000
+- ad_id: marshall-motif-ii-anc-black
+  title: Marshall Motif II ANC
+  markup: 0
+  static_price: 9500
+- ad_id: '206966955902'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Clear (L)
+  markup: 0
+  static_price: 38900
+- ad_id: '801148016312'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Clear (M)
+  markup: 0
+  static_price: 38900
+- ad_id: '755503876112'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Polar Grad
+  markup: 0
+  static_price: 38900
+- ad_id: '182977591852'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Polar Grad
+  markup: 0
+  static_price: 38900
+- ad_id: '619575511072'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 G15 (L) Gr
+  markup: 0
+  static_price: 41900
+- ad_id: '163404328072'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 G15 (M) Gr
+  markup: 0
+  static_price: 41900
+- ad_id: '284461309262'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Transition
+  markup: 0
+  static_price: 40900
+- ad_id: '427475132592'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Transition
+  markup: 0
+  static_price: 40900
+- ad_id: '761821580652'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Transition
+  markup: 0
+  static_price: 41900
+- ad_id: '982006935252'
+  title: Смарт-очки Ray-Ban Meta Wayfarer RW4012 Transition
+  markup: 0
+  static_price: 41900
