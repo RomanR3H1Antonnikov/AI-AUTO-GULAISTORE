@@ -1373,7 +1373,11 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "Brand": "Apple",
+      "Diagonal": "27",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1387,7 +1391,11 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "Brand": "Apple",
+      "Diagonal": "27",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1401,7 +1409,11 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "Brand": "Apple",
+      "Diagonal": "27",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1415,7 +1427,11 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "Brand": "Apple",
+      "Diagonal": "27",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1429,7 +1445,11 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "Brand": "Apple",
+      "Diagonal": "27",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1443,7 +1463,11 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "Brand": "Apple",
+      "Diagonal": "27",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1457,7 +1481,11 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "Brand": "Apple",
+      "Diagonal": "27",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1471,9 +1499,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1487,9 +1519,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1503,9 +1539,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1519,9 +1559,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1535,9 +1579,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1551,9 +1599,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1567,9 +1619,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1583,9 +1639,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1599,9 +1659,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1615,9 +1679,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1631,9 +1699,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1647,9 +1719,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1663,9 +1739,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1679,9 +1759,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1695,9 +1779,13 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Моноблок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Моноблоки",
+      "Model": "iMac 24",
+      "Diagonal": "24",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1711,9 +1799,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Mini (M4)",
+      "ProcessorLine": "Apple M4",
+      "Processor": "Apple M4",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1727,9 +1820,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Mini (M4)",
+      "ProcessorLine": "Apple M4",
+      "Processor": "Apple M4",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1743,9 +1841,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Mini (M4)",
+      "ProcessorLine": "Apple M4",
+      "Processor": "Apple M4",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1759,9 +1862,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Mini (M4)",
+      "ProcessorLine": "Apple M4 Pro",
+      "Processor": "Apple M4 Pro",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1775,9 +1883,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Mini (M4)",
+      "ProcessorLine": "Apple M4 Pro",
+      "Processor": "Apple M4 Pro",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1791,9 +1904,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Studio (M4)",
+      "ProcessorLine": "Apple M4 Max",
+      "Processor": "Apple M4 Max",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1807,9 +1925,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Studio (M4)",
+      "ProcessorLine": "Apple M4 Max",
+      "Processor": "Apple M4 Max",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1823,9 +1946,14 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Системный блок",
       "Brand": "Apple",
-      "Address": "Москва, улица Барклая, 8"
+      "Address": "Москва, улица Барклая, 8",
+      "GoodsSubType": "Системные блоки",
+      "Model": "Mac Studio (M4)",
+      "ProcessorLine": "Apple M4 Max",
+      "Processor": "Apple M4 Max",
+      "ExtendedCondition": "Новое",
+      "BoxSealed": "Да"
     }
   },
   {
@@ -1840,12 +1968,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "1000",
-      "ScreenSize": "6",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 13 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -1860,12 +1999,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "512",
-      "ScreenSize": "6",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 13 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -1880,12 +2030,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "1000",
-      "ScreenSize": "6",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 13 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -1900,12 +2061,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "2000",
-      "ScreenSize": "6",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 13 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -1920,12 +2092,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "4000",
-      "ScreenSize": "6",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 13 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -1940,12 +2123,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "2000",
-      "ScreenSize": "6",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 13 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -1960,12 +2154,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "32",
       "DriveSize": "2000",
-      "ScreenSize": "6",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 13 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -1980,12 +2185,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "1000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2000,12 +2216,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "512",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2020,12 +2247,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "1000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2040,12 +2278,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "2000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2060,12 +2309,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "4000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2080,12 +2340,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "2000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2100,12 +2371,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "4000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2120,12 +2402,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "32",
       "DriveSize": "1000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2140,12 +2433,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "32",
       "DriveSize": "2000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2160,12 +2464,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "32",
       "DriveSize": "4000",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2180,12 +2495,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "32",
       "DriveSize": "512",
-      "ScreenSize": "15",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "15.3",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Air 15 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "2880x1864",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2200,12 +2526,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "8",
       "DriveSize": "256",
-      "ScreenSize": "13",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Neo 13 (A18 Pro)",
+      "ProcessorLine": "Apple A18 Pro",
+      "Processor": "Apple A18 Pro",
+      "ProcessorCores": "6",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 6-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2220,12 +2557,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "8",
       "DriveSize": "512",
-      "ScreenSize": "13",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "13.6",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Neo 13 (A18 Pro)",
+      "ProcessorLine": "Apple A18 Pro",
+      "Processor": "Apple A18 Pro",
+      "ProcessorCores": "6",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 6-core",
+      "ScreenRes": "2560x1664",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2240,12 +2588,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "36",
       "DriveSize": "2000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2260,12 +2619,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "1000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2280,12 +2650,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "2000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2300,12 +2681,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "1000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2320,12 +2712,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "16",
       "DriveSize": "512",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2340,12 +2743,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "1000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2360,12 +2774,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "32",
       "DriveSize": "1000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5)",
+      "ProcessorLine": "Apple M5",
+      "Processor": "Apple M5",
+      "ProcessorCores": "10",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 10-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2380,12 +2805,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "128",
-      "DriveSize": "4000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "DriveSize": "128",
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2400,12 +2836,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "128",
-      "DriveSize": "8000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "DriveSize": "128",
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2420,12 +2867,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "48",
       "DriveSize": "2000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2440,12 +2898,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "48",
       "DriveSize": "1000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2460,12 +2929,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "64",
       "DriveSize": "1000",
-      "ScreenSize": "14",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "14.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 14 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3024x1964",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2480,12 +2960,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "512",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M4 Pro)",
+      "ProcessorLine": "Apple M4 Pro",
+      "Processor": "Apple M4 Pro",
+      "ProcessorCores": "12",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2500,12 +2991,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "48",
       "DriveSize": "512",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M4 Pro)",
+      "ProcessorLine": "Apple M4 Pro",
+      "Processor": "Apple M4 Pro",
+      "ProcessorCores": "12",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2520,12 +3022,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "36",
       "DriveSize": "2000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2540,12 +3053,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "48",
       "DriveSize": "2000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2560,12 +3084,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "24",
       "DriveSize": "1000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2580,12 +3115,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "48",
       "DriveSize": "1000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2600,12 +3146,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "128",
-      "DriveSize": "2000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "DriveSize": "128",
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2620,12 +3177,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "128",
-      "DriveSize": "8000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "DriveSize": "128",
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2640,12 +3208,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "36",
       "DriveSize": "4000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2660,12 +3239,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "48",
       "DriveSize": "4000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2680,12 +3270,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "64",
       "DriveSize": "2000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Max)",
+      "ProcessorLine": "Apple M5 Max",
+      "Processor": "Apple M5 Max",
+      "ProcessorCores": "16",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 40-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2700,12 +3301,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "48",
       "DriveSize": "2000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2720,12 +3332,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "64",
       "DriveSize": "1000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2740,12 +3363,23 @@
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
       "Vendor": "Apple",
-      "KBLayout": "Английская",
+      "KBLayout": "Нет кириллицы",
       "BoxSealed": "Да",
       "RamSize": "64",
       "DriveSize": "2000",
-      "ScreenSize": "16",
-      "Address": "Москва, улица Барклая, 8"
+      "ScreenSize": "16.2",
+      "Address": "Москва, улица Барклая, 8",
+      "Model": "MacBook Pro 16 (M5 Pro)",
+      "ProcessorLine": "Apple M5 Pro",
+      "Processor": "Apple M5 Pro",
+      "ProcessorCores": "14",
+      "VideocardType": "Встроенная",
+      "Videocard": "Apple graphics 20-core",
+      "ScreenRes": "3456x2234",
+      "DrivesConfig": "SSD",
+      "OperatingSystem": "macOS",
+      "Set": "Зарядное устройство | Коробка",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2759,13 +3393,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "128",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad 11 (2025)",
+      "RamSize": "8",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2779,13 +3418,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "256",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad 11 (2025)",
+      "RamSize": "8",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2799,13 +3443,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "128",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Air 11 (M4)",
+      "RamSize": "8",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2819,13 +3468,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "256",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Air 11 (M4)",
+      "RamSize": "8",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2839,13 +3493,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "128",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Air 13 (M4)",
+      "RamSize": "8",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2859,13 +3518,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "256",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Air 13 (M4)",
+      "RamSize": "8",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2879,13 +3543,17 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "128",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad mini 7",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2899,13 +3567,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "256",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 11 (2025)",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2919,13 +3592,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "512",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 11 (2025)",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2939,12 +3617,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 11 (2025)",
+      "MemorySize": "1000",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2958,13 +3642,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "256",
       "SimSlot": "LTE",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 11 (2025)",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2978,12 +3667,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "SimSlot": "LTE",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 11 (2025)",
+      "MemorySize": "1000",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -2997,12 +3692,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "SimSlot": "LTE",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 11 (2025)",
+      "MemorySize": "2000",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3016,13 +3717,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "256",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 13 (2025)",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3036,13 +3742,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
       "MemorySize": "512",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 13 (2025)",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3056,12 +3767,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 13 (2025)",
+      "MemorySize": "1000",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3075,12 +3792,18 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
+      "GoodsType": "Планшеты",
       "Brand": "Apple",
-      "SimSlot": "Wi-Fi",
+      "SimSlot": "Нет",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "ProductsType": "Планшет",
+      "Model": "iPad Pro 13 (2025)",
+      "MemorySize": "2000",
+      "RamSize": "16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3322,13 +4045,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "128",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3342,13 +4068,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 16",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3362,13 +4091,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3382,13 +4114,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3402,13 +4137,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "512",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3422,13 +4160,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "512",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3442,12 +4183,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "eSIM",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Air 1 ТБ",
+      "MemorySize": "1000",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3461,13 +4206,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "eSIM",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Air",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3481,13 +4229,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "512",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "eSIM",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Air",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3501,12 +4252,15 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "MemorySize": "1000",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3520,12 +4274,15 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "MemorySize": "1000",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3539,13 +4296,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3559,13 +4319,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3579,13 +4342,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "512",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3599,13 +4365,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "512",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3619,12 +4388,15 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "MemorySize": "1000",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3638,12 +4410,15 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "MemorySize": "1000",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3657,12 +4432,15 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "MemorySize": "2000",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3676,12 +4454,15 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "MemorySize": "2000",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3695,13 +4476,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro Max",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3715,13 +4499,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "256",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro Max",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3735,13 +4522,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "512",
-      "SimConfig": "Без SIM | eSIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro Max",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
@@ -3755,13 +4545,16 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильный телефон",
+      "GoodsType": "Мобильные телефоны",
       "Vendor": "Apple",
       "MemorySize": "512",
-      "SimConfig": "Две SIM | SIM + eSIM",
+      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный"
+      "DeviceHistory": "Неактивированный",
+      "Model": "iPhone 17 Pro Max",
+      "Set": "Коробка | Провод зарядки",
+      "ExtendedCondition": "Новое"
     }
   },
   {
