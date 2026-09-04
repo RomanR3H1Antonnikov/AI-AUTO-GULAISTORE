@@ -3817,9 +3817,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "256",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3836,9 +3835,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "256",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3855,9 +3853,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "512",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3874,9 +3871,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "512",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3893,9 +3889,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "16",
+      "MemorySize": "1000",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3912,9 +3907,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "16",
+      "MemorySize": "1000",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3931,9 +3925,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "128",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3950,9 +3943,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "128",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3969,9 +3961,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "256",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -3988,9 +3979,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "256",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -4007,9 +3997,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "512",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -4026,9 +4015,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Планшет",
       "Brand": "Samsung",
-      "MemorySize": "12",
+      "MemorySize": "512",
       "SimSlot": "Wi-Fi",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8"
@@ -4045,15 +4033,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "128",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 16",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4068,15 +4049,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 16",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4091,15 +4065,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4114,15 +4081,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4137,15 +4097,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "512",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4160,15 +4113,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "512",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4183,15 +4129,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "SimConfig": "eSIM",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Air 1 ТБ",
-      "MemorySize": "1000",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4206,15 +4145,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "eSIM",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Air",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4229,15 +4161,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "512",
-      "SimConfig": "eSIM",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Air",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4252,14 +4177,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "MemorySize": "1000",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4274,14 +4193,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "MemorySize": "1000",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4296,15 +4209,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4319,15 +4225,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4342,15 +4241,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "512",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4365,15 +4257,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "512",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4388,14 +4273,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "MemorySize": "1000",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4410,14 +4289,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "MemorySize": "1000",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4432,14 +4305,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "MemorySize": "2000",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4454,14 +4321,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "MemorySize": "2000",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4476,15 +4337,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro Max",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4499,15 +4353,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "256",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro Max",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4522,15 +4369,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "512",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro Max",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },
@@ -4545,15 +4385,8 @@
     "extra_fields": {
       "AdType": "Товар приобретен на продажу",
       "Condition": "Новое",
-      "GoodsType": "Мобильные телефоны",
-      "Vendor": "Apple",
-      "MemorySize": "512",
-      "SimConfig": "2 SIM (nano SIM + eSIM)",
       "BoxSealed": "Да",
       "Address": "Москва, улица Барклая, 8",
-      "DeviceHistory": "Неактивированный",
-      "Model": "iPhone 17 Pro Max",
-      "Set": "Коробка | Провод зарядки",
       "ExtendedCondition": "Новое"
     }
   },

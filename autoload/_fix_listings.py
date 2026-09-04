@@ -360,8 +360,31 @@ for entry in entries:
     elif cat == "Планшеты и электронные книги" and "apple" in n:
         patch_ipad(name, extra)
         patched += 1
+    elif cat == "Планшеты и электронные книги" and "samsung" in n:
+        # Fix Samsung tablet MemorySize: catalog sends RAM (12GB) not storage (256GB).
+        # Title is truncated so detect from internal_id (e.g. biggeek-...-256gb-...)
+        storage = detect_storage_gb(name)
+        if not storage:
+            # Fallback: extract from internal_id slug ("...256gb...")
+            slug = (internal_id or "").lower()
+            m_slug = re.search(r"-(\d{3,4})gb", slug)
+            if m_slug and int(m_slug.group(1)) >= 128:
+                storage = m_slug.group(1)
+        if storage:
+            extra["MemorySize"] = storage
+        # Remove invalid extra fields for Samsung tablets
+        for f in ["RamSize", "GoodsType", "ProductsType"]:
+            extra.pop(f, None)
+        patched += 1
     elif cat == "Телефоны" and "iphone" in n:
-        patch_phone(name, extra)
+        # For 12-digit avito_id phones (catalog imports in wrong Avito category):
+        # only update basics — phone-specific fields cause "Ошибка параметра"
+        if isinstance(avito_id, int) and len(str(avito_id)) >= 12:
+            for f in ["GoodsType", "Vendor", "Model", "MemorySize",
+                      "SimConfig", "DeviceHistory", "Set"]:
+                extra.pop(f, None)
+        else:
+            patch_phone(name, extra)
         patched += 1
 
 with open(JSON_PATH, "w", encoding="utf-8") as f:
