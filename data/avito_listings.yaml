@@ -1024,7 +1024,7 @@ listings:
   title: Выпрямитель Dyson Airstrait HT01
   markup: 0
   static_price: 32180
-- ad_id: store77-HS08AS (143161-01) EU
+- ad_id: store77-HS08AS-(143161-01)-EU
   title: 'Стайлер Dyson Airwrap Coanda2x™ HS09 для кудрявых '
   markup: 0
   static_price: 56980
@@ -1036,11 +1036,11 @@ listings:
   title: Стайлер Dyson Airwrap Complete Long HS05
   markup: 0
   static_price: 39680
-- ad_id: store77-HS08CCVBT EU
+- ad_id: store77-HS08CCVBT-EU
   title: 'Стайлер Dyson Airwrap i.d. Long HS08 для кудрявых '
   markup: 0
   static_price: 42980
-- ad_id: store77-HS08PBRC (107214-01)
+- ad_id: store77-HS08PBRC-(107214-01)
   title: Стайлер Dyson Airwrap i.d. Long HS08 для прямых во
   markup: 0
   static_price: 36280
@@ -1052,27 +1052,27 @@ listings:
   title: Фен Dyson Supersonic HD17 R Pro для прямых волос (
   markup: 0
   static_price: 40080
-- ad_id: store77-HD16CPT EU
+- ad_id: store77-HD16CPT-EU
   title: Фен Dyson Supersonic Nural HD16 для кудрявых волос
   markup: 0
   static_price: 42380
-- ad_id: store77-DG5DCB (448091-01)
+- ad_id: store77-DG5DCB-(448091-01)
   title: Беспроводной пылесос Dyson Gen5 Detect Absolute SV
   markup: 0
   static_price: 69080
-- ad_id: store77-DPVFB EU (492747-01)
+- ad_id: store77-DPVFB-EU-(492747-01)
   title: Беспроводной пылесос Dyson PencilVac Fluffy
   markup: 0
   static_price: 42980
-- ad_id: store77-DPVFB (492714-01)
+- ad_id: store77-DPVFB-(492714-01)
   title: Беспроводной пылесос Dyson PencilVac Fluffycone
   markup: 0
   static_price: 40480
-- ad_id: store77-DPWBC EU(637249-01)
+- ad_id: store77-DPWBC-EU(637249-01)
   title: Беспроводной пылесос Dyson PencilWash
   markup: 0
   static_price: 41880
-- ad_id: store77-DV10ACG (448883-01/394433-01)
+- ad_id: store77-DV10ACG-(448883-01/394433-01)
   title: Беспроводной пылесос Dyson V10 Absolute
   markup: 0
   static_price: 40480
@@ -1084,11 +1084,11 @@ listings:
   title: Беспроводной пылесос Dyson V10 Konical
   markup: 0
   static_price: 43480
-- ad_id: store77-DV12dsa (448884-01/470521-01/405880-01)
+- ad_id: store77-DV12dsa-(448884-01/470521-01/405880-01)
   title: Беспроводной пылесос Dyson V12 Detect Slim Absolut
   markup: 0
   static_price: 43580
-- ad_id: store77-DV12DSSNGEU (485450-01)
+- ad_id: store77-DV12DSSNGEU-(485450-01)
   title: Беспроводной пылесос Dyson V12s Detect Slim Submar
   markup: 0
   static_price: 46780
@@ -1096,11 +1096,11 @@ listings:
   title: Беспроводной пылесос Dyson V15 Detect Absolute SV4
   markup: 0
   static_price: 58880
-- ad_id: store77-DV15DSGG (448798-01/448799-01)
+- ad_id: store77-DV15DSGG-(448798-01/448799-01)
   title: Беспроводной пылесос Dyson V15s Detect Submarine
   markup: 0
   static_price: 61680
-- ad_id: store77-DV16PABCKR (495960-01)
+- ad_id: store77-DV16PABCKR-(495960-01)
   title: Беспроводной пылесос Dyson V16 Piston Animal с под
   markup: 0
   static_price: 86280
@@ -1112,23 +1112,23 @@ listings:
   title: Беспроводной пылесос Dyson V16 Piston Animal
   markup: 0
   static_price: 63380
-- ad_id: store77-DV8AGN (476547-01)
+- ad_id: store77-DV8AGN-(476547-01)
   title: Беспроводной пылесос Dyson V8 Absolute
   markup: 0
   static_price: 28580
-- ad_id: store77-DV8ASN (492637-01)
+- ad_id: store77-DV8ASN-(492637-01)
   title: Беспроводной пылесос Dyson V8 Advanced
   markup: 0
   static_price: 33580
-- ad_id: store77-SV55-AMAGNBLK (226587-01) EU
+- ad_id: store77-SV55-AMAGNBLK-(226587-01)-EU
   title: Беспроводной пылесос Dyson V8 Cyclone
   markup: 0
   static_price: 30280
-- ad_id: store77-DCWHPBRC (426450-01)
+- ad_id: store77-DCWHPBRC-(426450-01)
   title: Моющий пылесос Dyson Clean+Wash Hygiene
   markup: 0
   static_price: 48680
-- ad_id: store77-DG1WBBL (473817-01)
+- ad_id: store77-DG1WBBL-(473817-01)
   title: Моющий пылесос Dyson G1 Wash
   markup: 0
   static_price: 41180

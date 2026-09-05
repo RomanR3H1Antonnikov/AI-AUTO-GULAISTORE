@@ -255,13 +255,13 @@ def patch_imac(name: str, extra: dict) -> None:
     screen = detect_screen(name)
     extra["GoodsSubType"] = "Моноблоки"
     extra.pop("GoodsType", None)
+    extra.pop("ExtendedCondition", None)
+    extra.pop("BoxSealed", None)
     extra["Brand"] = "Apple"
     if model:
         extra["Model"] = model
     if screen:
         extra["Diagonal"] = screen
-    extra["ExtendedCondition"] = "Новое"
-    extra["BoxSealed"] = "Да"
 
 def patch_mac_mini(name: str, extra: dict) -> None:
     model = detect_model_name(name)
@@ -308,6 +308,53 @@ def patch_monitor(name: str, extra: dict) -> None:
         extra["Diagonal"] = screen
     extra["ExtendedCondition"] = "Новое"
     extra["BoxSealed"] = "Да"
+
+def patch_samsung_tablet(name: str, extra: dict, slug: str) -> None:
+    slug_l = slug.lower()
+
+    # Storage: prefer from title, fallback from slug
+    storage = detect_storage_gb(name)
+    if not storage:
+        m = re.search(r"-(\d{3,4})gb", slug_l)
+        if m and int(m.group(1)) >= 128:
+            storage = m.group(1)
+        else:
+            m_tb = re.search(r"-(\d+)tb", slug_l)
+            if m_tb:
+                storage = str(int(m_tb.group(1)) * 1000)
+
+    # RAM: slug format is "{screen}-{ram}-{storage}gb" e.g. "146-12-256gb" or "11-12-128gb"
+    ram = ""
+    m_ram = re.search(r"-(\d{2,3})-(\d{1,2})-\d{3,4}(?:gb|tb)", slug_l)
+    if m_ram:
+        ram = m_ram.group(2)
+
+    # SimSlot: 5G slug → LTE, otherwise no SIM slot
+    sim = "LTE" if "-5g-" in slug_l else "Нет"
+
+    # Model from slug: tab-s11-ultra, tab-s11, etc.
+    model = ""
+    m_model = re.search(r"tab-(s\d+)(?:-(ultra|plus|fe))?", slug_l)
+    if m_model:
+        gen = m_model.group(1).upper()
+        variant = m_model.group(2)
+        model = f"Samsung Galaxy Tab {gen} {variant.capitalize()}" if variant else f"Samsung Galaxy Tab {gen}"
+
+    extra["GoodsType"] = "Планшеты"
+    extra["ProductsType"] = "Планшет"
+    extra["Brand"] = "Samsung"
+    if model:
+        extra["Model"] = model
+    if storage:
+        extra["MemorySize"] = storage
+    if ram:
+        extra["RamSize"] = ram
+    extra["SimSlot"] = sim
+    extra["DeviceHistory"] = "Неактивированный"
+    extra.setdefault("Set", "Коробка | Провод зарядки")
+    extra["ExtendedCondition"] = "Новое"
+    extra["BoxSealed"] = "Да"
+    extra.pop("Condition", None)
 
 # ── Main ───────────────────────────────────────────────────────────────────
 
@@ -361,27 +408,35 @@ for entry in entries:
         patch_ipad(name, extra)
         patched += 1
     elif cat == "Планшеты и электронные книги" and "samsung" in n:
-        # Fix Samsung tablet MemorySize: catalog sends RAM (12GB) not storage (256GB).
-        # Title is truncated so detect from internal_id (e.g. biggeek-...-256gb-...)
-        storage = detect_storage_gb(name)
-        if not storage:
-            # Fallback: extract from internal_id slug ("...256gb...")
-            slug = (internal_id or "").lower()
-            m_slug = re.search(r"-(\d{3,4})gb", slug)
-            if m_slug and int(m_slug.group(1)) >= 128:
-                storage = m_slug.group(1)
+        patch_samsung_tablet(name, extra, internal_id)
+        patched += 1
+    elif cat == "Телефоны" and "pixel" in n:
+        # Google Pixel: move to correct phone category, fix MemorySize (slug: {storage}gb-{ram}gb)
+        entry["category"] = "Мобильные телефоны"
+        slug_l = (internal_id or "").lower()
+        storage = ""
+        m_store = re.search(r"-(\d{3,4})gb-\d{1,2}gb", slug_l)
+        if m_store:
+            storage = m_store.group(1)
+        else:
+            storage = detect_storage_gb(name) or _num(extra.get("MemorySize", ""))
+        extra["GoodsType"] = "Мобильные телефоны"
+        extra["Vendor"] = "Google"
         if storage:
             extra["MemorySize"] = storage
-        # Remove invalid extra fields for Samsung tablets
-        for f in ["RamSize", "GoodsType", "ProductsType"]:
-            extra.pop(f, None)
+        extra["DeviceHistory"] = "Неактивированный"
+        extra.setdefault("Set", "Коробка | Провод зарядки")
+        extra["ExtendedCondition"] = "Новое"
+        extra["BoxSealed"] = "Да"
+        extra.pop("Condition", None)
         patched += 1
     elif cat == "Телефоны" and "iphone" in n:
         # For 12-digit avito_id phones (catalog imports in wrong Avito category):
-        # only update basics — phone-specific fields cause "Ошибка параметра"
+        # strip phone-specific fields — they cause "Ошибка параметра" in wrong category
         if isinstance(avito_id, int) and len(str(avito_id)) >= 12:
             for f in ["GoodsType", "Vendor", "Model", "MemorySize",
-                      "SimConfig", "DeviceHistory", "Set"]:
+                      "SimConfig", "DeviceHistory", "Set",
+                      "BoxSealed", "ExtendedCondition"]:
                 extra.pop(f, None)
         else:
             patch_phone(name, extra)
