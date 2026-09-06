@@ -302,12 +302,74 @@ def patch_phone(name: str, extra: dict) -> None:
     extra["BoxSealed"] = "Да"
 
 def patch_monitor(name: str, extra: dict) -> None:
-    screen = detect_screen(name)
     extra["Brand"] = "Apple"
-    if screen:
-        extra["Diagonal"] = screen
-    extra["ExtendedCondition"] = "Новое"
-    extra["BoxSealed"] = "Да"
+    extra["Model"] = "Studio Display"
+    extra["ProductsType"] = "Мониторы"
+    extra["Condition"] = "Новое"
+    extra.pop("Diagonal", None)
+    extra.pop("ExtendedCondition", None)
+    extra.pop("BoxSealed", None)
+
+
+def patch_dyson_vacuum(name: str, extra: dict) -> None:
+    extra["ProductType"] = "Пылесосы и запчасти"
+    extra["GoodsType"] = "Для дома"
+    extra["GoodsSubType"] = "Пылесосы"
+    # Wet vacuums get their own subtype
+    n = name.lower()
+    if "wash" in n or "моющий" in n:
+        extra["ProductSubType"] = "Моющие"
+    else:
+        extra["ProductSubType"] = "Вертикальные"
+
+
+def patch_dyson_hair(name: str, extra: dict) -> None:
+    extra["GoodsType"] = "Средства для волос"
+
+
+def patch_rayban(name: str, extra: dict) -> None:
+    extra["Brand"] = "Ray-Ban"
+    extra["GoodsType"] = "Очки"
+    extra["GlassesStyle"] = "Wayfarer"
+    extra["Gender"] = "Унисекс"
+
+
+def patch_action_camera(name: str, extra: dict, entry: dict) -> None:
+    n = name.lower()
+    if "dji" in n:
+        vendor = "DJI"
+    elif "gopro" in n:
+        vendor = "GoPro"
+    elif "insta360" in n:
+        vendor = "Insta360"
+    else:
+        vendor = ""
+    if vendor:
+        extra["Vendor"] = vendor
+
+    # Extract model: everything after vendor name, before storage size
+    model = ""
+    m = re.search(rf"{vendor}\s+(.+?)(?:\s+\d+\s*ГБ|$)", name, re.IGNORECASE)
+    if m:
+        model = re.sub(
+            r"\s+(Adventure Combo|Standard Combo|Standart Combo|Adventure|Standard)$",
+            "", m.group(1).strip()
+        ).strip()
+    if model:
+        extra["Model"] = model
+
+    entry["category"] = "Экшн-камеры"
+
+
+def patch_lego(name: str, extra: dict) -> None:
+    extra["Brand"] = "LEGO"
+    extra["GoodsType"] = "Конструкторы"
+    extra["Toys"] = "Конструктор"
+    n = name.lower()
+    if "botanicals" in n:
+        extra["SeriesLEGO"] = "Botanicals"
+        extra["Thematics"] = "Природа"
+    extra["Age"] = "18 лет и старше"
 
 def patch_samsung_tablet(name: str, extra: dict, slug: str) -> None:
     slug_l = slug.lower()
@@ -460,6 +522,21 @@ for entry in entries:
         extra["ExtendedCondition"] = "Новое"
         extra["BoxSealed"] = "Да"
         extra.pop("Condition", None)
+        patched += 1
+    elif cat == "Бытовая техника" and "dyson" in n:
+        patch_dyson_vacuum(name, extra)
+        patched += 1
+    elif cat == "Красота и здоровье" and "dyson" in n:
+        patch_dyson_hair(name, extra)
+        patched += 1
+    elif cat == "Одежда, обувь, аксессуары" and "ray-ban" in n:
+        patch_rayban(name, extra)
+        patched += 1
+    elif cat == "Фото- и видеотехника" and any(v in n for v in ("dji", "gopro", "insta360")):
+        patch_action_camera(name, extra, entry)
+        patched += 1
+    elif cat == "Хобби и отдых" and "lego" in n:
+        patch_lego(name, extra)
         patched += 1
     elif cat == "Телефоны" and "iphone" in n:
         # For 12-digit avito_id phones (catalog imports in wrong Avito category):
