@@ -47,3 +47,6 @@ scripts/channel_dump.txt
 # Generated test artifacts
 infoautodownload/test_feed.xml
 infoautodownload/page_checkfile.txt
+
+# Avito XML templates (local reference files)
+infoautodownload/templates_avito/

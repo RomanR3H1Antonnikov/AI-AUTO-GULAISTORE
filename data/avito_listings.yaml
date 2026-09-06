@@ -27,13 +27,6 @@ listings:
   - 17_pro_256_blue
   - 17_pro_256_orange
   - 17_pro_256_silver
-- ad_id: 8152871167
-  title: iPhone 17 Pro 512 Р“Р‘ (СЃС‚Р°СЂРѕРµ РѕР±СЉСЏРІР»РµРЅРёРµ SIM+eSIM)
-  markup: 0
-  price_skus:
-  - 17_pro_512_blue
-  - 17_pro_512_orange
-  - 17_pro_512_silver
 - ad_id: 8280667149
   title: iPhone 17 Pro 512 Р“Р‘
   markup: 0
@@ -106,12 +99,6 @@ listings:
   markup: 0
   price_skus:
   - neo_8_512_silver
-- ad_id: 8152383441
-  title: MacBook Air 13/15 M5 16/512 Р“Р‘ Silver (РєРѕРјР±Рѕ-РѕР±СЉСЏРІР»РµРЅРёРµ)
-  markup: 0
-  price_skus:
-  - air_13_m5_16_512_silver
-  - air_15_m5_16_512_silver
 - ad_id: 8248820667
   title: MacBook Air 13 M5 16/512 Р“Р‘
   markup: 0
@@ -578,12 +565,6 @@ listings:
   price_skus:
   - ipad_mini_7_128_wi_fi_grey
   - ipad_mini_7_128_wi_fi_blue
-- ad_id: '613764782712'
-  title: Планшет Apple iPad Pro 11" (M5, 2025) 256 ГБ Wi-Fi
-  markup: 0
-  price_skus:
-  - ipad_pro_11_m5_256_wi_fi_black
-  - ipad_pro_11_m5_256_wi_fi_silver
 - ad_id: '972695599562'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 512 ГБ Wi-Fi
   markup: 0
@@ -596,12 +577,6 @@ listings:
   price_skus:
   - ipad_pro_11_m5_1tb_wi_fi_black
   - ipad_pro_11_m5_1tb_wi_fi_silver
-- ad_id: '252587465172'
-  title: Планшет Apple iPad Pro 11" (M5, 2025) 256 ГБ LTE
-  markup: 0
-  price_skus:
-  - ipad_pro_11_m5_256_lte_black
-  - ipad_pro_11_m5_256_lte_silver
 - ad_id: '677940322792'
   title: Планшет Apple iPad Pro 11" (M5, 2025) 1 ТБ LTE
   markup: 0
@@ -702,42 +677,6 @@ listings:
   - 16_256_blue
   - 16_256_pink
   - 16_256_white
-- ad_id: '390945771722'
-  title: Apple iPhone 17 256 ГБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_256_black
-  - 17_256_blue
-  - 17_256_lavender
-  - 17_256_sage
-  - 17_256_white
-- ad_id: '669356397752'
-  title: Apple iPhone 17 256 ГБ (nanoSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_256_black_nano
-  - 17_256_blue_nano
-  - 17_256_lavender_nano
-  - 17_256_sage_nano
-  - 17_256_white_nano
-- ad_id: '219125254192'
-  title: Apple iPhone 17 512 ГБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_512_black
-  - 17_512_blue
-  - 17_512_lavender
-  - 17_512_sage
-  - 17_512_white
-- ad_id: '647204326182'
-  title: Apple iPhone 17 512 ГБ (nanoSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_512_black_nano
-  - 17_512_blue_nano
-  - 17_512_lavender_nano
-  - 17_512_sage_nano
-  - 17_512_white_nano
 - ad_id: '667130219622'
   title: Apple iPhone 17 Air 1 ТБ
   markup: 0
@@ -762,13 +701,6 @@ listings:
   - air_512_blue
   - air_512_gold
   - air_512_white
-- ad_id: '498775832072'
-  title: Apple iPhone 17 Pro 1 ТБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_pro_1tb_blue
-  - 17_pro_1tb_orange
-  - 17_pro_1tb_silver
 - ad_id: '554239870182'
   title: Apple iPhone 17 Pro 1 ТБ (nanoSIM + eSIM)
   markup: 0
@@ -776,13 +708,6 @@ listings:
   - 17_pro_1tb_blue_nano
   - 17_pro_1tb_orange_nano
   - 17_pro_1tb_silver_nano
-- ad_id: '395322318412'
-  title: Apple iPhone 17 Pro 256 ГБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_pro_256_blue
-  - 17_pro_256_orange
-  - 17_pro_256_silver
 - ad_id: '770966262222'
   title: Apple iPhone 17 Pro 256 ГБ (nanoSIM + eSIM)
   markup: 0
@@ -790,13 +715,6 @@ listings:
   - 17_pro_256_blue_nano
   - 17_pro_256_orange_nano
   - 17_pro_256_silver_nano
-- ad_id: '965610392452'
-  title: Apple iPhone 17 Pro 512 ГБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_pro_512_blue
-  - 17_pro_512_orange
-  - 17_pro_512_silver
 - ad_id: '779528177062'
   title: Apple iPhone 17 Pro 512 ГБ (nanoSIM + eSIM)
   markup: 0
@@ -804,13 +722,6 @@ listings:
   - 17_pro_512_blue_nano
   - 17_pro_512_orange_nano
   - 17_pro_512_silver_nano
-- ad_id: '236091660132'
-  title: Apple iPhone 17 Pro Max 1 ТБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_pro_max_1tb_blue
-  - 17_pro_max_1tb_orange
-  - 17_pro_max_1tb_silver
 - ad_id: '497956930092'
   title: Apple iPhone 17 Pro Max 1 ТБ (nanoSIM + eSIM)
   markup: 0
@@ -832,13 +743,6 @@ listings:
   - 17_pro_max_2tb_blue_nano
   - 17_pro_max_2tb_orange_nano
   - 17_pro_max_2tb_silver_nano
-- ad_id: '676051461412'
-  title: Apple iPhone 17 Pro Max 256 ГБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_pro_max_256_blue
-  - 17_pro_max_256_orange
-  - 17_pro_max_256_silver
 - ad_id: '461533466882'
   title: Apple iPhone 17 Pro Max 256 ГБ (nanoSIM + eSIM)
   markup: 0
@@ -846,13 +750,6 @@ listings:
   - 17_pro_max_256_blue_nano
   - 17_pro_max_256_orange_nano
   - 17_pro_max_256_silver_nano
-- ad_id: '157317398462'
-  title: Apple iPhone 17 Pro Max 512 ГБ (eSIM + eSIM)
-  markup: 0
-  price_skus:
-  - 17_pro_max_512_blue
-  - 17_pro_max_512_orange
-  - 17_pro_max_512_silver
 - ad_id: '325177358492'
   title: Apple iPhone 17 Pro Max 512 ГБ (nanoSIM + eSIM)
   markup: 0
