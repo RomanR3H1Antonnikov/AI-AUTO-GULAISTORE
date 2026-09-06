@@ -410,9 +410,10 @@ for entry in entries:
     elif cat == "Планшеты и электронные книги" and "samsung" in n:
         patch_samsung_tablet(name, extra, internal_id)
         patched += 1
-    elif cat == "Телефоны" and "pixel" in n:
-        # Google Pixel: move to correct phone category, fix MemorySize (slug: {storage}gb-{ram}gb)
-        entry["category"] = "Мобильные телефоны"
+    elif cat in ("Телефоны", "Мобильные телефоны") and "pixel" in n:
+        # Google Pixel: keep category "Телефоны" (Мобильные телефоны is not a valid leaf category)
+        # fix MemorySize (slug format: {storage}gb-{ram}gb → first large value = storage)
+        entry["category"] = "Телефоны"
         slug_l = (internal_id or "").lower()
         storage = ""
         m_store = re.search(r"-(\d{3,4})gb-\d{1,2}gb", slug_l)
@@ -422,6 +423,36 @@ for entry in entries:
             storage = detect_storage_gb(name) or _num(extra.get("MemorySize", ""))
         extra["GoodsType"] = "Мобильные телефоны"
         extra["Vendor"] = "Google"
+        if storage:
+            extra["MemorySize"] = storage
+        extra["DeviceHistory"] = "Неактивированный"
+        extra.setdefault("Set", "Коробка | Провод зарядки")
+        extra["ExtendedCondition"] = "Новое"
+        extra["BoxSealed"] = "Да"
+        extra.pop("Condition", None)
+        patched += 1
+    elif cat == "Телефоны" and "samsung" in n and "galaxy" in n:
+        # Samsung Galaxy smartphones: fix GoodsType (plural), fix MemorySize to storage
+        # Slug format: ...-{ram}-gb-{storage}-gb-... or ...-{ram}-gb-{storage}-tb-...
+        slug_l = (internal_id or "").lower()
+        storage = ""
+        m_gb = re.search(r"-(\d+)-gb-(\d+)-gb", slug_l)
+        m_tb = re.search(r"-(\d+)-gb-(\d+)-tb", slug_l)
+        if m_gb:
+            storage = m_gb.group(2)
+        elif m_tb:
+            storage = str(int(m_tb.group(2)) * 1000)
+        # Model from slug: galaxy-s26-ultra → "Samsung Galaxy S26 Ultra"
+        model = ""
+        m_model = re.search(r"galaxy-(s\d+)(?:-(ultra|plus|fe))?", slug_l)
+        if m_model:
+            gen = m_model.group(1).upper()
+            variant = m_model.group(2)
+            model = f"Samsung Galaxy {gen} {variant.capitalize()}" if variant else f"Samsung Galaxy {gen}"
+        extra["GoodsType"] = "Мобильные телефоны"
+        extra["Vendor"] = "Samsung"
+        if model:
+            extra["Model"] = model
         if storage:
             extra["MemorySize"] = storage
         extra["DeviceHistory"] = "Неактивированный"
