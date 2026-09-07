@@ -301,7 +301,8 @@ def patch_phone(name: str, extra: dict) -> None:
     extra["ExtendedCondition"] = "Новое"
     extra["BoxSealed"] = "Да"
 
-def patch_monitor(name: str, extra: dict) -> None:
+def patch_monitor(name: str, extra: dict, entry: dict) -> None:
+    entry["category"] = "Мониторы и запчасти"
     extra["Brand"] = "Apple"
     extra["Model"] = "Studio Display"
     extra["ProductsType"] = "Мониторы"
@@ -318,7 +319,7 @@ def patch_dyson_vacuum(name: str, extra: dict) -> None:
     # Wet vacuums get their own subtype
     n = name.lower()
     if "wash" in n or "моющий" in n:
-        extra["ProductSubType"] = "Моющие"
+        extra["ProductSubType"] = "Вертикальные"
     else:
         extra["ProductSubType"] = "Вертикальные"
 
@@ -358,12 +359,14 @@ def patch_action_camera(name: str, extra: dict, entry: dict) -> None:
     if model:
         extra["Model"] = model
 
-    entry["category"] = "Экшн-камеры"
+    entry["category"] = "Аудио и видео"
+    extra["GoodsType"] = "Видеокамеры"
+    extra["ProductType"] = "Экшн-камеры"
 
 
 def patch_lego(name: str, extra: dict) -> None:
     extra["Brand"] = "LEGO"
-    extra["GoodsType"] = "Конструкторы"
+    extra["GoodsType"] = "Игрушки"
     extra["Toys"] = "Конструктор"
     n = name.lower()
     if "botanicals" in n:
@@ -463,8 +466,8 @@ for entry in entries:
     elif cat == "Настольные компьютеры" and ("mac mini" in n or "mac studio" in n):
         patch_mac_mini(name, extra)
         patched += 1
-    elif cat == "Мониторы":
-        patch_monitor(name, extra)
+    elif cat in ("Мониторы", "Мониторы и запчасти"):
+        patch_monitor(name, extra, entry)
         patched += 1
     elif cat == "Планшеты и электронные книги" and "apple" in n:
         patch_ipad(name, extra)
@@ -532,7 +535,7 @@ for entry in entries:
     elif cat == "Одежда, обувь, аксессуары" and "ray-ban" in n:
         patch_rayban(name, extra)
         patched += 1
-    elif cat == "Фото- и видеотехника" and any(v in n for v in ("dji", "gopro", "insta360")):
+    elif cat in ("Фото- и видеотехника", "Экшн-камеры", "Аудио и видео") and any(v in n for v in ("dji", "gopro", "insta360")):
         patch_action_camera(name, extra, entry)
         patched += 1
     elif cat == "Хобби и отдых" and "lego" in n:
