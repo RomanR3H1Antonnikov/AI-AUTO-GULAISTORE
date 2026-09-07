@@ -82,7 +82,7 @@ def _add_field(parent: Element, field: str, value: str) -> None:
         SubElement(parent, field).text = value
 
 
-def _build_ad(parent: Element, listing: dict, ad_id: str, price: int) -> None:
+def _build_ad(parent: Element, listing: dict, ad_id: str, price: int, listing_fee: str = "") -> None:
     ad = SubElement(parent, "Ad")
 
     SubElement(ad, "Id").text = ad_id
@@ -100,6 +100,9 @@ def _build_ad(parent: Element, listing: dict, ad_id: str, price: int) -> None:
 
     ad_type = extra.get("AdType", "Товар приобретен на продажу")
     SubElement(ad, "AdType").text = ad_type
+
+    if listing_fee:
+        SubElement(ad, "ListingFee").text = listing_fee
 
     SubElement(ad, "Title").text = listing["title"]
     SubElement(ad, "Description").text = listing["description"]
@@ -160,7 +163,8 @@ def generate_feed(
             skipped_no_listing += 1
             continue
 
-        _build_ad(root, listing, ad_id, price)
+        listing_fee = str(mapping.get("listing_fee", ""))
+        _build_ad(root, listing, ad_id, price, listing_fee)
         included += 1
 
     logger.info(
